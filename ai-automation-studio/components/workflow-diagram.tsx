@@ -48,7 +48,7 @@ export function WorkflowDiagram({ nodes, edges }: WorkflowDiagramProps) {
   const getNode = (id: string) => nodes.find((n) => n.id === id)
 
   return (
-    <div className="glass-panel p-6 sm:p-8 overflow-hidden">
+    <div className="glass-panel p-4 sm:p-6 md:p-8 overflow-hidden">
       <svg
         viewBox={`0 0 ${viewWidth} ${viewHeight}`}
         className="w-full h-auto"

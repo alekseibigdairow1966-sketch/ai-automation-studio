@@ -68,7 +68,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex justify-center gap-12 sm:gap-20"
+          className="flex justify-center gap-8 sm:gap-12 md:gap-20"
         >
           {stats.map((stat, i) => (
             <div key={i} className="text-center">

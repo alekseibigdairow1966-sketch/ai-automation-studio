@@ -49,7 +49,7 @@ export function ContactFormSection() {
           <form onSubmit={handleSubmit} className="glass-panel p-6 sm:p-8 space-y-4">
             <input type="text" name="honeypot" className="hidden" tabIndex={-1} autoComplete="off" />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-text-secondary text-xs mb-1.5 block">Имя *</label>
                 <Input name="name" className="bg-background border-white/[0.06] text-text-primary" />

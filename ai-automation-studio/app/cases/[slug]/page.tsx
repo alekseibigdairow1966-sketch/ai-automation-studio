@@ -75,7 +75,7 @@ export default async function CasePage({ params }: Props) {
                 <span className="text-red-400/70 text-sm line-through">{r.before}</span>
                 <ArrowRight size={12} className="text-text-muted" />
               </div>
-              <span className="text-2xl sm:text-3xl font-bold accent-gradient-text">{r.after}</span>
+              <span className="text-lg sm:text-2xl lg:text-3xl font-bold accent-gradient-text break-words">{r.after}</span>
             </div>
           ))}
         </div>

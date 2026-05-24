@@ -91,7 +91,7 @@ export function OperationalDashboard() {
             </div>
 
             {/* Queue table */}
-            <div className="bg-background/50 border border-white/[0.06] rounded-xl overflow-hidden">
+            <div className="bg-background/50 border border-white/[0.06] rounded-xl overflow-x-auto">
               <div className="px-4 py-3 border-b border-white/[0.06] flex items-center gap-2">
                 <Wrench size={14} className="text-text-muted" />
                 <span className="text-text-primary text-sm font-medium">Очередь ремонтов</span>
@@ -107,7 +107,7 @@ export function OperationalDashboard() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.6 + i * 0.08 }}
                   >
-                    <span className="text-text-muted text-xs font-mono w-16 shrink-0">{item.id}</span>
+                    <span className="text-text-muted text-xs font-mono w-14 sm:w-16 shrink-0 hidden sm:block">{item.id}</span>
                     <div className="flex-1 min-w-0">
                       <p className="text-text-primary text-sm truncate">{item.device}</p>
                       <p className="text-text-muted text-xs">{item.type}</p>

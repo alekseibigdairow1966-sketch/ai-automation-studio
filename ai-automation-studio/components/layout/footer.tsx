@@ -61,7 +61,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/[0.06] px-4 sm:px-6 py-5">
-        <div className="max-w-7xl mx-auto flex justify-between items-center text-xs text-text-muted">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-text-muted">
           <span>&copy; {new Date().getFullYear()} AIAutomation Studio</span>
           <div className="flex gap-4">
             <a href="https://t.me/" target="_blank" rel="noopener noreferrer" className="hover:text-text-secondary transition-colors">Telegram</a>
