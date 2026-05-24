@@ -9,6 +9,8 @@ const SERVICE_LINKS = [
 
 const COMPANY_LINKS = [
   { href: "/cases", label: "Кейсы" },
+  { href: "/audit", label: "AI-аудит" },
+  { href: "/calculator", label: "ROI-калькулятор" },
   { href: "/blog", label: "Блог" },
   { href: "/contact", label: "Контакты" },
 ]

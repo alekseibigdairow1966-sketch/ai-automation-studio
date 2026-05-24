@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
+import { ConsultantWidget } from "@/components/ai-consultant/consultant-widget"
 import "./globals.css"
 
 const inter = Inter({
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="pt-16 min-h-screen">{children}</main>
         <Footer />
+        <ConsultantWidget />
       </body>
     </html>
   )
