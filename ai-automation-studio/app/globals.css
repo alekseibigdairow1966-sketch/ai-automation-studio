@@ -163,10 +163,89 @@
     border-radius: 1rem;
   }
   .hover-glow {
-    transition: all 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .hover-glow:hover {
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
-    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.12),
+                0 8px 32px rgba(0, 0, 0, 0.25);
+    border-color: rgba(99, 102, 241, 0.25);
+    transform: translateY(-2px);
   }
+
+  /* --- Phase 3: Ambient motion --- */
+
+  /* Slow gradient-orb drift */
+  .animate-drift-1 { animation: drift-1 20s ease-in-out infinite; }
+  .animate-drift-2 { animation: drift-2 25s ease-in-out infinite; }
+  .animate-pulse-ambient { animation: pulse-ambient 8s ease-in-out infinite; }
+
+  /* Flowing highlight on connector lines */
+  .animate-flow-line { animation: flow-line 3s ease-in-out infinite; }
+
+  /* Slowly shifting gradient background */
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease-in-out infinite;
+  }
+
+  /* Subtle dot-grid (hero, sections) */
+  .hero-grid {
+    background-image: radial-gradient(circle, rgba(99, 102, 241, 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Live indicator ring */
+  .live-ring {
+    position: relative;
+  }
+  .live-ring::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 9999px;
+    border: 1px solid currentColor;
+    opacity: 0;
+    animation: live-ring-expand 2s ease-out infinite;
+  }
+}
+
+/* Phase 3 keyframes */
+@keyframes drift-1 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(15px, -20px); }
+  66% { transform: translate(-10px, 15px); }
+}
+@keyframes drift-2 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(-20px, 10px); }
+  66% { transform: translate(10px, -15px); }
+}
+@keyframes pulse-ambient {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes flow-line {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(500%); }
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes live-ring-expand {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Reduced motion — disable ambient animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift-1,
+  .animate-drift-2,
+  .animate-pulse-ambient,
+  .animate-flow-line,
+  .animate-gradient-shift { animation: none; }
+  .hover-glow:hover { transform: none; }
+  .live-ring::after { animation: none; }
 }

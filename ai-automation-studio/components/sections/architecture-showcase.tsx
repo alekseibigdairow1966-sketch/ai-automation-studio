@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion"
 import { MotionWrapper, StaggerContainer, StaggerItem } from "@/components/motion-wrapper"
 import { MessageCircle, Bot, Database, Wrench, Bell, BarChart3 } from "lucide-react"
 
@@ -78,15 +79,25 @@ export function ArchitectureShowcase() {
                   return (
                     <StaggerItem key={step.label}>
                       <div className="relative">
-                        {/* Connector line */}
+                        {/* Connector line with flowing pulse */}
                         {i < steps.length - 1 && (
-                          <div className="absolute top-6 left-[calc(50%+28px)] right-[-12px] h-px bg-gradient-to-r from-white/10 to-white/5 z-0" />
+                          <div className="absolute top-6 left-[calc(50%+28px)] right-[-12px] h-px z-0 overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5" />
+                            <div
+                              className="absolute inset-y-0 w-8 bg-gradient-to-r from-transparent via-accent/30 to-transparent animate-flow-line"
+                              style={{ animationDelay: `${i * 0.6}s` }}
+                            />
+                          </div>
                         )}
                         {/* Step */}
                         <div className="relative z-10 text-center">
-                          <div className={`w-12 h-12 rounded-xl ${step.bg} border ${step.border} flex items-center justify-center mx-auto mb-3`}>
+                          <motion.div
+                            className={`w-12 h-12 rounded-xl ${step.bg} border ${step.border} flex items-center justify-center mx-auto mb-3`}
+                            animate={{ boxShadow: [`0 0 0 rgba(99,102,241,0)`, `0 0 20px rgba(99,102,241,0.1)`, `0 0 0 rgba(99,102,241,0)`] }}
+                            transition={{ duration: 4, delay: i * 0.7, repeat: Infinity, ease: "easeInOut" }}
+                          >
                             <Icon size={20} className={step.color} />
-                          </div>
+                          </motion.div>
                           <p className="text-text-primary text-xs font-semibold mb-1">{step.label}</p>
                           <p className="text-text-muted text-[10px] leading-tight">{step.desc}</p>
                         </div>
@@ -112,7 +123,12 @@ export function ArchitectureShowcase() {
                         <Icon size={18} className={step.color} />
                       </div>
                       {i < steps.length - 1 && (
-                        <div className="w-px h-6 bg-white/10 mt-2" />
+                        <div className="w-px h-6 mt-2 bg-gradient-to-b from-white/15 to-white/5 relative overflow-hidden">
+                          <div
+                            className="absolute inset-x-0 h-2 bg-gradient-to-b from-transparent via-accent/40 to-transparent animate-flow-line"
+                            style={{ animationDelay: `${i * 0.5}s`, animationDuration: "2s" }}
+                          />
+                        </div>
                       )}
                     </div>
                     <div className="pt-1">

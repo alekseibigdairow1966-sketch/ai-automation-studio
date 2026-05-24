@@ -185,7 +185,7 @@ export default async function CasePage({ params }: Props) {
       </section>
 
       {/* CTA */}
-      <section className="accent-gradient rounded-2xl p-8 sm:p-12 text-center">
+      <section className="rounded-2xl p-8 sm:p-12 text-center animate-gradient-shift" style={{ background: "linear-gradient(135deg, #6366F1, #7C3AED, #8B5CF6, #6366F1)", backgroundSize: "200% 200%" }}>
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Хотите такое же решение?</h2>
         <p className="text-white/70 mb-6 max-w-lg mx-auto">Обсудим вашу задачу и спроектируем архитектуру автоматизации под ваши процессы</p>
         <Link href="/contact">

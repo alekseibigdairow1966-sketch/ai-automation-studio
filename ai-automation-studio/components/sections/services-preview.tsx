@@ -55,10 +55,10 @@ export function ServicesPreview() {
               <StaggerItem key={svc.title}>
                 <Link href="/services" className="group block glass-panel hover-glow p-6 h-full">
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-10 h-10 rounded-xl accent-gradient flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl accent-gradient flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.3)]">
                       <Icon size={18} className="text-white" />
                     </div>
-                    <ArrowUpRight size={16} className="text-text-muted group-hover:text-accent transition-colors" />
+                    <ArrowUpRight size={16} className="text-text-muted group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                   </div>
                   <h3 className="font-semibold text-text-primary mb-1.5">{svc.title}</h3>
                   <p className="text-text-muted text-sm">{svc.desc}</p>

@@ -32,7 +32,7 @@ export function AISystemsShowcase() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
           <MotionWrapper delay={0.1}>
-            <div className="glass-panel p-6 sm:p-8 h-full border-red-500/10">
+            <div className="glass-panel p-6 sm:p-8 h-full border-red-500/10 hover-glow">
               <div className="flex items-center gap-2 mb-6">
                 <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
                   <X size={16} className="text-red-400" />
@@ -51,7 +51,7 @@ export function AISystemsShowcase() {
           </MotionWrapper>
 
           <MotionWrapper delay={0.3}>
-            <div className="glass-panel p-6 sm:p-8 h-full border-accent/20">
+            <div className="glass-panel p-6 sm:p-8 h-full border-accent/20 hover-glow">
               <div className="flex items-center gap-2 mb-6">
                 <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
                   <Check size={16} className="text-accent" />

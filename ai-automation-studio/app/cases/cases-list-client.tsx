@@ -72,6 +72,8 @@ export function CasesListClient() {
               <Link href={`/cases/${cs.slug}`} className="group block glass-panel hover-glow overflow-hidden h-full">
                 {/* Visual header */}
                 <div className="h-44 bg-gradient-to-br from-accent/10 via-accent/5 to-accent-end/10 relative p-5 flex flex-col justify-between">
+                  {/* Grid overlay */}
+                  <div className="absolute inset-0 hero-grid opacity-[0.03]" />
                   {/* Industry badge */}
                   <Badge variant="secondary" className="self-start text-[10px] bg-white/10 text-white/80 border-0 backdrop-blur-sm">
                     {cs.industry}

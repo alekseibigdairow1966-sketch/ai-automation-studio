@@ -60,8 +60,9 @@ export function WorkflowDiagram({ nodes, edges }: WorkflowDiagramProps) {
             <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.3" />
           </linearGradient>
           <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
             <feMerge>
+              <feMergeNode in="coloredBlur" />
               <feMergeNode in="coloredBlur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
@@ -97,19 +98,19 @@ export function WorkflowDiagram({ nodes, edges }: WorkflowDiagramProps) {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 + i * 0.15 }}
               />
-              {/* Animated pulse dot */}
+              {/* Animated pulse dot — brighter with trail */}
               <motion.circle
-                r="2.5"
-                fill="#6366F1"
+                r="3"
+                fill="#818CF8"
                 filter="url(#glow)"
                 initial={{ opacity: 0 }}
-                whileInView={{ opacity: [0, 1, 0] }}
+                whileInView={{ opacity: [0, 0.9, 0] }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 2,
-                  delay: 1 + i * 0.3,
+                  duration: 2.5,
+                  delay: 1 + i * 0.4,
                   repeat: Infinity,
-                  repeatDelay: 3,
+                  repeatDelay: 4,
                 }}
               >
                 <animateMotion
@@ -148,7 +149,7 @@ export function WorkflowDiagram({ nodes, edges }: WorkflowDiagramProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              {/* Node glow */}
+              {/* Node glow — breathing */}
               <circle
                 cx={cx}
                 cy={cy}
@@ -156,7 +157,10 @@ export function WorkflowDiagram({ nodes, edges }: WorkflowDiagramProps) {
                 fill="rgba(99, 102, 241, 0.05)"
                 stroke="rgba(99, 102, 241, 0.15)"
                 strokeWidth="1"
-              />
+              >
+                <animate attributeName="r" values="26;30;26" dur="4s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="4s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
+              </circle>
               {/* Node circle */}
               <circle
                 cx={cx}

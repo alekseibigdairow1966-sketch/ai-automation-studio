@@ -13,9 +13,9 @@ const queueItems = [
 ]
 
 const statusColors: Record<string, string> = {
-  in_progress: "text-amber-400 bg-amber-500/10",
+  in_progress: "text-amber-400 bg-amber-500/10 shadow-[0_0_8px_rgba(245,158,11,0.15)]",
   waiting: "text-blue-400 bg-blue-500/10",
-  done: "text-green-400 bg-green-500/10",
+  done: "text-green-400 bg-green-500/10 shadow-[0_0_8px_rgba(34,197,94,0.15)]",
 }
 
 const statusLabels: Record<string, string> = {
@@ -50,7 +50,10 @@ export function OperationalDashboard() {
             {/* Dashboard header */}
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <div className="relative">
+                  <div className="w-2 h-2 rounded-full bg-green-400" />
+                  <div className="absolute inset-0 w-2 h-2 rounded-full bg-green-400 live-ring text-green-400" />
+                </div>
                 <span className="text-text-primary text-sm font-medium">Live Operations</span>
                 <span className="text-text-muted text-xs">Обновлено 30 сек назад</span>
               </div>
@@ -78,11 +81,25 @@ export function OperationalDashboard() {
                       <span className="text-text-muted text-xs">{m.label}</span>
                     </div>
                     <div className="flex items-end gap-2">
-                      <span className="text-text-primary text-xl font-bold">{m.value}</span>
+                      <motion.span
+                        className="text-text-primary text-xl font-bold"
+                        initial={{ opacity: 0, filter: "blur(6px)" }}
+                        whileInView={{ opacity: 1, filter: "blur(0px)" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.6 + i * 0.12 }}
+                      >
+                        {m.value}
+                      </motion.span>
                       {m.change && (
-                        <span className={`text-xs mb-0.5 ${m.change.startsWith("+") || m.change.startsWith("−") ? (m.change.startsWith("−") ? "text-green-400" : "text-accent") : "text-text-muted"}`}>
+                        <motion.span
+                          className={`text-xs mb-0.5 ${m.change.startsWith("+") || m.change.startsWith("−") ? (m.change.startsWith("−") ? "text-green-400" : "text-accent") : "text-text-muted"}`}
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.4, delay: 0.9 + i * 0.12 }}
+                        >
                           {m.change}
-                        </span>
+                        </motion.span>
                       )}
                     </div>
                   </motion.div>

@@ -45,9 +45,9 @@ export function TrustSection() {
             const Icon = point.icon
             return (
               <StaggerItem key={point.title}>
-                <div className="glass-panel p-6 sm:p-8 h-full hover-glow">
+                <div className="glass-panel p-6 sm:p-8 h-full hover-glow group">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-accent/15 group-hover:border-accent/30 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.15)]">
                       <Icon size={22} className="text-accent" />
                     </div>
                     <div>

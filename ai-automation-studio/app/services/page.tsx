@@ -42,7 +42,7 @@ export default function ServicesPage() {
               <StaggerItem key={svc.id}>
                 <div className="glass-panel p-6 sm:p-8 h-full hover-glow group">
                   {/* Icon */}
-                  <div className="w-12 h-12 rounded-xl accent-gradient flex items-center justify-center mb-5">
+                  <div className="w-12 h-12 rounded-xl accent-gradient flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_24px_rgba(99,102,241,0.3)]">
                     <Icon size={22} className="text-white" />
                   </div>
 
@@ -80,7 +80,7 @@ export default function ServicesPage() {
 
         {/* CTA */}
         <MotionWrapper>
-          <div className="accent-gradient rounded-2xl p-8 sm:p-12 text-center">
+          <div className="rounded-2xl p-8 sm:p-12 text-center animate-gradient-shift" style={{ background: "linear-gradient(135deg, #6366F1, #7C3AED, #8B5CF6, #6366F1)", backgroundSize: "200% 200%" }}>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Нужна комплексная автоматизация?</h2>
             <p className="text-white/70 mb-6 max-w-lg mx-auto">
               Проведём аудит процессов вашего сервисного центра и спроектируем архитектуру AI-системы

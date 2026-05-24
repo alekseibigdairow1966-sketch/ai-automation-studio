@@ -33,10 +33,12 @@ export function CasesPreview() {
           {featured.map((cs) => (
             <StaggerItem key={cs.id}>
               <Link href={`/cases/${cs.slug}`} className="group block glass-panel hover-glow overflow-hidden h-full">
-                <div className="h-40 bg-gradient-to-br from-accent/10 to-accent-end/10 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-2xl border border-accent/20 flex items-center justify-center">
+                <div className="h-40 bg-gradient-to-br from-accent/10 to-accent-end/10 flex items-center justify-center relative">
+                  <div className="w-16 h-16 rounded-2xl border border-accent/20 flex items-center justify-center transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-[0_0_24px_rgba(99,102,241,0.2)]">
                     <span className="text-accent text-2xl font-bold">{cs.title[0]}</span>
                   </div>
+                  {/* Subtle grid overlay on card header */}
+                  <div className="absolute inset-0 hero-grid opacity-[0.03]" />
                 </div>
                 <div className="p-5">
                   <Badge variant="secondary" className="mb-3 text-xs bg-accent/10 text-accent border-0">

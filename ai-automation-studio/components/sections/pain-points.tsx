@@ -57,8 +57,8 @@ export function PainPointsSection() {
             const Icon = pain.icon
             return (
               <StaggerItem key={pain.title}>
-                <div className="glass-panel p-6 h-full group">
-                  <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/10 flex items-center justify-center mb-4">
+                <div className="glass-panel p-6 h-full group hover-glow">
+                  <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/10 flex items-center justify-center mb-4 transition-all duration-300 group-hover:bg-red-500/15 group-hover:border-red-500/20 group-hover:shadow-[0_0_16px_rgba(239,68,68,0.1)]">
                     <Icon size={18} className="text-red-400/80" />
                   </div>
                   <h3 className="font-semibold text-text-primary mb-2 text-sm">{pain.title}</h3>

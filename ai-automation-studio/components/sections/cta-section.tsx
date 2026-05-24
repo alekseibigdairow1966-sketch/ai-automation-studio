@@ -9,7 +9,10 @@ export function CTASection() {
   return (
     <section className="py-24 px-4 sm:px-6">
       <MotionWrapper>
-        <div className="max-w-4xl mx-auto accent-gradient rounded-3xl p-10 sm:p-16 text-center relative overflow-hidden">
+        <div
+          className="max-w-4xl mx-auto rounded-3xl p-10 sm:p-16 text-center relative overflow-hidden animate-gradient-shift"
+          style={{ background: "linear-gradient(135deg, #6366F1, #7C3AED, #8B5CF6, #6366F1)", backgroundSize: "200% 200%" }}
+        >
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
           <div className="relative">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">

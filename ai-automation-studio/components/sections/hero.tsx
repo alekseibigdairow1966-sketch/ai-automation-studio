@@ -14,11 +14,13 @@ const stats = [
 export function Hero() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      {/* Gradient mesh background */}
+      {/* Gradient mesh background — animated drift */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-end/15 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px]" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-drift-1" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-end/15 rounded-full blur-[120px] animate-drift-2" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px] animate-pulse-ambient" />
+        {/* Subtle dot grid */}
+        <div className="absolute inset-0 hero-grid opacity-[0.04]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 text-center">
@@ -63,20 +65,21 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex justify-center gap-8 sm:gap-12 md:gap-20"
-        >
+        {/* Stats — staggered blur reveal */}
+        <div className="flex justify-center gap-8 sm:gap-12 md:gap-20">
           {stats.map((stat, i) => (
-            <div key={i} className="text-center">
+            <motion.div
+              key={i}
+              className="text-center"
+              initial={{ opacity: 0, y: 15, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.8, delay: 0.5 + i * 0.15, ease: "easeOut" }}
+            >
               <p className="text-3xl sm:text-4xl font-bold accent-gradient-text">{stat.value}</p>
               <p className="text-text-muted text-sm mt-1">{stat.label}</p>
-            </div>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
