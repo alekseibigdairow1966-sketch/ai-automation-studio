@@ -1,26 +1,57 @@
 "use client"
 
-import { MotionWrapper } from "@/components/motion-wrapper"
-import { motion } from "framer-motion"
+import { MotionWrapper, StaggerContainer, StaggerItem } from "@/components/motion-wrapper"
+import { MessageCircle, Bot, Database, Wrench, Bell, BarChart3 } from "lucide-react"
 
-const nodes = [
-  { id: "user", label: "Клиент", x: 5, y: 45, icon: "\u{1F464}" },
-  { id: "whatsapp", label: "WhatsApp", x: 22, y: 45, icon: "\u{1F4AC}" },
-  { id: "ai", label: "AI Router", x: 42, y: 45, icon: "\u{1F916}" },
-  { id: "crm", label: "CRM", x: 65, y: 20, icon: "\u{1F4CA}" },
-  { id: "n8n", label: "n8n", x: 65, y: 45, icon: "\u{26A1}" },
-  { id: "notify", label: "Уведомления", x: 65, y: 70, icon: "\u{1F514}" },
-  { id: "dashboard", label: "Dashboard", x: 85, y: 45, icon: "\u{1F4C8}" },
-]
-
-const edges = [
-  { from: "user", to: "whatsapp" },
-  { from: "whatsapp", to: "ai" },
-  { from: "ai", to: "crm" },
-  { from: "ai", to: "n8n" },
-  { from: "ai", to: "notify" },
-  { from: "crm", to: "dashboard" },
-  { from: "n8n", to: "dashboard" },
+const steps = [
+  {
+    icon: MessageCircle,
+    label: "Обращение",
+    desc: "WhatsApp, Telegram, сайт, звонок",
+    color: "text-green-400",
+    bg: "bg-green-500/10",
+    border: "border-green-500/20",
+  },
+  {
+    icon: Bot,
+    label: "AI-приёмка",
+    desc: "Классификация, сбор данных, создание заявки",
+    color: "text-accent",
+    bg: "bg-accent/10",
+    border: "border-accent/20",
+  },
+  {
+    icon: Database,
+    label: "CRM",
+    desc: "Заявка в системе, статус, история",
+    color: "text-blue-400",
+    bg: "bg-blue-500/10",
+    border: "border-blue-500/20",
+  },
+  {
+    icon: Wrench,
+    label: "Мастер",
+    desc: "Назначение, выполнение, обновление статуса",
+    color: "text-amber-400",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/20",
+  },
+  {
+    icon: Bell,
+    label: "Уведомление",
+    desc: "Клиент информирован на каждом этапе",
+    color: "text-purple-400",
+    bg: "bg-purple-500/10",
+    border: "border-purple-500/20",
+  },
+  {
+    icon: BarChart3,
+    label: "Аналитика",
+    desc: "Dashboard, метрики, контроль",
+    color: "text-cyan-400",
+    bg: "bg-cyan-500/10",
+    border: "border-cyan-500/20",
+  },
 ]
 
 export function ArchitectureShowcase() {
@@ -30,73 +61,68 @@ export function ArchitectureShowcase() {
         <MotionWrapper className="text-center mb-16">
           <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">Архитектура</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
-            Как выглядит типичная AI-автоматизация
+            Как работает AI-система сервисного центра
           </h2>
           <p className="text-text-muted text-sm max-w-xl mx-auto">
-            От обращения клиента до автоматической обработки — без участия оператора
+            От обращения клиента до завершения ремонта — полная автоматизация
           </p>
         </MotionWrapper>
 
         <MotionWrapper delay={0.2}>
-          <div className="glass-panel p-8 sm:p-12 overflow-x-auto">
-            <svg viewBox="0 0 100 90" className="w-full max-w-3xl mx-auto" style={{ minWidth: 500 }}>
-              {/* Edges */}
-              {edges.map((edge, i) => {
-                const fromNode = nodes.find((n) => n.id === edge.from)!
-                const toNode = nodes.find((n) => n.id === edge.to)!
+          <div className="glass-panel p-6 sm:p-10">
+            {/* Desktop: horizontal flow */}
+            <div className="hidden lg:block">
+              <StaggerContainer className="grid grid-cols-6 gap-3">
+                {steps.map((step, i) => {
+                  const Icon = step.icon
+                  return (
+                    <StaggerItem key={step.label}>
+                      <div className="relative">
+                        {/* Connector line */}
+                        {i < steps.length - 1 && (
+                          <div className="absolute top-6 left-[calc(50%+28px)] right-[-12px] h-px bg-gradient-to-r from-white/10 to-white/5 z-0" />
+                        )}
+                        {/* Step */}
+                        <div className="relative z-10 text-center">
+                          <div className={`w-12 h-12 rounded-xl ${step.bg} border ${step.border} flex items-center justify-center mx-auto mb-3`}>
+                            <Icon size={20} className={step.color} />
+                          </div>
+                          <p className="text-text-primary text-xs font-semibold mb-1">{step.label}</p>
+                          <p className="text-text-muted text-[10px] leading-tight">{step.desc}</p>
+                        </div>
+                        {/* Step number */}
+                        <div className="absolute -top-2 -right-1 w-5 h-5 rounded-full bg-background border border-white/10 flex items-center justify-center">
+                          <span className="text-text-muted text-[9px] font-medium">{i + 1}</span>
+                        </div>
+                      </div>
+                    </StaggerItem>
+                  )
+                })}
+              </StaggerContainer>
+            </div>
+
+            {/* Mobile: vertical flow */}
+            <div className="lg:hidden space-y-4">
+              {steps.map((step, i) => {
+                const Icon = step.icon
                 return (
-                  <motion.line
-                    key={i}
-                    x1={fromNode.x + 6}
-                    y1={fromNode.y + 5}
-                    x2={toNode.x}
-                    y2={toNode.y + 5}
-                    stroke="rgba(99,102,241,0.3)"
-                    strokeWidth="0.3"
-                    strokeDasharray="1 0.5"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    whileInView={{ pathLength: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.5 + i * 0.15 }}
-                  />
+                  <div key={step.label} className="flex items-start gap-4">
+                    <div className="relative flex flex-col items-center">
+                      <div className={`w-10 h-10 rounded-xl ${step.bg} border ${step.border} flex items-center justify-center shrink-0`}>
+                        <Icon size={18} className={step.color} />
+                      </div>
+                      {i < steps.length - 1 && (
+                        <div className="w-px h-6 bg-white/10 mt-2" />
+                      )}
+                    </div>
+                    <div className="pt-1">
+                      <p className="text-text-primary text-sm font-semibold">{step.label}</p>
+                      <p className="text-text-muted text-xs">{step.desc}</p>
+                    </div>
+                  </div>
                 )
               })}
-
-              {/* Nodes */}
-              {nodes.map((node, i) => (
-                <motion.g
-                  key={node.id}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                >
-                  <rect
-                    x={node.x}
-                    y={node.y}
-                    width="12"
-                    height="10"
-                    rx="1.5"
-                    fill="#18181B"
-                    stroke="rgba(99,102,241,0.2)"
-                    strokeWidth="0.2"
-                  />
-                  <text x={node.x + 6} y={node.y + 4.5} textAnchor="middle" fontSize="3.5">
-                    {node.icon}
-                  </text>
-                  <text
-                    x={node.x + 6}
-                    y={node.y + 8}
-                    textAnchor="middle"
-                    fontSize="1.6"
-                    fill="#A1A1AA"
-                    fontFamily="Inter, sans-serif"
-                  >
-                    {node.label}
-                  </text>
-                </motion.g>
-              ))}
-            </svg>
+            </div>
           </div>
         </MotionWrapper>
       </div>

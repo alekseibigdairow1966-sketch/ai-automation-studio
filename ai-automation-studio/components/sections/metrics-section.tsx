@@ -3,10 +3,10 @@
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper"
 
 const metrics = [
-  { value: "80%", label: "сокращение времени ответа", desc: "AI отвечает за секунды, не минуты" },
-  { value: "3x", label: "рост конверсии", desc: "Ни одно обращение не потеряно" },
-  { value: "24/7", label: "работа без перерывов", desc: "AI не спит и не уходит в отпуск" },
-  { value: "2 нед", label: "срок внедрения", desc: "От аудита до запуска" },
+  { value: "0%", label: "потерянных заявок", desc: "Каждое обращение фиксируется автоматически" },
+  { value: "-80%", label: "ручной работы", desc: "AI обрабатывает типовые обращения" },
+  { value: "30 сек", label: "время ответа", desc: "Вместо 15 минут ожидания на линии" },
+  { value: "2 нед", label: "срок внедрения", desc: "От аудита до работающей системы" },
 ]
 
 export function MetricsSection() {

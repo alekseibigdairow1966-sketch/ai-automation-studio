@@ -7,7 +7,12 @@ import { cases } from "@/data/cases"
 import { StaggerContainer, StaggerItem, MotionWrapper } from "@/components/motion-wrapper"
 
 export function CasesPreview() {
-  const featured = cases.filter((c) => c.published).slice(0, 3)
+  // Lead with service center case, then dental clinic, then restaurant
+  const priorityOrder = ["crm-automation-service-center", "ai-reception-dental-clinic", "restaurant-whatsapp-orders"]
+  const published = cases.filter((c) => c.published)
+  const featured = priorityOrder
+    .map((slug) => published.find((c) => c.slug === slug))
+    .filter(Boolean) as typeof cases
 
   return (
     <section className="py-24 px-4 sm:px-6 bg-surface/50">

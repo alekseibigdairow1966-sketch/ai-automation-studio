@@ -6,9 +6,9 @@ import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const stats = [
-  { value: "50+", label: "интеграций" },
-  { value: "30+", label: "проектов" },
-  { value: "99.9%", label: "uptime" },
+  { value: "0%", label: "потерянных заявок" },
+  { value: "-80%", label: "ручной работы" },
+  { value: "24/7", label: "без выходных" },
 ]
 
 export function Hero() {
@@ -30,19 +30,21 @@ export function Hero() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 mb-8">
             <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            <span className="text-xs text-accent font-medium">AI Automation Platform</span>
+            <span className="text-xs text-accent font-medium tracking-wide">
+              Операционная AI-платформа
+            </span>
           </div>
 
           {/* H1 */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6 max-w-4xl mx-auto">
-            AI Automation Infrastructure{" "}
-            <span className="accent-gradient-text">for Service Businesses</span>
+            AI-инфраструктура для{" "}
+            <span className="accent-gradient-text">сервисного бизнеса</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-text-secondary text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            WhatsApp AI, CRM-автоматизация, AI-ресепшн, n8n workflows —{" "}
-            строим цифровую инфраструктуру для бизнеса
+            Автоматизируем приём заявок, маршрутизацию, коммуникацию
+            с клиентами и контроль операций. Без хаоса, без потерянных обращений.
           </p>
 
           {/* CTAs */}
@@ -55,7 +57,7 @@ export function Hero() {
             </Link>
             <Link href="/contact">
               <Button size="lg" variant="outline" className="border-white/10 text-text-primary hover:bg-white/5 px-8">
-                Связаться
+                Обсудить проект
               </Button>
             </Link>
           </div>
