@@ -2,12 +2,13 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { cases } from "@/data/cases"
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper"
 
-const industries = ["Все", "Клиники", "Рестораны", "E-commerce", "Услуги", "SaaS"]
-const technologies = ["Все", "WhatsApp API", "OpenAI", "n8n", "CRM", "Supabase"]
+const industries = ["Все", "Сервисные центры", "Клиники", "Рестораны", "E-commerce", "SaaS"]
+const technologies = ["Все", "WhatsApp API", "OpenAI", "n8n", "Supabase", "Telegram Bot"]
 
 export function CasesListClient() {
   const [activeIndustry, setActiveIndustry] = useState("Все")
@@ -23,7 +24,7 @@ export function CasesListClient() {
   return (
     <>
       {/* Filters */}
-      <div className="mb-8 space-y-4">
+      <div className="mb-10 space-y-4">
         <div>
           <p className="text-text-muted text-xs mb-2">Индустрия</p>
           <div className="flex flex-wrap gap-2">
@@ -63,34 +64,51 @@ export function CasesListClient() {
       </div>
 
       {/* Cards */}
-      <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {filtered.map((cs) => (
-          <StaggerItem key={cs.id}>
-            <Link href={`/cases/${cs.slug}`} className="group block glass-panel hover-glow overflow-hidden h-full">
-              <div className="h-36 bg-gradient-to-br from-accent/10 to-accent-end/10 flex items-center justify-center">
-                <div className="w-14 h-14 rounded-xl border border-accent/20 flex items-center justify-center">
-                  <span className="text-accent text-xl font-bold">{cs.title[0]}</span>
+      <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {filtered.map((cs) => {
+          const topResult = cs.results[0]
+          return (
+            <StaggerItem key={cs.id}>
+              <Link href={`/cases/${cs.slug}`} className="group block glass-panel hover-glow overflow-hidden h-full">
+                {/* Visual header */}
+                <div className="h-44 bg-gradient-to-br from-accent/10 via-accent/5 to-accent-end/10 relative p-5 flex flex-col justify-between">
+                  {/* Industry badge */}
+                  <Badge variant="secondary" className="self-start text-[10px] bg-white/10 text-white/80 border-0 backdrop-blur-sm">
+                    {cs.industry}
+                  </Badge>
+                  {/* Key metric */}
+                  {topResult && (
+                    <div className="self-end">
+                      <div className="bg-background/60 backdrop-blur-md border border-white/[0.08] rounded-xl px-4 py-2.5">
+                        <p className="text-text-muted text-[10px] mb-0.5">{topResult.metric}</p>
+                        <div className="flex items-center gap-2">
+                          <span className="text-red-400/70 text-xs line-through">{topResult.before}</span>
+                          <ArrowRight size={10} className="text-text-muted" />
+                          <span className="text-accent font-bold text-sm">{topResult.after}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-              <div className="p-5">
-                <Badge variant="secondary" className="mb-2 text-xs bg-accent/10 text-accent border-0">
-                  {cs.industry}
-                </Badge>
-                <h2 className="font-semibold text-text-primary mb-2 group-hover:text-accent transition-colors">
-                  {cs.title}
-                </h2>
-                <p className="text-text-muted text-sm line-clamp-2 mb-4">{cs.description}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {cs.technologies.map((tech) => (
-                    <span key={tech} className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-text-muted">
-                      {tech}
-                    </span>
-                  ))}
+
+                {/* Content */}
+                <div className="p-5">
+                  <h2 className="font-semibold text-text-primary mb-2 group-hover:text-accent transition-colors leading-snug">
+                    {cs.title}
+                  </h2>
+                  <p className="text-text-muted text-sm line-clamp-2 mb-4 leading-relaxed">{cs.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {cs.technologies.map((tech) => (
+                      <span key={tech} className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-text-muted border border-white/[0.04]">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Link>
-          </StaggerItem>
-        ))}
+              </Link>
+            </StaggerItem>
+          )
+        })}
       </StaggerContainer>
 
       {filtered.length === 0 && (
