@@ -61,18 +61,25 @@ export function ROICalculator() {
     const ins = t.calculator.insight
     if (!touched) return ins.default as string
 
-    // Priority: specific parameter thresholds → total losses → generic
-    if (inputs.lostPct >= 15) return ins.highLoss as string
-    if (inputs.avgResponseMin >= 25) return ins.slowResponse as string
-    if (inputs.managerCount >= 8) return ins.manyManagers as string
+    // 1. Good performance — both metrics low
+    if (inputs.lostPct < 5 && inputs.avgResponseMin < 10) {
+      return ins.goodPerformance as string
+    }
 
-    if (results.totalLosses >= 2_000_000) {
+    // 2. High volume + notable losses — show real amount
+    if (inputs.requestsPerDay > 40 && inputs.lostPct > 10) {
       const m = results.totalLosses / 1_000_000
       const formatted = m >= 10
         ? `${Math.round(m)} млн`
         : `${m.toFixed(1).replace(".", ",")} млн`
-      return (ins.highTotal as string).replace("{amount}", formatted)
+      return (ins.highVolumeLoss as string).replace("{amount}", formatted)
     }
+
+    // 3. Slow response time
+    if (inputs.avgResponseMin > 20) return ins.slowResponse as string
+
+    // 4. Too many managers / coordination overhead
+    if (inputs.managerCount > 5) return ins.manyManagers as string
 
     return ins.generic as string
   }, [touched, inputs, results, t])
@@ -233,15 +240,15 @@ export function ROICalculator() {
               </div>
 
               {/* Dynamic Insight */}
-              <div className="py-1 min-h-[48px] flex items-center justify-center">
+              <div className="pt-4 mt-1 border-t border-white/[0.06] min-h-[56px] flex items-start justify-center">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={insightText}
-                    initial={{ opacity: 0, y: 6 }}
+                    initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.45, ease: "easeInOut" }}
-                    className="text-text-muted/60 text-[11px] leading-relaxed text-center max-w-[560px] mx-auto"
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                    className="text-text-secondary text-[13px] sm:text-sm leading-relaxed text-center max-w-[500px] mx-auto"
                   >
                     {insightText}
                   </motion.p>
@@ -250,8 +257,8 @@ export function ROICalculator() {
 
               {/* CTA */}
               <Link href="/audit">
-                <Button className="w-full accent-gradient text-white" size="lg">
-                  {t.calculator.getPlan} <ArrowRight size={16} className="ml-1" />
+                <Button className="w-full bg-accent hover:bg-accent/80 text-white/90 hover:text-white transition-colors">
+                  {t.calculator.getPlan} <ArrowRight size={14} className="ml-1" />
                 </Button>
               </Link>
             </div>
