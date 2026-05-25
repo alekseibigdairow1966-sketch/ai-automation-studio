@@ -6,8 +6,8 @@ import { cases as defaultCases } from "@/data/cases"
 import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 
 export const metadata: Metadata = {
-  title: "Кейсы AI-автоматизации сервисных центров — AIAutomation Studio",
-  description: "Реализованные проекты: автоматизация сервисных центров, WhatsApp AI, CRM-системы, AI-приёмка. Архитектура и результаты.",
+  title: "Сценарии автоматизации — AIAutomation Studio",
+  description: "Операционные AI-системы для сервисного бизнеса: CRM-автоматизация, WhatsApp AI, AI-маршрутизация, автоуведомления.",
 }
 
 export default async function CasesPage() {

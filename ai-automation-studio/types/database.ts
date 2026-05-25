@@ -16,6 +16,10 @@ export interface CaseStudy {
   results: { metric: string; before: string; after: string }[]
   published: boolean
   created_at: string
+  level?: "BASIC" | "STANDARD" | "ADVANCED"
+  automatedFeatures?: string[]
+  proofMetrics?: { value: string; label: string }[]
+  workflow?: string[]
 }
 
 export interface BlogPost {
