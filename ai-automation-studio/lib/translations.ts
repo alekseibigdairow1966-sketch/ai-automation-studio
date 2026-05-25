@@ -258,7 +258,7 @@ export const translations = {
       withAI: "Возможное снижение потерь",
       savingsMonth: "Экономия / мес",
       savingsYear: "Экономия / год",
-      getPlan: "Получить план автоматизации",
+      getPlan: "Получить аудит потерь",
       min: "мин",
     },
   },
