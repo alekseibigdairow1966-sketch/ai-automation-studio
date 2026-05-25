@@ -218,6 +218,11 @@ export function ROICalculator() {
             </div>
           </MotionWrapper>
         </div>
+
+        {/* Disclaimer */}
+        <p className="text-text-muted text-xs text-center mt-8 max-w-2xl mx-auto leading-relaxed">
+          {t.calculator.disclaimer}
+        </p>
       </div>
     </section>
   )
