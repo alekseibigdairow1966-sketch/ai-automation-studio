@@ -1,4 +1,7 @@
 import Link from "next/link"
+import { readStore } from "@/lib/content-store"
+import { CONTACTS } from "@/data/contacts"
+import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 
 const SERVICE_LINKS = [
   { href: "/services", label: "AI Receptionist" },
@@ -7,7 +10,7 @@ const SERVICE_LINKS = [
   { href: "/services", label: "n8n Workflows" },
 ]
 
-const COMPANY_LINKS = [
+const COMPANY_LINKS_RU = [
   { href: "/cases", label: "Кейсы" },
   { href: "/audit", label: "AI-аудит" },
   { href: "/calculator", label: "ROI-калькулятор" },
@@ -15,7 +18,19 @@ const COMPANY_LINKS = [
   { href: "/contact", label: "Контакты" },
 ]
 
-export function Footer() {
+const COMPANY_LINKS_KK = [
+  { href: "/cases", label: "Кейстер" },
+  { href: "/audit", label: "AI-аудит" },
+  { href: "/calculator", label: "ROI-калькулятор" },
+  { href: "/blog", label: "Блог" },
+  { href: "/contact", label: "Байланыс" },
+]
+
+export async function Footer() {
+  const c = await readStore("contacts", CONTACTS)
+  const locale = await getServerLocale()
+  const t = getTranslations(locale)
+
   return (
     <footer className="border-t border-white/[0.06] mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 sm:grid-cols-3 gap-10 text-sm">
@@ -24,15 +39,31 @@ export function Footer() {
             <div className="w-7 h-7 rounded-lg accent-gradient flex items-center justify-center text-white text-[10px] font-bold">
               AI
             </div>
-            <span className="font-semibold text-text-primary text-sm">AIAutomation Studio</span>
+            <span className="font-semibold text-text-primary text-sm">
+              AIAutomation Studio
+            </span>
           </div>
-          <p className="text-text-muted text-xs leading-relaxed max-w-xs">
-            Строим AI-инфраструктуру для бизнеса. WhatsApp AI, CRM-автоматизация, AI-ресепшн, n8n workflows.
+          <p className="text-text-muted text-xs leading-relaxed max-w-xs mb-3">
+            {c.description}
           </p>
+          <div className="space-y-1 text-text-muted text-xs">
+            <p>{c.address.full}</p>
+            <p>
+              <a
+                href={`mailto:${c.email}`}
+                className="hover:text-text-secondary transition-colors"
+              >
+                {c.email}
+              </a>
+            </p>
+            <p>{c.workingHours.short}</p>
+          </div>
         </div>
 
         <div>
-          <p className="text-text-primary font-medium mb-4 text-xs uppercase tracking-wider">Услуги</p>
+          <p className="text-text-primary font-medium mb-4 text-xs uppercase tracking-wider">
+            {t.footer.services}
+          </p>
           <div className="space-y-2">
             {SERVICE_LINKS.map((link) => (
               <Link
@@ -47,9 +78,11 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="text-text-primary font-medium mb-4 text-xs uppercase tracking-wider">Компания</p>
+          <p className="text-text-primary font-medium mb-4 text-xs uppercase tracking-wider">
+            {t.footer.company}
+          </p>
           <div className="space-y-2">
-            {COMPANY_LINKS.map((link) => (
+            {(locale === "kk" ? COMPANY_LINKS_KK : COMPANY_LINKS_RU).map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
@@ -66,8 +99,38 @@ export function Footer() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-text-muted">
           <span>&copy; {new Date().getFullYear()} AIAutomation Studio</span>
           <div className="flex gap-4">
-            <a href="https://t.me/" target="_blank" rel="noopener noreferrer" className="hover:text-text-secondary transition-colors">Telegram</a>
-            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="hover:text-text-secondary transition-colors">WhatsApp</a>
+            {c.phones[0] && (
+              <a
+                href={`tel:${c.phones[0].raw}`}
+                className="hover:text-text-secondary transition-colors"
+              >
+                {c.phones[0].display}
+              </a>
+            )}
+            <a
+              href={c.social.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-text-secondary transition-colors"
+            >
+              WhatsApp
+            </a>
+            <a
+              href={c.social.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-text-secondary transition-colors"
+            >
+              Telegram
+            </a>
+            <a
+              href={c.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-text-secondary transition-colors"
+            >
+              Instagram
+            </a>
           </div>
         </div>
       </div>

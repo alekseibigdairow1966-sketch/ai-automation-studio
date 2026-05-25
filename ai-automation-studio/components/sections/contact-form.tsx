@@ -6,17 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { MotionWrapper } from "@/components/motion-wrapper"
-
-const PROBLEM_OPTIONS = [
-  "Теряются заявки",
-  "Медленные ответы клиентам",
-  "Нет контроля над процессами",
-  "Ручная рутина отнимает время",
-  "Нет аналитики",
-  "Хаос в коммуникации",
-]
+import { useLocale } from "@/lib/i18n"
 
 export function ContactFormSection() {
+  const { t } = useLocale()
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle")
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [selectedProblems, setSelectedProblems] = useState<string[]>([])
@@ -41,9 +34,9 @@ export function ContactFormSection() {
     if (honeypot) return
 
     const newErrors: Record<string, string> = {}
-    if (!name || name.length < 2) newErrors.name = "Введите имя"
+    if (!name || name.length < 2) newErrors.name = t.contactForm.errorName
     if (!phone || !/^\+?[\d\s\-()]{7,20}$/.test(phone))
-      newErrors.phone = "Введите корректный номер"
+      newErrors.phone = t.contactForm.errorPhone
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
       return
@@ -79,10 +72,10 @@ export function ContactFormSection() {
         <MotionWrapper className="max-w-lg mx-auto text-center py-16">
           <CheckCircle2 size={48} className="text-accent mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-text-primary mb-2">
-            Заявка отправлена!
+            {t.contactForm.successTitle}
           </h3>
           <p className="text-text-muted text-sm">
-            Ответим в течение 2 часов в рабочее время
+            {t.contactForm.successText}
           </p>
         </MotionWrapper>
       </section>
@@ -94,13 +87,13 @@ export function ContactFormSection() {
       <div className="max-w-lg mx-auto">
         <MotionWrapper className="text-center mb-10">
           <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
-            Контакты
+            {t.contactForm.badge}
           </p>
           <h2 className="text-3xl font-bold text-text-primary mb-3">
-            Оставить заявку
+            {t.contactForm.title}
           </h2>
           <p className="text-text-muted text-sm">
-            Расскажите о задаче — подберём решение и посчитаем ROI
+            {t.contactForm.subtitle}
           </p>
         </MotionWrapper>
 
@@ -120,7 +113,7 @@ export function ContactFormSection() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-text-secondary text-xs mb-1.5 block">
-                  Имя *
+                  {t.contactForm.name}
                 </label>
                 <Input
                   name="name"
@@ -132,7 +125,7 @@ export function ContactFormSection() {
               </div>
               <div>
                 <label className="text-text-secondary text-xs mb-1.5 block">
-                  Телефон *
+                  {t.contactForm.phone}
                 </label>
                 <Input
                   name="phone"
@@ -149,7 +142,7 @@ export function ContactFormSection() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-text-secondary text-xs mb-1.5 block">
-                  Email
+                  {t.contactForm.email}
                 </label>
                 <Input
                   name="email"
@@ -159,7 +152,7 @@ export function ContactFormSection() {
               </div>
               <div>
                 <label className="text-text-secondary text-xs mb-1.5 block">
-                  WhatsApp
+                  {t.contactForm.whatsapp}
                 </label>
                 <Input
                   name="whatsapp"
@@ -172,11 +165,11 @@ export function ContactFormSection() {
 
             <div>
               <label className="text-text-secondary text-xs mb-1.5 block">
-                Бизнес
+                {t.contactForm.business}
               </label>
               <Input
                 name="business"
-                placeholder="Сфера и масштаб"
+                placeholder={t.contactForm.businessPlaceholder}
                 className="bg-background border-white/[0.06] text-text-primary placeholder:text-text-muted"
               />
             </div>
@@ -184,10 +177,10 @@ export function ContactFormSection() {
             {/* Problem chips */}
             <div>
               <label className="text-text-secondary text-xs mb-2 block">
-                Операционные проблемы
+                {t.contactForm.problems}
               </label>
               <div className="flex flex-wrap gap-1.5">
-                {PROBLEM_OPTIONS.map((p) => {
+                {t.contactForm.problemOptions.map((p) => {
                   const active = selectedProblems.includes(p)
                   return (
                     <button
@@ -209,12 +202,12 @@ export function ContactFormSection() {
 
             <div>
               <label className="text-text-secondary text-xs mb-1.5 block">
-                Сообщение
+                {t.contactForm.message}
               </label>
               <Textarea
                 name="message"
                 rows={3}
-                placeholder="Опишите задачу или вопрос..."
+                placeholder={t.contactForm.messagePlaceholder}
                 className="resize-none bg-background border-white/[0.06] text-text-primary placeholder:text-text-muted"
               />
             </div>
@@ -227,11 +220,11 @@ export function ContactFormSection() {
               {status === "loading" ? (
                 <Loader2 size={18} className="animate-spin" />
               ) : (
-                "Отправить заявку"
+                t.contactForm.submit
               )}
             </Button>
             <p className="text-center text-text-muted text-xs">
-              Ответим в течение 2 часов
+              {t.contactForm.responseTime}
             </p>
           </form>
         </MotionWrapper>

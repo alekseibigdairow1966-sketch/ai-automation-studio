@@ -2,21 +2,17 @@
 
 import { motion } from "framer-motion"
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper"
-
-const metrics = [
-  { value: "0%", label: "потерянных заявок", desc: "Каждое обращение фиксируется автоматически" },
-  { value: "-80%", label: "ручной работы", desc: "AI обрабатывает типовые обращения" },
-  { value: "30 сек", label: "время ответа", desc: "Вместо 15 минут ожидания на линии" },
-  { value: "2 нед", label: "срок внедрения", desc: "От аудита до работающей системы" },
-]
+import { useLocale } from "@/lib/i18n"
 
 export function MetricsSection() {
+  const { t } = useLocale()
+
   return (
     <section className="py-24 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {metrics.map((m, i) => (
-            <StaggerItem key={m.label}>
+          {t.metrics.map((m, i) => (
+            <StaggerItem key={i}>
               <div className="glass-panel p-6 text-center hover-glow group">
                 <motion.p
                   className="text-3xl sm:text-4xl font-bold accent-gradient-text mb-2"

@@ -1,25 +1,31 @@
 import type { Metadata } from "next"
 import { CasesListClient } from "./cases-list-client"
 import { MotionWrapper } from "@/components/motion-wrapper"
+import { readStore } from "@/lib/content-store"
+import { cases as defaultCases } from "@/data/cases"
+import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 
 export const metadata: Metadata = {
   title: "Кейсы AI-автоматизации сервисных центров — AIAutomation Studio",
   description: "Реализованные проекты: автоматизация сервисных центров, WhatsApp AI, CRM-системы, AI-приёмка. Архитектура и результаты.",
 }
 
-export default function CasesPage() {
+export default async function CasesPage() {
+  const cases = await readStore("cases", defaultCases)
+  const locale = await getServerLocale()
+  const t = getTranslations(locale)
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <MotionWrapper className="text-center mb-16">
-        <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">Кейсы</p>
+        <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">{t.casesPage.badge}</p>
         <h1 className="text-4xl sm:text-5xl font-bold text-text-primary mb-4">
-          Реализованные проекты
+          {t.casesPage.title}
         </h1>
         <p className="text-text-muted text-lg max-w-2xl mx-auto">
-          Операционная автоматизация сервисных центров, клиник и бизнесов с измеримыми результатами
+          {t.casesPage.subtitle}
         </p>
       </MotionWrapper>
-      <CasesListClient />
+      <CasesListClient cases={cases} />
     </div>
   )
 }

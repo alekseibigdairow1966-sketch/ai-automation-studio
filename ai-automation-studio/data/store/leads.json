@@ -1,0 +1,19 @@
+[
+  {
+    "id": "4a4eeb50-ae5c-4081-a830-4448db155861",
+    "name": "Алексей Бигдаиров",
+    "phone": "+77014721540",
+    "email": "aleksei.bigdairow@yandex.kz",
+    "business": "сервисный центр",
+    "problems": [
+      "Теряются заявки"
+    ],
+    "source": "contact",
+    "consultantData": {
+      "message": "впвапв"
+    },
+    "quality_score": 60,
+    "quality": "warm",
+    "created_at": "2026-05-25T10:31:43.548Z"
+  }
+]

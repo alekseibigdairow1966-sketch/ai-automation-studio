@@ -239,13 +239,22 @@
   100% { transform: scale(2.2); opacity: 0; }
 }
 
+/* Slow spin for decorative elements */
+.animate-spin-slow { animation: spin 25s linear infinite; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* Reduced motion — disable ambient animations */
 @media (prefers-reduced-motion: reduce) {
   .animate-drift-1,
   .animate-drift-2,
   .animate-pulse-ambient,
   .animate-flow-line,
-  .animate-gradient-shift { animation: none; }
+  .animate-gradient-shift,
+  .animate-spin-slow { animation: none; }
   .hover-glow:hover { transform: none; }
   .live-ring::after { animation: none; }
 }

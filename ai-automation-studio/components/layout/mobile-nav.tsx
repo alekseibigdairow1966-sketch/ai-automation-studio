@@ -8,9 +8,10 @@ interface MobileNavProps {
   open: boolean
   onClose: () => void
   links: { href: string; label: string }[]
+  discussLabel?: string
 }
 
-export function MobileNav({ open, onClose, links }: MobileNavProps) {
+export function MobileNav({ open, onClose, links, discussLabel = "Обсудить проект" }: MobileNavProps) {
   return (
     <AnimatePresence>
       {open && (
@@ -35,7 +36,7 @@ export function MobileNav({ open, onClose, links }: MobileNavProps) {
             <div className="pt-4">
               <Link href="/contact" onClick={onClose}>
                 <Button className="w-full accent-gradient text-white text-sm font-medium">
-                  Обсудить проект
+                  {discussLabel}
                 </Button>
               </Link>
             </div>

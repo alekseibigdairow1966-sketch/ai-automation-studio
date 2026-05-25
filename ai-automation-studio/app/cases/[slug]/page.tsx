@@ -4,20 +4,24 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight, X, Check } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { cases } from "@/data/cases"
+import { cases as defaultCases } from "@/data/cases"
+import { readStore } from "@/lib/content-store"
 import { CaseWorkflow } from "./case-workflow"
+import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 
 interface Props {
   params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
-  return cases.filter((c) => c.published).map((c) => ({ slug: c.slug }))
+  const cases = await readStore("cases", defaultCases)
+  return cases.filter((c: { published: boolean }) => c.published).map((c: { slug: string }) => ({ slug: c.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const cs = cases.find((c) => c.slug === slug)
+  const cases = await readStore("cases", defaultCases)
+  const cs = cases.find((c: { slug: string }) => c.slug === slug)
   if (!cs) return {}
   return {
     title: `${cs.title} — AIAutomation Studio`,
@@ -27,7 +31,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CasePage({ params }: Props) {
   const { slug } = await params
-  const cs = cases.find((c) => c.slug === slug && c.published)
+  const cases = await readStore("cases", defaultCases)
+  const locale = await getServerLocale()
+  const t = getTranslations(locale)
+  const cs = cases.find((c: { slug: string; published: boolean }) => c.slug === slug && c.published)
   if (!cs) notFound()
 
   const inefficiencyList = cs.inefficiencies.split(". ").filter(Boolean).map((s) => s.replace(/\.$/, ""))
@@ -37,7 +44,7 @@ export default async function CasePage({ params }: Props) {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
       {/* Back */}
       <Link href="/cases" className="inline-flex items-center gap-1.5 text-text-muted text-sm hover:text-text-secondary transition-colors mb-8">
-        <ArrowLeft size={14} /> Все кейсы
+        <ArrowLeft size={14} /> {t.caseDetail.allCases}
       </Link>
 
       {/* Header */}
@@ -47,7 +54,7 @@ export default async function CasePage({ params }: Props) {
             {cs.industry}
           </Badge>
           <span className="text-text-muted text-xs">
-            {new Date(cs.created_at).toLocaleDateString("ru-RU", { year: "numeric", month: "long" })}
+            {new Date(cs.created_at).toLocaleDateString(locale === "kk" ? "kk-KZ" : "ru-RU", { year: "numeric", month: "long" })}
           </span>
         </div>
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-5 leading-tight">{cs.title}</h1>
@@ -65,7 +72,7 @@ export default async function CasePage({ params }: Props) {
       <section className="mb-16">
         <h2 className="text-xl font-semibold text-text-primary mb-6 flex items-center gap-2">
           <span className="w-1 h-6 rounded-full bg-success block" />
-          Результаты
+          {t.caseDetail.results}
         </h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {cs.results.map((r) => (
@@ -85,7 +92,7 @@ export default async function CasePage({ params }: Props) {
       <section className="mb-16">
         <h2 className="text-xl font-semibold text-text-primary mb-6 flex items-center gap-2">
           <span className="w-1 h-6 rounded-full bg-red-500 block" />
-          Проблема
+          {t.caseDetail.problem}
         </h2>
         <div className="glass-panel p-6 sm:p-8">
           <p className="text-text-secondary leading-relaxed text-base">{cs.problem}</p>
@@ -96,7 +103,7 @@ export default async function CasePage({ params }: Props) {
       <section className="mb-16">
         <h2 className="text-xl font-semibold text-text-primary mb-6 flex items-center gap-2">
           <span className="w-1 h-6 rounded-full bg-red-500 block" />
-          Операционные неэффективности
+          {t.caseDetail.inefficiencies}
         </h2>
         <div className="glass-panel p-6 sm:p-8 border-red-500/10">
           <div className="space-y-3">
@@ -114,7 +121,7 @@ export default async function CasePage({ params }: Props) {
       <section className="mb-16">
         <h2 className="text-xl font-semibold text-text-primary mb-6 flex items-center gap-2">
           <span className="w-1 h-6 rounded-full accent-gradient block" />
-          Решение
+          {t.caseDetail.solution}
         </h2>
         <div className="glass-panel p-6 sm:p-8 border-accent/10">
           <div className="space-y-3">
@@ -133,7 +140,7 @@ export default async function CasePage({ params }: Props) {
         <section className="mb-16">
           <h2 className="text-xl font-semibold text-text-primary mb-6 flex items-center gap-2">
             <span className="w-1 h-6 rounded-full accent-gradient block" />
-            Архитектура системы
+            {t.caseDetail.architecture}
           </h2>
           <CaseWorkflow
             nodes={cs.architecture.nodes}
@@ -146,7 +153,7 @@ export default async function CasePage({ params }: Props) {
       <section className="mb-16">
         <h2 className="text-xl font-semibold text-text-primary mb-6 flex items-center gap-2">
           <span className="w-1 h-6 rounded-full accent-gradient block" />
-          До и после
+          {t.caseDetail.beforeAfter}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="glass-panel p-6 border-red-500/10">
@@ -154,7 +161,7 @@ export default async function CasePage({ params }: Props) {
               <div className="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center">
                 <X size={16} className="text-red-400" />
               </div>
-              <h3 className="font-semibold text-text-primary text-sm">До автоматизации</h3>
+              <h3 className="font-semibold text-text-primary text-sm">{t.caseDetail.before}</h3>
             </div>
             <div className="space-y-3">
               {cs.results.map((r) => (
@@ -170,7 +177,7 @@ export default async function CasePage({ params }: Props) {
               <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
                 <Check size={16} className="text-accent" />
               </div>
-              <h3 className="font-semibold text-text-primary text-sm">С AI-системой</h3>
+              <h3 className="font-semibold text-text-primary text-sm">{t.caseDetail.after}</h3>
             </div>
             <div className="space-y-3">
               {cs.results.map((r) => (
@@ -186,11 +193,11 @@ export default async function CasePage({ params }: Props) {
 
       {/* CTA */}
       <section className="rounded-2xl p-8 sm:p-12 text-center animate-gradient-shift" style={{ background: "linear-gradient(135deg, #6366F1, #7C3AED, #8B5CF6, #6366F1)", backgroundSize: "200% 200%" }}>
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Хотите такое же решение?</h2>
-        <p className="text-white/70 mb-6 max-w-lg mx-auto">Обсудим вашу задачу и спроектируем архитектуру автоматизации под ваши процессы</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">{t.caseDetail.wantSame}</h2>
+        <p className="text-white/70 mb-6 max-w-lg mx-auto">{t.caseDetail.wantSameDesc}</p>
         <Link href="/contact">
           <Button size="lg" className="bg-white text-accent font-medium px-8 hover:bg-white/90">
-            Обсудить проект <ArrowRight size={16} className="ml-2" />
+            {t.nav.discuss} <ArrowRight size={16} className="ml-2" />
           </Button>
         </Link>
       </section>

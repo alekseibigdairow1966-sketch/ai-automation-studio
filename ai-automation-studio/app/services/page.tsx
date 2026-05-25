@@ -5,10 +5,12 @@ import {
   GitBranch, BarChart3, Workflow,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { services } from "@/data/services"
+import { services as defaultServices } from "@/data/services"
+import { readStore } from "@/lib/content-store"
 import { MotionWrapper, StaggerContainer, StaggerItem } from "@/components/motion-wrapper"
 import { OperationalDashboard } from "@/components/sections/operational-dashboard"
 import { TrustSection } from "@/components/sections/trust-section"
+import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 
 export const metadata: Metadata = {
   title: "AI-решения для сервисных центров — AIAutomation Studio",
@@ -19,18 +21,21 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Headphones, MessageCircle, Database, GitBranch, BarChart3, Workflow,
 }
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await readStore("services", defaultServices)
+  const locale = await getServerLocale()
+  const t = getTranslations(locale)
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
         {/* Header */}
         <MotionWrapper className="text-center mb-20">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">Решения</p>
+          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">{t.servicesPage.badge}</p>
           <h1 className="text-4xl sm:text-5xl font-bold text-text-primary mb-5">
-            AI-инфраструктура для сервисного бизнеса
+            {t.servicesPage.title}
           </h1>
           <p className="text-text-muted text-lg max-w-2xl mx-auto">
-            Полный стек автоматизации: от приёма заявок до аналитики и контроля операций. Каждое решение проектируется под ваши процессы.
+            {t.servicesPage.subtitle}
           </p>
         </MotionWrapper>
 
@@ -81,13 +86,13 @@ export default function ServicesPage() {
         {/* CTA */}
         <MotionWrapper>
           <div className="rounded-2xl p-8 sm:p-12 text-center animate-gradient-shift" style={{ background: "linear-gradient(135deg, #6366F1, #7C3AED, #8B5CF6, #6366F1)", backgroundSize: "200% 200%" }}>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Нужна комплексная автоматизация?</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">{t.servicesPage.ctaTitle}</h2>
             <p className="text-white/70 mb-6 max-w-lg mx-auto">
-              Проведём аудит процессов вашего сервисного центра и спроектируем архитектуру AI-системы
+              {t.servicesPage.ctaSubtitle}
             </p>
             <Link href="/contact">
               <Button size="lg" className="bg-white text-accent font-medium px-8 hover:bg-white/90">
-                Обсудить проект <ArrowRight size={16} className="ml-2" />
+                {t.servicesPage.ctaButton} <ArrowRight size={16} className="ml-2" />
               </Button>
             </Link>
           </div>

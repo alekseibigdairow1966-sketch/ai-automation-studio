@@ -1,32 +1,71 @@
 import type { Metadata } from "next"
-import { Mail, Phone, MapPin, Clock, MessageCircle, Send } from "lucide-react"
+import { Mail, Phone, MapPin, Clock, MessageCircle, Send, AtSign } from "lucide-react"
 import { ContactFormSection } from "@/components/sections/contact-form"
+import { readStore } from "@/lib/content-store"
+import { CONTACTS } from "@/data/contacts"
+import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 
 export const metadata: Metadata = {
   title: "Контакты",
-  description: "Свяжитесь с AIAutomation Studio — обсудим задачу AI-автоматизации вашего бизнеса. Ответим в течение 2 часов.",
+  description:
+    "Свяжитесь с AIAutomation Studio — обсудим задачу AI-автоматизации вашего бизнеса. Ответим в течение 2 часов.",
 }
 
-const contactInfo = [
-  { icon: Mail, label: "Email", value: "hello@aiautomation.studio", href: "mailto:hello@aiautomation.studio" },
-  { icon: Phone, label: "Телефон", value: "+7 (XXX) XXX-XX-XX", href: "tel:+7XXXXXXXXXX" },
-  { icon: Clock, label: "Время ответа", value: "В течение 2 часов", href: null },
-  { icon: MapPin, label: "Формат", value: "Удалённо, по всему СНГ", href: null },
-]
+export default async function ContactPage() {
+  const c = await readStore("contacts", CONTACTS)
+  const locale = await getServerLocale()
+  const t = getTranslations(locale)
 
-const socialLinks = [
-  { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/" },
-  { icon: Send, label: "Telegram", href: "https://t.me/" },
-]
+  const contactInfo = [
+    ...(c.phones || []).map((p: { display: string; raw: string }, i: number) => ({
+      icon: Phone,
+      label: `${t.contactPage.phone}${(c.phones?.length ?? 0) > 1 ? ` ${i + 1}` : ""}`,
+      value: p.display,
+      href: `tel:${p.raw}`,
+    })),
+    {
+      icon: Mail,
+      label: "Email",
+      value: c.email,
+      href: `mailto:${c.email}`,
+    },
+    {
+      icon: MapPin,
+      label: t.contactPage.address,
+      value: c.address.full,
+      href: c.address.mapUrl,
+    },
+    {
+      icon: Clock,
+      label: t.contactPage.weekdays,
+      value: c.workingHours.weekdays,
+      href: null,
+    },
+    {
+      icon: Clock,
+      label: t.contactPage.saturday,
+      value: c.workingHours.saturday,
+      href: null,
+    },
+  ]
 
-export default function ContactPage() {
+  const socialLinks = [
+    { icon: MessageCircle, label: "WhatsApp", href: c.social.whatsapp },
+    { icon: Send, label: "Telegram", href: c.social.telegram },
+    { icon: AtSign, label: "Instagram", href: c.social.instagram },
+  ]
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <div className="text-center mb-16">
-        <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">Контакты</p>
-        <h1 className="text-4xl sm:text-5xl font-bold text-text-primary mb-4">Обсудить проект</h1>
+        <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
+          {t.contactPage.badge}
+        </p>
+        <h1 className="text-4xl sm:text-5xl font-bold text-text-primary mb-4">
+          {t.contactPage.title}
+        </h1>
         <p className="text-text-muted text-lg max-w-xl mx-auto">
-          Расскажите о задаче — подберём решение и посчитаем ROI
+          {t.contactPage.subtitle}
         </p>
       </div>
 
@@ -39,9 +78,11 @@ export default function ContactPage() {
         {/* Right: Info */}
         <div className="lg:col-span-2 space-y-6">
           <div className="glass-panel p-6">
-            <h2 className="text-text-primary font-semibold mb-5">Контактная информация</h2>
+            <h2 className="text-text-primary font-semibold mb-5">
+              {t.contactPage.infoTitle}
+            </h2>
             <div className="space-y-4">
-              {contactInfo.map((item) => {
+              {contactInfo.map((item, idx) => {
                 const Icon = item.icon
                 const content = (
                   <div className="flex items-start gap-3">
@@ -55,16 +96,30 @@ export default function ContactPage() {
                   </div>
                 )
                 return item.href ? (
-                  <a key={item.label} href={item.href} className="block hover:opacity-80 transition-opacity">{content}</a>
+                  <a
+                    key={idx}
+                    href={item.href}
+                    className="block hover:opacity-80 transition-opacity"
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      item.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                  >
+                    {content}
+                  </a>
                 ) : (
-                  <div key={item.label}>{content}</div>
+                  <div key={idx}>{content}</div>
                 )
               })}
             </div>
           </div>
 
           <div className="glass-panel p-6">
-            <h2 className="text-text-primary font-semibold mb-4">Мессенджеры</h2>
+            <h2 className="text-text-primary font-semibold mb-4">
+              {t.contactPage.messengers}
+            </h2>
             <div className="flex gap-3">
               {socialLinks.map((link) => {
                 const Icon = link.icon
@@ -85,12 +140,15 @@ export default function ContactPage() {
           </div>
 
           <div className="glass-panel p-6">
-            <p className="text-text-primary text-sm font-medium mb-2">Как мы работаем</p>
+            <p className="text-text-primary text-sm font-medium mb-2">
+              {t.contactPage.howWeWork}
+            </p>
             <ol className="space-y-2 text-text-muted text-xs">
-              <li className="flex gap-2"><span className="text-accent font-medium">1.</span> Вы описываете задачу</li>
-              <li className="flex gap-2"><span className="text-accent font-medium">2.</span> Мы проводим аудит и предлагаем решение</li>
-              <li className="flex gap-2"><span className="text-accent font-medium">3.</span> Согласовываем архитектуру и сроки</li>
-              <li className="flex gap-2"><span className="text-accent font-medium">4.</span> Внедряем и запускаем за 2-3 недели</li>
+              {t.contactPage.steps.map((step, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="text-accent font-medium">{i + 1}.</span> {step}
+                </li>
+              ))}
             </ol>
           </div>
         </div>

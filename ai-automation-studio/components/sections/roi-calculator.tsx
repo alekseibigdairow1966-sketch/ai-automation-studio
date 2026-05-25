@@ -6,12 +6,13 @@ import { Calculator, TrendingDown, TrendingUp, ArrowRight, DollarSign, Clock, Al
 import { Button } from "@/components/ui/button"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import Link from "next/link"
+import { useLocale } from "@/lib/i18n"
 
 /* ------------------------------------------------------------------ */
 /*  Defaults & constants                                               */
 /* ------------------------------------------------------------------ */
 
-const MANAGER_HOURLY_RATE = 500 // RUB/hour
+const MANAGER_HOURLY_RATE = 2500 // KZT/hour
 const AI_EFFICIENCY_FACTOR = 0.6 // AI saves ~60%
 const CONTROL_HOURS_PER_DAY = 2 // hours spent on oversight per manager
 
@@ -28,7 +29,7 @@ const DEFAULTS: Inputs = {
   avgResponseMin: 15,
   lostPct: 10,
   managerCount: 3,
-  avgRepairValue: 5000,
+  avgRepairValue: 25000,
 }
 
 /* ------------------------------------------------------------------ */
@@ -36,6 +37,7 @@ const DEFAULTS: Inputs = {
 /* ------------------------------------------------------------------ */
 
 export function ROICalculator() {
+  const { t } = useLocale()
   const [inputs, setInputs] = useState<Inputs>(DEFAULTS)
 
   const results = useMemo(() => {
@@ -51,7 +53,7 @@ export function ROICalculator() {
   }, [inputs])
 
   const fmt = (n: number) =>
-    new Intl.NumberFormat("ru-RU", { style: "currency", currency: "RUB", maximumFractionDigits: 0 }).format(n)
+    new Intl.NumberFormat("ru-RU", { style: "currency", currency: "KZT", maximumFractionDigits: 0 }).format(n)
 
   const handleChange = (field: keyof Inputs, value: number) => {
     setInputs((prev) => ({ ...prev, [field]: value }))
@@ -62,13 +64,13 @@ export function ROICalculator() {
       <div className="max-w-7xl mx-auto">
         <MotionWrapper className="text-center mb-16">
           <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
-            Калькулятор
+            {t.calculator.badge}
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
-            Сколько вы теряете без автоматизации?
+            {t.calculator.title}
           </h2>
           <p className="text-text-muted text-sm max-w-2xl mx-auto">
-            Введите параметры вашего бизнеса — калькулятор покажет операционные потери и потенциал AI-автоматизации
+            {t.calculator.subtitle}
           </p>
         </MotionWrapper>
 
@@ -78,11 +80,11 @@ export function ROICalculator() {
             <div className="glass-panel p-6 sm:p-8 space-y-6">
               <div className="flex items-center gap-2 mb-2">
                 <Calculator size={18} className="text-accent" />
-                <h3 className="text-text-primary font-semibold">Параметры бизнеса</h3>
+                <h3 className="text-text-primary font-semibold">{t.calculator.paramsTitle}</h3>
               </div>
 
               <SliderInput
-                label="Заявок в день"
+                label={t.calculator.requestsPerDay as string}
                 value={inputs.requestsPerDay}
                 min={5}
                 max={200}
@@ -91,16 +93,16 @@ export function ROICalculator() {
                 onChange={(v) => handleChange("requestsPerDay", v)}
               />
               <SliderInput
-                label="Среднее время ответа"
+                label={t.calculator.avgResponseTime as string}
                 value={inputs.avgResponseMin}
                 min={1}
                 max={60}
                 step={1}
-                unit="мин"
+                unit={t.calculator.min as string}
                 onChange={(v) => handleChange("avgResponseMin", v)}
               />
               <SliderInput
-                label="Потеря заявок"
+                label={t.calculator.lostRequests as string}
                 value={inputs.lostPct}
                 min={0}
                 max={30}
@@ -109,7 +111,7 @@ export function ROICalculator() {
                 onChange={(v) => handleChange("lostPct", v)}
               />
               <SliderInput
-                label="Менеджеров"
+                label={t.calculator.managers as string}
                 value={inputs.managerCount}
                 min={1}
                 max={20}
@@ -118,12 +120,12 @@ export function ROICalculator() {
                 onChange={(v) => handleChange("managerCount", v)}
               />
               <SliderInput
-                label="Средний чек ремонта"
+                label={t.calculator.avgRepairValue as string}
                 value={inputs.avgRepairValue}
-                min={1000}
-                max={30000}
-                step={500}
-                unit="₽"
+                min={5000}
+                max={150000}
+                step={2500}
+                unit="₸"
                 onChange={(v) => handleChange("avgRepairValue", v)}
               />
             </div>
@@ -137,30 +139,30 @@ export function ROICalculator() {
                 <div className="flex items-center gap-2 mb-4">
                   <TrendingDown size={18} className="text-red-400" />
                   <h3 className="text-text-primary font-semibold text-sm">
-                    Ежемесячные потери
+                    {t.calculator.monthlyLosses}
                   </h3>
                 </div>
                 <div className="space-y-3">
                   <ResultRow
                     icon={<DollarSign size={14} />}
-                    label="Упущенная выручка"
+                    label={t.calculator.lostRevenue as string}
                     value={fmt(results.lostRevenue)}
                     color="text-red-400"
                   />
                   <ResultRow
                     icon={<Clock size={14} />}
-                    label="Время на коммуникацию"
+                    label={t.calculator.commTime as string}
                     value={fmt(results.commTime)}
                     color="text-red-400"
                   />
                   <ResultRow
                     icon={<AlertTriangle size={14} />}
-                    label="Контроль и координация"
+                    label={t.calculator.controlCoord as string}
                     value={fmt(results.controlOverhead)}
                     color="text-red-400"
                   />
                   <div className="border-t border-white/[0.06] pt-3 flex items-center justify-between">
-                    <span className="text-text-primary text-sm font-semibold">Итого потерь / мес</span>
+                    <span className="text-text-primary text-sm font-semibold">{t.calculator.totalLosses}</span>
                     <motion.span
                       key={results.totalLosses}
                       initial={{ opacity: 0, scale: 0.9 }}
@@ -178,12 +180,12 @@ export function ROICalculator() {
                 <div className="flex items-center gap-2 mb-4">
                   <TrendingUp size={18} className="text-accent" />
                   <h3 className="text-text-primary font-semibold text-sm">
-                    С AI-автоматизацией
+                    {t.calculator.withAI}
                   </h3>
                 </div>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-text-muted text-sm">Экономия / мес</span>
+                    <span className="text-text-muted text-sm">{t.calculator.savingsMonth}</span>
                     <motion.span
                       key={results.potentialSavings}
                       initial={{ opacity: 0, scale: 0.9 }}
@@ -194,7 +196,7 @@ export function ROICalculator() {
                     </motion.span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-text-muted text-sm">Экономия / год</span>
+                    <span className="text-text-muted text-sm">{t.calculator.savingsYear}</span>
                     <motion.span
                       key={results.annualSavings}
                       initial={{ opacity: 0, scale: 0.9 }}
@@ -210,7 +212,7 @@ export function ROICalculator() {
               {/* CTA */}
               <Link href="/audit">
                 <Button className="w-full accent-gradient text-white" size="lg">
-                  Получить план автоматизации <ArrowRight size={16} className="ml-1" />
+                  {t.calculator.getPlan} <ArrowRight size={16} className="ml-1" />
                 </Button>
               </Link>
             </div>

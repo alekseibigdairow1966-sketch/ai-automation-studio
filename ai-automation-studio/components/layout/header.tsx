@@ -2,22 +2,25 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Settings } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { MobileNav } from "./mobile-nav"
-
-const NAV_LINKS = [
-  { href: "/", label: "Главная" },
-  { href: "/cases", label: "Кейсы" },
-  { href: "/services", label: "Услуги" },
-  { href: "/audit", label: "AI-аудит" },
-  { href: "/calculator", label: "ROI" },
-  { href: "/blog", label: "Блог" },
-  { href: "/contact", label: "Контакты" },
-]
+import { LanguageSwitcher } from "@/components/ui/language-switcher"
+import { useLocale } from "@/lib/i18n"
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { t } = useLocale()
+
+  const NAV_LINKS = [
+    { href: "/", label: t.nav.home },
+    { href: "/cases", label: t.nav.cases },
+    { href: "/services", label: t.nav.services },
+    { href: "/audit", label: t.nav.audit },
+    { href: "/calculator", label: t.nav.roi },
+    { href: "/blog", label: t.nav.blog },
+    { href: "/contact", label: t.nav.contact },
+  ]
 
   return (
     <>
@@ -45,9 +48,17 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+            <Link
+              href="/admin"
+              className="text-text-muted hover:text-accent transition-colors duration-200"
+              title="Админ-панель"
+            >
+              <Settings size={18} />
+            </Link>
             <Link href="/contact">
               <Button size="sm" className="accent-gradient text-white text-xs font-medium hidden sm:flex hover:opacity-90 transition-opacity">
-                Обсудить проект
+                {t.nav.discuss}
               </Button>
             </Link>
             <button
@@ -60,7 +71,7 @@ export function Header() {
         </nav>
       </header>
 
-      <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} links={NAV_LINKS} />
+      <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} links={NAV_LINKS} discussLabel={t.nav.discuss} />
     </>
   )
 }

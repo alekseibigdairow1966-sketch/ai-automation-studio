@@ -1,27 +1,32 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
-import { blogPosts } from "@/data/blog-posts"
+import { blogPosts as defaultBlog } from "@/data/blog-posts"
+import { readStore } from "@/lib/content-store"
+import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 
 export const metadata: Metadata = {
   title: "Блог об AI-автоматизации",
   description: "Статьи о WhatsApp AI, n8n, CRM-автоматизации, AI-ресепшн и бизнес-системах.",
 }
 
-export default function BlogPage() {
-  const published = blogPosts.filter((p) => p.published_at).sort(
+export default async function BlogPage() {
+  const blogPosts = await readStore("blog", defaultBlog)
+  const locale = await getServerLocale()
+  const t = getTranslations(locale)
+  const published = blogPosts.filter((p: { published_at: string | null }) => p.published_at).sort(
     (a, b) => new Date(b.published_at!).getTime() - new Date(a.published_at!).getTime()
   )
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <div className="text-center mb-16">
-        <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">Блог</p>
+        <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">{t.blogPage.badge}</p>
         <h1 className="text-4xl sm:text-5xl font-bold text-text-primary mb-4">
-          Статьи об AI-автоматизации
+          {t.blogPage.title}
         </h1>
         <p className="text-text-muted text-lg max-w-xl mx-auto">
-          Разбираем кейсы, сравниваем инструменты, делимся опытом
+          {t.blogPage.subtitle}
         </p>
       </div>
 
@@ -41,7 +46,7 @@ export default function BlogPage() {
                   {post.category}
                 </Badge>
                 <span className="text-text-muted text-[10px]">
-                  {new Date(post.published_at!).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" })}
+                  {new Date(post.published_at!).toLocaleDateString(locale === "kk" ? "kk-KZ" : "ru-RU", { day: "numeric", month: "long", year: "numeric" })}
                 </span>
               </div>
               <h2 className="font-semibold text-text-primary mb-2 group-hover:text-accent transition-colors line-clamp-2">

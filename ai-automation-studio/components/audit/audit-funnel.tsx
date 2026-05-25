@@ -25,6 +25,7 @@ import {
   generateAuditSummary,
   type Recommendation,
 } from "@/data/consultant-flow"
+import { useLocale } from "@/lib/i18n"
 
 /* skip greeting — audit starts at step 1 */
 const AUDIT_STEPS = CONSULTANT_STEPS.filter((s) => s.type !== "greeting")
@@ -33,6 +34,7 @@ const STEP_ICONS = [Building2, MessageSquare, AlertTriangle, Settings, Users, Br
 type Phase = "questions" | "processing" | "results" | "capture" | "done"
 
 export function AuditFunnel() {
+  const { t } = useLocale()
   const [currentStep, setCurrentStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({})
   const [multiSelected, setMultiSelected] = useState<string[]>([])
@@ -82,8 +84,8 @@ export function AuditFunnel() {
 
   const handleSubmit = async () => {
     const errs: Record<string, string> = {}
-    if (!leadForm.name || leadForm.name.length < 2) errs.name = "Введите имя"
-    if (!leadForm.phone || !/^\+?[\d\s\-()]{7,20}$/.test(leadForm.phone)) errs.phone = "Введите номер"
+    if (!leadForm.name || leadForm.name.length < 2) errs.name = t.audit.errorName as string
+    if (!leadForm.phone || !/^\+?[\d\s\-()]{7,20}$/.test(leadForm.phone)) errs.phone = t.audit.errorPhone as string
     if (Object.keys(errs).length > 0) { setFormErrors(errs); return }
     setFormErrors({})
     setSubmitting(true)
@@ -121,7 +123,7 @@ export function AuditFunnel() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
           <span className="text-text-muted text-xs">
-            {phase === "questions" ? `Шаг ${currentStep + 1} из ${totalSteps}` : "Аудит завершён"}
+            {phase === "questions" ? `${t.audit.stepOf} ${currentStep + 1} ${t.audit.of} ${totalSteps}` : t.audit.auditDone}
           </span>
           <span className="text-accent text-xs font-medium">{progress}%</span>
         </div>
@@ -201,7 +203,7 @@ export function AuditFunnel() {
                         className="w-full accent-gradient text-white mt-4"
                         size="lg"
                       >
-                        Продолжить <ArrowRight size={16} className="ml-1" />
+                        {t.audit.continue} <ArrowRight size={16} className="ml-1" />
                       </Button>
                     )}
                   </>
@@ -214,7 +216,7 @@ export function AuditFunnel() {
                   onClick={goBack}
                   className="flex items-center gap-1 text-text-muted text-xs hover:text-text-secondary transition-colors mt-6 mx-auto"
                 >
-                  <ArrowLeft size={12} /> Назад
+                  <ArrowLeft size={12} /> {t.audit.back}
                 </button>
               )}
             </div>
@@ -240,8 +242,8 @@ export function AuditFunnel() {
               style={{ filter: "blur(16px)" }}
             />
           </div>
-          <h3 className="text-xl font-bold text-text-primary mb-2">AI анализирует ваш бизнес</h3>
-          <p className="text-text-muted text-sm mb-6">Генерируем персональные рекомендации по автоматизации</p>
+          <h3 className="text-xl font-bold text-text-primary mb-2">{t.audit.processing}</h3>
+          <p className="text-text-muted text-sm mb-6">{t.audit.processingDesc}</p>
           <Loader2 size={24} className="text-accent animate-spin mx-auto" />
         </motion.div>
       )}
@@ -259,7 +261,7 @@ export function AuditFunnel() {
             <div className="flex items-center gap-2 mb-3">
               <Sparkles size={16} className="text-accent" />
               <p className="text-accent text-xs font-semibold uppercase tracking-wider">
-                Результат AI-аудита
+                {t.audit.resultBadge}
               </p>
             </div>
             <p className="text-text-secondary text-sm leading-relaxed">{auditSummary}</p>
@@ -267,7 +269,7 @@ export function AuditFunnel() {
 
           {/* Recommendations */}
           <div>
-            <h3 className="text-lg font-bold text-text-primary mb-4">Рекомендации по автоматизации</h3>
+            <h3 className="text-lg font-bold text-text-primary mb-4">{t.audit.recommendations}</h3>
             <div className="space-y-3">
               {recommendations.map((rec, i) => (
                 <motion.div
@@ -304,7 +306,7 @@ export function AuditFunnel() {
             className="w-full accent-gradient text-white"
             size="lg"
           >
-            Получить детальный план внедрения <ArrowRight size={16} className="ml-1" />
+            {t.audit.getPlan} <ArrowRight size={16} className="ml-1" />
           </Button>
         </motion.div>
       )}
@@ -318,16 +320,16 @@ export function AuditFunnel() {
         >
           <div className="text-center mb-6">
             <h3 className="text-lg font-bold text-text-primary mb-2">
-              Получите детальный план автоматизации
+              {t.audit.captureTitle}
             </h3>
             <p className="text-text-muted text-sm">
-              На основе аудита подготовим архитектуру, сроки и стоимость внедрения
+              {t.audit.captureDesc}
             </p>
           </div>
 
           <div className="space-y-4 max-w-sm mx-auto">
             <div>
-              <label className="text-text-secondary text-xs mb-1.5 block">Имя *</label>
+              <label className="text-text-secondary text-xs mb-1.5 block">{t.audit.nameLabel}</label>
               <Input
                 value={leadForm.name}
                 onChange={(e) => { setLeadForm((p) => ({ ...p, name: e.target.value })); setFormErrors((p) => ({ ...p, name: "" })) }}
@@ -336,7 +338,7 @@ export function AuditFunnel() {
               {formErrors.name && <p className="text-red-400 text-xs mt-1">{formErrors.name}</p>}
             </div>
             <div>
-              <label className="text-text-secondary text-xs mb-1.5 block">Телефон *</label>
+              <label className="text-text-secondary text-xs mb-1.5 block">{t.audit.phoneLabel}</label>
               <Input
                 type="tel"
                 placeholder="+7 (___) ___-__-__"
@@ -347,7 +349,7 @@ export function AuditFunnel() {
               {formErrors.phone && <p className="text-red-400 text-xs mt-1">{formErrors.phone}</p>}
             </div>
             <div>
-              <label className="text-text-secondary text-xs mb-1.5 block">Email</label>
+              <label className="text-text-secondary text-xs mb-1.5 block">{t.audit.emailLabel}</label>
               <Input
                 type="email"
                 value={leadForm.email}
@@ -356,7 +358,7 @@ export function AuditFunnel() {
               />
             </div>
             <div>
-              <label className="text-text-secondary text-xs mb-1.5 block">Компания / Бизнес</label>
+              <label className="text-text-secondary text-xs mb-1.5 block">{t.audit.businessLabel}</label>
               <Input
                 value={leadForm.business}
                 onChange={(e) => setLeadForm((p) => ({ ...p, business: e.target.value }))}
@@ -365,9 +367,9 @@ export function AuditFunnel() {
             </div>
 
             <Button onClick={handleSubmit} disabled={submitting} className="w-full accent-gradient text-white" size="lg">
-              {submitting ? <Loader2 size={18} className="animate-spin" /> : <>Отправить <Send size={14} className="ml-1" /></>}
+              {submitting ? <Loader2 size={18} className="animate-spin" /> : <>{t.audit.send} <Send size={14} className="ml-1" /></>}
             </Button>
-            <p className="text-center text-text-muted text-xs">Ответим в течение 2 часов</p>
+            <p className="text-center text-text-muted text-xs">{t.audit.responseTime}</p>
           </div>
         </motion.div>
       )}
@@ -380,9 +382,9 @@ export function AuditFunnel() {
           className="glass-panel p-10 sm:p-14 text-center"
         >
           <CheckCircle2 size={48} className="text-accent mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-text-primary mb-2">Заявка отправлена!</h3>
+          <h3 className="text-xl font-bold text-text-primary mb-2">{t.audit.doneTitle}</h3>
           <p className="text-text-muted text-sm max-w-md mx-auto">
-            Мы подготовим индивидуальный план автоматизации на основе вашего аудита и свяжемся в течение 2 часов
+            {t.audit.doneDesc}
           </p>
         </motion.div>
       )}

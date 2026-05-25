@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server"
+import crypto from "crypto"
 import { leadSchema, calculateLeadScore, formatLeadForTelegram } from "@/lib/leads"
+import { appendToStore } from "@/lib/content-store"
 
 export async function POST(req: Request) {
   try {
@@ -16,6 +18,19 @@ export async function POST(req: Request) {
 
     const lead = parsed.data
     const { score, quality } = calculateLeadScore(lead)
+
+    /* ---- Local JSON storage (always) ---- */
+    try {
+      await appendToStore("leads", {
+        id: crypto.randomUUID(),
+        ...lead,
+        quality_score: score,
+        quality,
+        created_at: new Date().toISOString(),
+      })
+    } catch {
+      console.warn("[leads] Local storage failed — continuing")
+    }
 
     /* ---- Supabase (optional) ---- */
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL

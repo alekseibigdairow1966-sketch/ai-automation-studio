@@ -4,20 +4,23 @@ import { useState } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { cases } from "@/data/cases"
+import type { CaseStudy } from "@/types/database"
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper"
+import { useLocale } from "@/lib/i18n"
 
-const industries = ["Все", "Сервисные центры", "Клиники", "Рестораны", "E-commerce", "SaaS"]
-const technologies = ["Все", "WhatsApp API", "OpenAI", "n8n", "Supabase", "Telegram Bot"]
+const industries = ["Сервисные центры", "Клиники", "Рестораны", "E-commerce", "SaaS"]
+const technologies = ["WhatsApp API", "OpenAI", "n8n", "Supabase", "Telegram Bot"]
 
-export function CasesListClient() {
-  const [activeIndustry, setActiveIndustry] = useState("Все")
-  const [activeTech, setActiveTech] = useState("Все")
+export function CasesListClient({ cases }: { cases: CaseStudy[] }) {
+  const { t } = useLocale()
+  const allLabel = t.casesPage.all as string
+  const [activeIndustry, setActiveIndustry] = useState<string>(allLabel)
+  const [activeTech, setActiveTech] = useState<string>(allLabel)
 
   const filtered = cases.filter((c) => {
     if (!c.published) return false
-    if (activeIndustry !== "Все" && c.industry !== activeIndustry) return false
-    if (activeTech !== "Все" && !c.technologies.some((t) => t.includes(activeTech))) return false
+    if (activeIndustry !== allLabel && c.industry !== activeIndustry) return false
+    if (activeTech !== allLabel && !c.technologies.some((tech) => tech.includes(activeTech))) return false
     return true
   })
 
@@ -26,9 +29,9 @@ export function CasesListClient() {
       {/* Filters */}
       <div className="mb-10 space-y-4">
         <div>
-          <p className="text-text-muted text-xs mb-2">Индустрия</p>
+          <p className="text-text-muted text-xs mb-2">{t.casesPage.industry}</p>
           <div className="flex flex-wrap gap-2">
-            {industries.map((ind) => (
+            {[allLabel, ...industries].map((ind) => (
               <button
                 key={ind}
                 onClick={() => setActiveIndustry(ind)}
@@ -44,9 +47,9 @@ export function CasesListClient() {
           </div>
         </div>
         <div>
-          <p className="text-text-muted text-xs mb-2">Технология</p>
+          <p className="text-text-muted text-xs mb-2">{t.casesPage.technology}</p>
           <div className="flex flex-wrap gap-2">
-            {technologies.map((tech) => (
+            {[allLabel, ...technologies].map((tech) => (
               <button
                 key={tech}
                 onClick={() => setActiveTech(tech)}
@@ -114,7 +117,7 @@ export function CasesListClient() {
       </StaggerContainer>
 
       {filtered.length === 0 && (
-        <p className="text-center text-text-muted py-16">Нет кейсов по выбранным фильтрам</p>
+        <p className="text-center text-text-muted py-16">{t.casesPage.noResults}</p>
       )}
     </>
   )

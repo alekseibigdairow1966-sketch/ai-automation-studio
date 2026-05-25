@@ -3,13 +3,14 @@
 import { motion } from "framer-motion"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { Activity, Clock, Users, Wrench, CheckCircle2, AlertTriangle } from "lucide-react"
+import { useLocale } from "@/lib/i18n"
 
 const queueItems = [
-  { id: "SC-1247", device: "iPhone 14 Pro", type: "Замена экрана", status: "in_progress", master: "Александр К.", time: "1ч 20м" },
-  { id: "SC-1248", device: "MacBook Air M2", type: "Диагностика", status: "waiting", master: "—", time: "Ожидает" },
-  { id: "SC-1249", device: "Samsung S24", type: "Замена батареи", status: "done", master: "Михаил В.", time: "45м" },
-  { id: "SC-1250", device: "iPad Pro 12.9", type: "Ремонт разъёма", status: "in_progress", master: "Дмитрий С.", time: "2ч 10м" },
-  { id: "SC-1251", device: "AirPods Pro", type: "Не заряжается", status: "waiting", master: "—", time: "Ожидает" },
+  { id: "SC-1247", device: "iPhone 14 Pro", type_ru: "Замена экрана", type_kk: "Экранды ауыстыру", status: "in_progress", master: "Александр К.", time_ru: "1ч 20м", time_kk: "1с 20м" },
+  { id: "SC-1248", device: "MacBook Air M2", type_ru: "Диагностика", type_kk: "Диагностика", status: "waiting", master: "—", time_ru: "Ожидает", time_kk: "Күтуде" },
+  { id: "SC-1249", device: "Samsung S24", type_ru: "Замена батареи", type_kk: "Батареяны ауыстыру", status: "done", master: "Михаил В.", time_ru: "45м", time_kk: "45м" },
+  { id: "SC-1250", device: "iPad Pro 12.9", type_ru: "Ремонт разъёма", type_kk: "Ұяшықты жөндеу", status: "in_progress", master: "Дмитрий С.", time_ru: "2ч 10м", time_kk: "2с 10м" },
+  { id: "SC-1251", device: "AirPods Pro", type_ru: "Не заряжается", type_kk: "Зарядталмайды", status: "waiting", master: "—", time_ru: "Ожидает", time_kk: "Күтуде" },
 ]
 
 const statusColors: Record<string, string> = {
@@ -18,30 +19,32 @@ const statusColors: Record<string, string> = {
   done: "text-green-400 bg-green-500/10 shadow-[0_0_8px_rgba(34,197,94,0.15)]",
 }
 
-const statusLabels: Record<string, string> = {
-  in_progress: "В работе",
-  waiting: "В очереди",
-  done: "Готово",
-}
-
-const miniMetrics = [
-  { icon: Activity, label: "Заявок сегодня", value: "34", change: "+12%" },
-  { icon: Clock, label: "Среднее время", value: "1.5ч", change: "−18%" },
-  { icon: Users, label: "Мастеров на смене", value: "4/5", change: "" },
-  { icon: CheckCircle2, label: "Завершено", value: "28", change: "+8%" },
-]
-
 export function OperationalDashboard() {
+  const { locale, t } = useLocale()
+
+  const statusLabels: Record<string, string> = {
+    in_progress: t.dashboard.inProgress as string,
+    waiting: t.dashboard.waiting as string,
+    done: t.dashboard.done as string,
+  }
+
+  const miniMetrics = [
+    { icon: Activity, label: t.dashboard.requestsToday, value: "34", change: "+12%" },
+    { icon: Clock, label: t.dashboard.avgTime, value: "1.5ч", change: "−18%" },
+    { icon: Users, label: t.dashboard.mastersOnShift, value: "4/5", change: "" },
+    { icon: CheckCircle2, label: t.dashboard.completed, value: "28", change: "+8%" },
+  ]
+
   return (
     <section className="py-24 px-4 sm:px-6 bg-surface/50">
       <div className="max-w-7xl mx-auto">
         <MotionWrapper className="text-center mb-16">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">Операционный контроль</p>
+          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">{t.dashboard.badge}</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
-            Dashboard директора сервисного центра
+            {t.dashboard.title}
           </h2>
           <p className="text-text-muted text-sm max-w-xl mx-auto">
-            Real-time контроль операций вместо ежедневных обзвонов мастеров
+            {t.dashboard.subtitle}
           </p>
         </MotionWrapper>
 
@@ -55,11 +58,11 @@ export function OperationalDashboard() {
                   <div className="absolute inset-0 w-2 h-2 rounded-full bg-green-400 live-ring text-green-400" />
                 </div>
                 <span className="text-text-primary text-sm font-medium">Live Operations</span>
-                <span className="text-text-muted text-xs">Обновлено 30 сек назад</span>
+                <span className="text-text-muted text-xs">{t.dashboard.updatedAgo}</span>
               </div>
               <div className="hidden sm:flex items-center gap-2">
-                <span className="text-text-muted text-xs px-2 py-1 rounded bg-white/5">Сегодня</span>
-                <span className="text-accent text-xs px-2 py-1 rounded bg-accent/10">Неделя</span>
+                <span className="text-text-muted text-xs px-2 py-1 rounded bg-white/5">{t.dashboard.today}</span>
+                <span className="text-accent text-xs px-2 py-1 rounded bg-accent/10">{t.dashboard.week}</span>
               </div>
             </div>
 
@@ -69,7 +72,7 @@ export function OperationalDashboard() {
                 const Icon = m.icon
                 return (
                   <motion.div
-                    key={m.label}
+                    key={i}
                     className="bg-background/50 border border-white/[0.06] rounded-xl p-4"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -111,8 +114,8 @@ export function OperationalDashboard() {
             <div className="bg-background/50 border border-white/[0.06] rounded-xl overflow-x-auto">
               <div className="px-4 py-3 border-b border-white/[0.06] flex items-center gap-2">
                 <Wrench size={14} className="text-text-muted" />
-                <span className="text-text-primary text-sm font-medium">Очередь ремонтов</span>
-                <span className="text-text-muted text-xs ml-auto">5 активных</span>
+                <span className="text-text-primary text-sm font-medium">{t.dashboard.repairQueue}</span>
+                <span className="text-text-muted text-xs ml-auto">{t.dashboard.activeCount}</span>
               </div>
               <div className="divide-y divide-white/[0.04]">
                 {queueItems.map((item, i) => (
@@ -127,10 +130,10 @@ export function OperationalDashboard() {
                     <span className="text-text-muted text-xs font-mono w-14 sm:w-16 shrink-0 hidden sm:block">{item.id}</span>
                     <div className="flex-1 min-w-0">
                       <p className="text-text-primary text-sm truncate">{item.device}</p>
-                      <p className="text-text-muted text-xs">{item.type}</p>
+                      <p className="text-text-muted text-xs">{locale === "kk" ? item.type_kk : item.type_ru}</p>
                     </div>
                     <span className="hidden sm:block text-text-muted text-xs w-24 truncate">{item.master}</span>
-                    <span className="hidden sm:block text-text-muted text-xs w-16 text-right">{item.time}</span>
+                    <span className="hidden sm:block text-text-muted text-xs w-16 text-right">{locale === "kk" ? item.time_kk : item.time_ru}</span>
                     <span className={`text-[10px] px-2 py-0.5 rounded-full ${statusColors[item.status]}`}>
                       {statusLabels[item.status]}
                     </span>
@@ -142,7 +145,7 @@ export function OperationalDashboard() {
             {/* Bottom hint */}
             <div className="flex items-center gap-2 mt-4 pt-4 border-t border-white/[0.04]">
               <AlertTriangle size={12} className="text-amber-400" />
-              <span className="text-text-muted text-xs">2 заявки ожидают назначения мастера более 30 минут</span>
+              <span className="text-text-muted text-xs">{t.dashboard.alertHint}</span>
             </div>
           </div>
         </MotionWrapper>
