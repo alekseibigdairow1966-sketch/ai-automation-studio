@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Calculator, TrendingDown, TrendingUp, ArrowRight, DollarSign, Clock, AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { MotionWrapper } from "@/components/motion-wrapper"
@@ -39,6 +39,7 @@ const DEFAULTS: Inputs = {
 export function ROICalculator() {
   const { t } = useLocale()
   const [inputs, setInputs] = useState<Inputs>(DEFAULTS)
+  const [touched, setTouched] = useState(false)
 
   const results = useMemo(() => {
     const monthlyRequests = inputs.requestsPerDay * 30
@@ -55,7 +56,29 @@ export function ROICalculator() {
   const fmt = (n: number) =>
     new Intl.NumberFormat("ru-RU", { style: "currency", currency: "KZT", maximumFractionDigits: 0 }).format(n)
 
+  /* ---- Dynamic insight logic ---- */
+  const insightText = useMemo(() => {
+    const ins = t.calculator.insight
+    if (!touched) return ins.default as string
+
+    // Priority: specific parameter thresholds → total losses → generic
+    if (inputs.lostPct >= 15) return ins.highLoss as string
+    if (inputs.avgResponseMin >= 25) return ins.slowResponse as string
+    if (inputs.managerCount >= 8) return ins.manyManagers as string
+
+    if (results.totalLosses >= 2_000_000) {
+      const m = results.totalLosses / 1_000_000
+      const formatted = m >= 10
+        ? `${Math.round(m)} млн`
+        : `${m.toFixed(1).replace(".", ",")} млн`
+      return (ins.highTotal as string).replace("{amount}", formatted)
+    }
+
+    return ins.generic as string
+  }, [touched, inputs, results, t])
+
   const handleChange = (field: keyof Inputs, value: number) => {
+    if (!touched) setTouched(true)
     setInputs((prev) => ({ ...prev, [field]: value }))
   }
 
@@ -207,6 +230,22 @@ export function ROICalculator() {
                     </motion.span>
                   </div>
                 </div>
+              </div>
+
+              {/* Dynamic Insight */}
+              <div className="py-1 min-h-[48px] flex items-center justify-center">
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={insightText}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.45, ease: "easeInOut" }}
+                    className="text-text-muted/60 text-[11px] leading-relaxed text-center max-w-[560px] mx-auto"
+                  >
+                    {insightText}
+                  </motion.p>
+                </AnimatePresence>
               </div>
 
               {/* CTA */}
