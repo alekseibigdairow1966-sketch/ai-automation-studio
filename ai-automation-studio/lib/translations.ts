@@ -255,7 +255,7 @@ export const translations = {
       commTime: "Время на коммуникацию",
       controlCoord: "Контроль и координация",
       totalLosses: "Итого потерь / мес",
-      withAI: "С AI-автоматизацией",
+      withAI: "Возможное снижение потерь",
       savingsMonth: "Экономия / мес",
       savingsYear: "Экономия / год",
       getPlan: "Получить план автоматизации",
