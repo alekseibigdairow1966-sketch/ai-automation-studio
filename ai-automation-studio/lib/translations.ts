@@ -148,6 +148,8 @@ export const translations = {
       automated: "Что автоматизировано",
       systemMetrics: "Метрики системы",
       results: "Результаты внедрения",
+      viewScenario: "Смотреть сценарий",
+      liveEvents: "Системные события",
     },
 
     // Services page
@@ -447,6 +449,8 @@ export const translations = {
       automated: "Не автоматтандырылған",
       systemMetrics: "Жүйе метрикалары",
       results: "Енгізу нәтижелері",
+      viewScenario: "Сценарийді көру",
+      liveEvents: "Жүйе оқиғалары",
     },
 
     // Services page
