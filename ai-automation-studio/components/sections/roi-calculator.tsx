@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Calculator, TrendingDown, TrendingUp, ArrowRight, DollarSign, Clock, AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -32,6 +32,9 @@ const DEFAULTS: Inputs = {
   avgRepairValue: 25000,
 }
 
+const fmt = (n: number) =>
+  new Intl.NumberFormat("ru-RU", { style: "currency", currency: "KZT", maximumFractionDigits: 0 }).format(n)
+
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
@@ -53,9 +56,6 @@ export function ROICalculator() {
     return { lostRevenue, commTime, controlOverhead, totalLosses, potentialSavings, annualSavings }
   }, [inputs])
 
-  const fmt = (n: number) =>
-    new Intl.NumberFormat("ru-RU", { style: "currency", currency: "KZT", maximumFractionDigits: 0 }).format(n)
-
   /* ---- Dynamic insight logic ---- */
   const insightText = useMemo(() => {
     const ins = t.calculator.insight
@@ -65,24 +65,17 @@ export function ROICalculator() {
     if (inputs.lostPct < 5 && inputs.avgResponseMin < 10) {
       return ins.goodPerformance as string
     }
-
-    // 2. High volume + notable losses — show real amount
-    if (inputs.requestsPerDay > 40 && inputs.lostPct > 10) {
-      const m = results.totalLosses / 1_000_000
-      const formatted = m >= 10
-        ? `${Math.round(m)} млн`
-        : `${m.toFixed(1).replace(".", ",")} млн`
-      return (ins.highVolumeLoss as string).replace("{amount}", formatted)
-    }
-
+    // 2. High loss rate — most critical
+    if (inputs.lostPct > 15) return ins.highLoss as string
     // 3. Slow response time
     if (inputs.avgResponseMin > 20) return ins.slowResponse as string
-
-    // 4. Too many managers / coordination overhead
+    // 4. High request volume
+    if (inputs.requestsPerDay > 40) return ins.highVolume as string
+    // 5. Many managers / coordination overhead
     if (inputs.managerCount > 5) return ins.manyManagers as string
 
     return ins.generic as string
-  }, [touched, inputs, results, t])
+  }, [touched, inputs, t])
 
   const handleChange = (field: keyof Inputs, value: number) => {
     if (!touched) setTouched(true)
@@ -176,31 +169,24 @@ export function ROICalculator() {
                   <ResultRow
                     icon={<DollarSign size={14} />}
                     label={t.calculator.lostRevenue as string}
-                    value={fmt(results.lostRevenue)}
+                    value={<AnimatedValue value={results.lostRevenue} />}
                     color="text-red-400"
                   />
                   <ResultRow
                     icon={<Clock size={14} />}
                     label={t.calculator.commTime as string}
-                    value={fmt(results.commTime)}
+                    value={<AnimatedValue value={results.commTime} />}
                     color="text-red-400"
                   />
                   <ResultRow
                     icon={<AlertTriangle size={14} />}
                     label={t.calculator.controlCoord as string}
-                    value={fmt(results.controlOverhead)}
+                    value={<AnimatedValue value={results.controlOverhead} />}
                     color="text-red-400"
                   />
                   <div className="border-t border-white/[0.06] pt-3 flex items-center justify-between">
                     <span className="text-text-primary text-sm font-semibold">{t.calculator.totalLosses}</span>
-                    <motion.span
-                      key={results.totalLosses}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="text-red-400 text-lg font-bold"
-                    >
-                      {fmt(results.totalLosses)}
-                    </motion.span>
+                    <AnimatedValue value={results.totalLosses} className="text-red-400 text-lg font-bold" />
                   </div>
                 </div>
               </div>
@@ -216,25 +202,11 @@ export function ROICalculator() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-text-muted text-sm">{t.calculator.savingsMonth}</span>
-                    <motion.span
-                      key={results.potentialSavings}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="text-accent text-lg font-bold"
-                    >
-                      {fmt(results.potentialSavings)}
-                    </motion.span>
+                    <AnimatedValue value={results.potentialSavings} className="text-accent text-lg font-bold" />
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-text-muted text-sm">{t.calculator.savingsYear}</span>
-                    <motion.span
-                      key={results.annualSavings}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="accent-gradient-text text-2xl font-bold"
-                    >
-                      {fmt(results.annualSavings)}
-                    </motion.span>
+                    <AnimatedValue value={results.annualSavings} className="accent-gradient-text text-2xl font-bold" />
                   </div>
                 </div>
               </div>
@@ -255,9 +227,21 @@ export function ROICalculator() {
                 </AnimatePresence>
               </div>
 
+              {/* Benchmark */}
+              <div className="text-center space-y-1.5 py-1">
+                <p className="text-text-muted/50 text-[10px] font-medium uppercase tracking-wider">
+                  {t.calculator.benchmark.title}
+                </p>
+                {(t.calculator.benchmark.items as readonly string[]).map((item, i) => (
+                  <p key={i} className="text-text-muted/40 text-[11px]">
+                    {item}
+                  </p>
+                ))}
+              </div>
+
               {/* CTA */}
               <Link href="/audit">
-                <Button className="w-full bg-accent hover:bg-accent/80 text-white/90 hover:text-white transition-colors">
+                <Button className="w-full bg-accent/90 hover:bg-accent text-white/90 hover:text-white transition-colors text-sm">
                   {t.calculator.getPlan} <ArrowRight size={14} className="ml-1" />
                 </Button>
               </Link>
@@ -269,6 +253,32 @@ export function ROICalculator() {
         <p className="text-text-muted text-xs text-center mt-8 max-w-2xl mx-auto leading-relaxed">
           {t.calculator.disclaimer}
         </p>
+
+        {/* How Losses Form */}
+        <MotionWrapper delay={0.3}>
+          <div className="mt-16 max-w-4xl mx-auto">
+            <h3 className="text-text-primary text-base font-semibold text-center mb-8">
+              {t.calculator.lossFormation.title}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {(t.calculator.lossFormation.items as readonly { title: string; causes: readonly string[] }[]).map(
+                (item, i) => (
+                  <div key={i} className="glass-panel p-5">
+                    <h4 className="text-text-primary text-sm font-medium mb-3">{item.title}</h4>
+                    <ul className="space-y-2">
+                      {item.causes.map((cause, j) => (
+                        <li key={j} className="text-text-muted text-xs flex items-start gap-2">
+                          <span className="text-accent/50 mt-px shrink-0">→</span>
+                          <span>{cause}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
+        </MotionWrapper>
       </div>
     </section>
   )
@@ -277,6 +287,47 @@ export function ROICalculator() {
 /* ------------------------------------------------------------------ */
 /*  Sub-components                                                     */
 /* ------------------------------------------------------------------ */
+
+/** Smoothly animates a KZT value using requestAnimationFrame (easeOutCubic, 600ms). */
+function AnimatedValue({ value, className }: { value: number; className?: string }) {
+  const nodeRef = useRef<HTMLSpanElement>(null)
+  const prevValue = useRef(value)
+
+  useEffect(() => {
+    const node = nodeRef.current
+    if (!node) return
+
+    const from = prevValue.current
+    const to = value
+    prevValue.current = to
+
+    if (from === to) return
+
+    const duration = 600
+    const startTime = performance.now()
+    let rafId: number
+
+    const step = (now: number) => {
+      const elapsed = now - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3) // easeOutCubic
+      const current = Math.round(from + (to - from) * eased)
+      node.textContent = fmt(current)
+      if (progress < 1) {
+        rafId = requestAnimationFrame(step)
+      }
+    }
+
+    rafId = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(rafId)
+  }, [value])
+
+  return (
+    <span ref={nodeRef} className={className}>
+      {fmt(value)}
+    </span>
+  )
+}
 
 function SliderInput({
   label,
@@ -336,7 +387,7 @@ function ResultRow({
 }: {
   icon: React.ReactNode
   label: string
-  value: string
+  value: React.ReactNode
   color: string
 }) {
   return (
