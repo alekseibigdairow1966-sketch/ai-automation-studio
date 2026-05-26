@@ -9,7 +9,7 @@ import { AISystemsShowcase } from "@/components/sections/ai-systems-showcase"
 import { SystemInterfaces } from "@/components/sections/system-interfaces"
 import { InteractiveDemos } from "@/components/sections/interactive-demos"
 import { ProofOperations } from "@/components/sections/proof-operations"
-import { OperationalDashboard } from "@/components/sections/operational-dashboard"
+import { LiveOperationsDashboard } from "@/components/sections/live-operations-dashboard"
 import { ROICalculator } from "@/components/sections/roi-calculator"
 import { CasesPreview } from "@/components/sections/cases-preview"
 import { DemoVideo } from "@/components/sections/demo-video"
@@ -50,12 +50,12 @@ export default async function HomePage() {
       <BeforeAfter />
       <ServicesPreview />
       <SystemWorkflow />
+      <LiveOperationsDashboard />
       <ArchitectureShowcase />
       <AISystemsShowcase />
       <SystemInterfaces />
       <InteractiveDemos />
       <ProofOperations />
-      <OperationalDashboard />
       <ROICalculator />
       <CasesPreview />
       <DemoVideo />
