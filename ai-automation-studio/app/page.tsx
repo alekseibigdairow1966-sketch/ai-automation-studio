@@ -2,22 +2,12 @@ import { readStore } from "@/lib/content-store"
 import { Hero, type HeroContent } from "@/components/sections/hero"
 import { PainPointsSection } from "@/components/sections/pain-points"
 import { BeforeAfter } from "@/components/sections/before-after"
-import { ServicesPreview } from "@/components/sections/services-preview"
 import { SystemWorkflow } from "@/components/sections/system-workflow"
-import { ArchitectureShowcase } from "@/components/sections/architecture-showcase"
-import { AISystemsShowcase } from "@/components/sections/ai-systems-showcase"
-import { SystemInterfaces } from "@/components/sections/system-interfaces"
-import { InteractiveDemos } from "@/components/sections/interactive-demos"
-import { ProofOperations } from "@/components/sections/proof-operations"
 import { LiveOperationsDashboard } from "@/components/sections/live-operations-dashboard"
 import { ROICalculator } from "@/components/sections/roi-calculator"
 import { CasesPreview } from "@/components/sections/cases-preview"
-import { DemoVideo } from "@/components/sections/demo-video"
-import { IntegrationEcosystem } from "@/components/sections/integration-ecosystem"
 import { TrustSection } from "@/components/sections/trust-section"
-import { MetricsSection } from "@/components/sections/metrics-section"
 import { CTASection, type CTAContent } from "@/components/sections/cta-section"
-import { ContactFormSection } from "@/components/sections/contact-form"
 
 const HERO_DEFAULTS: HeroContent = {
   badge: "Операционная AI-платформа",
@@ -45,25 +35,32 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* 1. Hero — value proposition */}
       <Hero content={heroContent} />
+
+      {/* 2. Pain — operational chaos */}
       <PainPointsSection />
+
+      {/* 3. Before → After — visual proof */}
       <BeforeAfter />
-      <ServicesPreview />
+
+      {/* 4. Automation Flow — how the system works */}
       <SystemWorkflow />
+
+      {/* 5. Live Dashboard — centerpiece perception */}
       <LiveOperationsDashboard />
-      <ArchitectureShowcase />
-      <AISystemsShowcase />
-      <SystemInterfaces />
-      <InteractiveDemos />
-      <ProofOperations />
+
+      {/* 6. ROI — business impact */}
       <ROICalculator />
+
+      {/* 7. Cases — operational proof (3 strongest) */}
       <CasesPreview />
-      <DemoVideo />
-      <IntegrationEcosystem />
+
+      {/* 8. Trust — credibility (compact) */}
       <TrustSection />
-      <MetricsSection />
+
+      {/* 9. CTA — conversion */}
       <CTASection content={ctaContent} />
-      <ContactFormSection />
     </>
   )
 }
