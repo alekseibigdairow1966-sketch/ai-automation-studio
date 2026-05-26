@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { useLocale } from "@/lib/i18n"
 
+/* ── i18n ── */
 const content = {
   ru: {
     badge: "Операционный контроль",
@@ -19,10 +20,11 @@ const content = {
   },
 } as const
 
+/* ── Data ── */
 const kpiCards = [
-  { label: "Active Repairs", value: 47 },
-  { label: "Waiting Parts", value: 12 },
-  { label: "Completed Today", value: 8 },
+  { label: "Active Repairs", value: 47, sub: "+3 since last hour" },
+  { label: "Waiting Parts", value: 12, sub: "2 supplier delays detected" },
+  { label: "Completed Today", value: 8, sub: "92% SLA completed" },
 ]
 
 const tickets: {
@@ -30,22 +32,23 @@ const tickets: {
   device: string
   status: string
   priority: "HIGH" | "MEDIUM" | "LOW"
+  highlight?: boolean
 }[] = [
-  { id: "#4821", device: "iPhone 13", status: "In Progress", priority: "HIGH" },
+  { id: "#4821", device: "iPhone 13", status: "In Progress", priority: "HIGH", highlight: true },
   { id: "#4820", device: "Samsung S22", status: "Diagnostics", priority: "MEDIUM" },
   { id: "#4819", device: "MacBook Air M2", status: "Waiting Parts", priority: "LOW" },
 ]
 
-const activityFeed = [
-  { time: "14:32", text: "New repair ticket created" },
-  { time: "14:32", text: "Technician notified via Telegram" },
-  { time: "14:33", text: "Client confirmation sent" },
-  { time: "14:34", text: "Dashboard updated" },
+const activityFeed: { time: string; text: string; color: string }[] = [
+  { time: "14:32", text: "New repair ticket created", color: "bg-emerald-400" },
+  { time: "14:32", text: "Technician notified via Telegram", color: "bg-blue-400" },
+  { time: "14:33", text: "Client confirmation sent", color: "bg-emerald-400" },
+  { time: "14:34", text: "Dashboard updated", color: "bg-neutral-500" },
 ]
 
 const priorityStyles: Record<string, string> = {
-  HIGH: "text-red-400 bg-red-500/10 border-red-500/20",
-  MEDIUM: "text-amber-400 bg-amber-500/10 border-amber-500/20",
+  HIGH: "text-red-400 bg-red-500/10 border-red-500/25",
+  MEDIUM: "text-amber-400 bg-amber-500/10 border-amber-500/25",
   LOW: "text-neutral-500 bg-neutral-500/8 border-neutral-500/15",
 }
 
@@ -56,12 +59,12 @@ export function LiveOperationsDashboard() {
   return (
     <section className="py-24 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <MotionWrapper className="text-center mb-14">
+        {/* Section Header — tighter spacing */}
+        <MotionWrapper className="text-center mb-8">
           <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
             {t.badge}
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-3">
             {t.title}
           </h2>
           <p className="text-text-muted text-sm max-w-2xl mx-auto leading-relaxed">
@@ -70,7 +73,7 @@ export function LiveOperationsDashboard() {
         </MotionWrapper>
 
         {/* Dashboard Container */}
-        <MotionWrapper delay={0.15}>
+        <MotionWrapper delay={0.1}>
           <div className="bg-[#08080d] border border-white/[0.07] rounded-2xl overflow-hidden">
             {/* ── Top Bar ── */}
             <div className="px-5 sm:px-6 py-3.5 border-b border-white/[0.06] flex items-center justify-between">
@@ -82,9 +85,11 @@ export function LiveOperationsDashboard() {
                 <span className="text-text-primary text-sm font-medium">
                   Operations
                 </span>
-                <span className="text-text-muted text-xs">· Live</span>
+                <span className="text-emerald-400/70 text-[10px] font-semibold uppercase tracking-wider">
+                  Live
+                </span>
               </div>
-              <span className="text-text-muted text-xs hidden sm:block">
+              <span className="text-text-muted text-xs hidden sm:block tabular-nums">
                 Updated 12s ago
               </span>
             </div>
@@ -102,13 +107,16 @@ export function LiveOperationsDashboard() {
                   initial={{ opacity: 0, y: 8 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.25 + i * 0.1, duration: 0.5 }}
+                  transition={{ delay: 0.2 + i * 0.1, duration: 0.5 }}
                 >
-                  <p className="text-text-muted text-[11px] sm:text-xs mb-2 tracking-wide">
+                  <p className="text-text-muted text-[11px] sm:text-xs mb-1.5 tracking-wide">
                     {card.label}
                   </p>
-                  <p className="text-text-primary text-2xl sm:text-3xl font-semibold tabular-nums">
+                  <p className="text-text-primary text-2xl sm:text-3xl font-semibold tabular-nums mb-1">
                     {card.value}
+                  </p>
+                  <p className="text-text-muted/60 text-[10px] sm:text-[11px] leading-tight">
+                    {card.sub}
                   </p>
                 </motion.div>
               ))}
@@ -125,7 +133,7 @@ export function LiveOperationsDashboard() {
                 </div>
 
                 {/* Table Header (desktop) */}
-                <div className="hidden sm:grid grid-cols-[72px_1fr_120px_72px] px-5 sm:px-6 py-2 border-b border-white/[0.04]">
+                <div className="hidden sm:grid grid-cols-[72px_1fr_120px_80px] px-5 sm:px-6 py-2 border-b border-white/[0.04]">
                   <span className="text-text-muted text-[11px] uppercase tracking-wider">
                     Ticket
                   </span>
@@ -144,7 +152,11 @@ export function LiveOperationsDashboard() {
                 {tickets.map((ticket, i) => (
                   <motion.div
                     key={ticket.id}
-                    className={`grid grid-cols-2 sm:grid-cols-[72px_1fr_120px_72px] px-5 sm:px-6 py-3 items-center gap-y-0.5 sm:gap-0 hover:bg-white/[0.02] transition-colors duration-150 ${
+                    className={`grid grid-cols-2 sm:grid-cols-[72px_1fr_120px_80px] px-5 sm:px-6 py-3 items-center gap-y-0.5 sm:gap-0 transition-colors duration-150 ${
+                      ticket.highlight
+                        ? "bg-white/[0.025] border-l-2 border-l-accent/40"
+                        : "hover:bg-white/[0.015]"
+                    } ${
                       i < tickets.length - 1
                         ? "border-b border-white/[0.04]"
                         : ""
@@ -152,7 +164,7 @@ export function LiveOperationsDashboard() {
                     initial={{ opacity: 0, x: -6 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.35 + i * 0.08, duration: 0.4 }}
+                    transition={{ delay: 0.3 + i * 0.08, duration: 0.4 }}
                   >
                     <span className="text-text-muted text-xs font-mono">
                       {ticket.id}
@@ -165,7 +177,7 @@ export function LiveOperationsDashboard() {
                     </span>
                     <span className="text-right">
                       <span
-                        className={`inline-block text-[10px] font-medium px-2 py-0.5 rounded border ${priorityStyles[ticket.priority]}`}
+                        className={`inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded border ${priorityStyles[ticket.priority]}`}
                       >
                         {ticket.priority}
                       </span>
@@ -197,10 +209,13 @@ export function LiveOperationsDashboard() {
                       initial={{ opacity: 0, x: 6 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.45 + i * 0.08, duration: 0.4 }}
+                      transition={{ delay: 0.4 + i * 0.08, duration: 0.4 }}
                     >
-                      <span className="text-text-muted text-xs font-mono shrink-0 pt-px tabular-nums">
-                        {item.time}
+                      <span className="flex items-center gap-2 shrink-0 pt-1">
+                        <span className={`block w-1.5 h-1.5 rounded-full ${item.color}`} />
+                        <span className="text-text-muted text-xs font-mono tabular-nums">
+                          {item.time}
+                        </span>
                       </span>
                       <span className="text-text-secondary text-sm leading-snug">
                         {item.text}
