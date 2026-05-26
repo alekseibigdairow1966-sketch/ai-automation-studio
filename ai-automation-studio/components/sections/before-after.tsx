@@ -58,7 +58,7 @@ export function BeforeAfter() {
   const c = content[locale as Lang] ?? content.ru
 
   return (
-    <section className="py-20 px-4 sm:px-6">
+    <section className="py-14 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <MotionWrapper className="text-center mb-12">
           <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">

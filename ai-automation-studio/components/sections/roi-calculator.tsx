@@ -83,9 +83,9 @@ export function ROICalculator() {
   }
 
   return (
-    <section className="py-24 px-4 sm:px-6">
+    <section className="py-16 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
-        <MotionWrapper className="text-center mb-16">
+        <MotionWrapper className="text-center mb-10">
           <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
             {t.calculator.badge}
           </p>

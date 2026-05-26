@@ -44,9 +44,9 @@ export function SystemWorkflow() {
   const c = content[locale as Lang] ?? content.ru
 
   return (
-    <section className="py-20 px-4 sm:px-6">
+    <section className="py-14 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
-        <MotionWrapper className="text-center mb-14">
+        <MotionWrapper className="text-center mb-10">
           <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
             {c.badge}
           </p>

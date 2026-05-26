@@ -10,9 +10,9 @@ export function PainPointsSection() {
   const { t } = useLocale()
 
   return (
-    <section className="py-24 px-4 sm:px-6">
+    <section className="py-16 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
-        <MotionWrapper className="text-center mb-16">
+        <MotionWrapper className="text-center mb-10">
           <p className="text-red-400/80 text-xs font-medium uppercase tracking-widest mb-3">
             {t.pains.badge}
           </p>

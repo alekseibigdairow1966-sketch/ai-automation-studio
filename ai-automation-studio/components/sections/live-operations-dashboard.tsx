@@ -57,7 +57,7 @@ export function LiveOperationsDashboard() {
   const t = content[locale]
 
   return (
-    <section className="py-24 px-4 sm:px-6">
+    <section className="py-16 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         {/* Section Header — tighter spacing */}
         <MotionWrapper className="text-center mb-8">

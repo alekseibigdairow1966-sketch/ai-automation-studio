@@ -20,7 +20,7 @@ export function TrustSection() {
   const items = t.trust.items.slice(0, 2)
 
   return (
-    <section className="py-20 px-4 sm:px-6">
+    <section className="py-14 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           {items.map((point, i) => {

@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -33,7 +32,6 @@ export function Hero({ content }: { content?: HeroContent }) {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px] animate-drift-1" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-end/15 rounded-full blur-[120px] animate-drift-2" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px] animate-pulse-ambient" />
-        {/* Subtle dot grid */}
         <div className="absolute inset-0 hero-grid opacity-[0.04]" />
       </div>
 
@@ -110,32 +108,119 @@ export function Hero({ content }: { content?: HeroContent }) {
             </div>
           </motion.div>
 
-          {/* Right: Avatar */}
+          {/* Right: Operational System Visual */}
           <motion.div
-            className="relative shrink-0"
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
+            className="relative shrink-0 w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px]"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
           >
-            {/* Glow behind avatar */}
-            <div className="absolute inset-0 rounded-full bg-accent/20 blur-[60px] scale-110" />
-            <div className="absolute inset-0 rounded-full bg-accent-end/10 blur-[80px] scale-125 animate-pulse-ambient" />
+            {/* Subtle glow behind */}
+            <div className="absolute -inset-8 bg-accent/[0.06] blur-[80px] rounded-3xl" />
 
-            {/* Avatar image */}
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-accent/30 shadow-[0_0_60px_rgba(99,102,241,0.2)]">
-              <Image
-                src="/avatar.png"
-                alt="ServiceLayer — Founder"
-                fill
-                sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
-                className="object-cover"
-                priority
-              />
+            {/* Main dashboard card */}
+            <div className="relative bg-[#08080d] border border-white/[0.07] rounded-xl overflow-hidden shadow-2xl">
+              {/* Top bar */}
+              <div className="px-4 py-2.5 border-b border-white/[0.06] flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-40" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  </span>
+                  <span className="text-text-primary text-[11px] font-medium">Operations</span>
+                  <span className="text-emerald-400/70 text-[9px] font-semibold uppercase tracking-wider">Live</span>
+                </div>
+                <span className="text-text-muted text-[10px] tabular-nums">Updated 12s ago</span>
+              </div>
+
+              {/* KPI row */}
+              <div className="grid grid-cols-3 border-b border-white/[0.06]">
+                {[
+                  { label: "Active", value: "47", color: "text-text-primary" },
+                  { label: "Queue", value: "12", color: "text-amber-400" },
+                  { label: "Done", value: "8", color: "text-emerald-400" },
+                ].map((kpi, i) => (
+                  <div key={kpi.label} className={`px-3.5 py-3 ${i < 2 ? "border-r border-white/[0.06]" : ""}`}>
+                    <p className="text-text-muted text-[9px] uppercase tracking-wider mb-0.5">{kpi.label}</p>
+                    <p className={`text-xl font-semibold tabular-nums ${kpi.color}`}>{kpi.value}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Ticket rows */}
+              <div>
+                {[
+                  { id: "#4821", device: "iPhone 13", status: "In Progress", priority: "HIGH" as const, highlight: true },
+                  { id: "#4820", device: "Samsung S22", status: "Diagnostics", priority: "MED" as const, highlight: false },
+                  { id: "#4819", device: "MacBook Air", status: "Waiting Parts", priority: "LOW" as const, highlight: false },
+                ].map((ticket, i, arr) => (
+                  <div
+                    key={ticket.id}
+                    className={`px-4 py-2.5 flex items-center justify-between ${
+                      ticket.highlight ? "bg-white/[0.025] border-l-2 border-l-accent/40" : ""
+                    } ${i < arr.length - 1 ? "border-b border-white/[0.04]" : ""}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-text-muted text-[10px] font-mono">{ticket.id}</span>
+                      <span className="text-text-primary text-[11px]">{ticket.device}</span>
+                    </div>
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-text-muted text-[10px] hidden sm:inline">{ticket.status}</span>
+                      <span
+                        className={`text-[9px] font-semibold px-2 py-0.5 rounded border ${
+                          ticket.priority === "HIGH"
+                            ? "text-red-400 bg-red-500/10 border-red-500/25"
+                            : ticket.priority === "MED"
+                              ? "text-amber-400 bg-amber-500/10 border-amber-500/25"
+                              : "text-neutral-500 bg-neutral-500/8 border-neutral-500/15"
+                        }`}
+                      >
+                        {ticket.priority}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Decorative ring */}
-            <div className="absolute -inset-3 rounded-full border border-accent/10 animate-spin-slow" style={{ animationDuration: "25s" }} />
-            <div className="absolute -inset-6 rounded-full border border-accent/5" />
+            {/* Floating: New ticket notification */}
+            <motion.div
+              className="absolute -bottom-4 -left-3 sm:-left-6 bg-[#0a0a12] border border-white/[0.08] rounded-lg px-3.5 py-2.5 shadow-2xl z-10"
+              initial={{ opacity: 0, y: 10, x: -10 }}
+              animate={{ opacity: 1, y: 0, x: 0 }}
+              transition={{ delay: 1.0, duration: 0.5 }}
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="w-7 h-7 rounded-md bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
+                  <span className="block w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                </div>
+                <div>
+                  <p className="text-text-primary text-[10px] font-medium">New ticket created</p>
+                  <p className="text-text-muted text-[9px]">MacBook Air M2 · Diagnostics</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Floating: AI routing indicator */}
+            <motion.div
+              className="absolute -top-3 -right-2 sm:-right-4 bg-[#0a0a12] border border-accent/20 rounded-lg px-3 py-2 shadow-2xl z-10"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 rounded bg-accent/10 flex items-center justify-center">
+                  <div
+                    className="w-3 h-3 border border-accent/20 border-t-accent/60 rounded-full animate-spin"
+                    style={{ animationDuration: "1.5s" }}
+                  />
+                </div>
+                <div>
+                  <p className="text-accent text-[9px] font-medium">AI Router</p>
+                  <p className="text-text-muted text-[8px]">Processing...</p>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
