@@ -150,9 +150,9 @@ export function Hero({ content }: { content?: HeroContent }) {
               {/* Ticket rows */}
               <div>
                 {[
-                  { id: "#4821", device: "iPhone 13", status: "In Progress", priority: "HIGH" as const, highlight: true },
+                  { id: "#4821", device: "Galaxy S25 Ultra", status: "In Progress", priority: "HIGH" as const, highlight: true },
                   { id: "#4820", device: "Samsung S22", status: "Diagnostics", priority: "MED" as const, highlight: false },
-                  { id: "#4819", device: "MacBook Air", status: "Waiting Parts", priority: "LOW" as const, highlight: false },
+                  { id: "#4819", device: "Acer Nitro V15", status: "Waiting Parts", priority: "LOW" as const, highlight: false },
                 ].map((ticket, i, arr) => (
                   <div
                     key={ticket.id}
@@ -196,7 +196,7 @@ export function Hero({ content }: { content?: HeroContent }) {
                 </div>
                 <div>
                   <p className="text-text-primary text-[10px] font-medium">New ticket created</p>
-                  <p className="text-text-muted text-[9px]">MacBook Air M2 · Diagnostics</p>
+                  <p className="text-text-muted text-[9px]">Acer Nitro V15 · Diagnostics</p>
                 </div>
               </div>
             </motion.div>

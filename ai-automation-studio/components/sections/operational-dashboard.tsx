@@ -7,7 +7,7 @@ import { useLocale } from "@/lib/i18n"
 
 const queueItems = [
   { id: "SC-1247", device: "iPhone 14 Pro", type_ru: "Замена экрана", type_kk: "Экранды ауыстыру", status: "in_progress", master: "Александр К.", time_ru: "1ч 20м", time_kk: "1с 20м" },
-  { id: "SC-1248", device: "MacBook Air M2", type_ru: "Диагностика", type_kk: "Диагностика", status: "waiting", master: "—", time_ru: "Ожидает", time_kk: "Күтуде" },
+  { id: "SC-1248", device: "Acer Nitro V15", type_ru: "Диагностика", type_kk: "Диагностика", status: "waiting", master: "—", time_ru: "Ожидает", time_kk: "Күтуде" },
   { id: "SC-1249", device: "Samsung S24", type_ru: "Замена батареи", type_kk: "Батареяны ауыстыру", status: "done", master: "Михаил В.", time_ru: "45м", time_kk: "45м" },
   { id: "SC-1250", device: "iPad Pro 12.9", type_ru: "Ремонт разъёма", type_kk: "Ұяшықты жөндеу", status: "in_progress", master: "Дмитрий С.", time_ru: "2ч 10м", time_kk: "2с 10м" },
   { id: "SC-1251", device: "AirPods Pro", type_ru: "Не заряжается", type_kk: "Зарядталмайды", status: "waiting", master: "—", time_ru: "Ожидает", time_kk: "Күтуде" },

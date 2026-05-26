@@ -34,9 +34,9 @@ const tickets: {
   priority: "HIGH" | "MEDIUM" | "LOW"
   highlight?: boolean
 }[] = [
-  { id: "#4821", device: "iPhone 13", status: "In Progress", priority: "HIGH", highlight: true },
+  { id: "#4821", device: "Galaxy S25 Ultra", status: "In Progress", priority: "HIGH", highlight: true },
   { id: "#4820", device: "Samsung S22", status: "Diagnostics", priority: "MEDIUM" },
-  { id: "#4819", device: "MacBook Air M2", status: "Waiting Parts", priority: "LOW" },
+  { id: "#4819", device: "Acer Nitro V15", status: "Waiting Parts", priority: "LOW" },
 ]
 
 const activityFeed: { time: string; text: string; color: string }[] = [
