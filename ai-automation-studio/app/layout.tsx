@@ -15,10 +15,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "AIAutomation Studio — AI-инфраструктура для бизнеса",
-    template: "%s | AIAutomation Studio",
+    default: "ServiceLayer — операционная инфраструктура для сервисного бизнеса",
+    template: "%s | ServiceLayer",
   },
-  description: "Строим AI-автоматизацию для сервисного бизнеса. WhatsApp AI, CRM-автоматизация, AI-ресепшн, n8n workflows. 30+ проектов, 50+ интеграций.",
+  description: "Операционная инфраструктура для сервисного бизнеса. CRM-автоматизация, WhatsApp AI, workflow-оркестрация, мониторинг. 30+ проектов, 50+ интеграций.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://aiautomation.studio"),
 }
 

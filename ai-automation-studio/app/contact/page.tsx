@@ -8,7 +8,7 @@ import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 export const metadata: Metadata = {
   title: "Контакты",
   description:
-    "Свяжитесь с AIAutomation Studio — обсудим задачу AI-автоматизации вашего бизнеса. Ответим в течение 2 часов.",
+    "Свяжитесь с ServiceLayer — обсудим задачу автоматизации вашего бизнеса. Ответим в течение 2 часов.",
 }
 
 export default async function ContactPage() {

@@ -60,10 +60,10 @@ function LoginForm() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <div className="w-14 h-14 rounded-xl accent-gradient flex items-center justify-center text-white text-lg font-bold mx-auto mb-4">
-            AI
+            SL
           </div>
           <h1 className="text-xl font-bold text-text-primary">Админ-панель</h1>
-          <p className="text-text-muted text-sm mt-1">AIAutomation Studio</p>
+          <p className="text-text-muted text-sm mt-1">ServiceLayer</p>
         </div>
         <form onSubmit={handleLogin} className="glass-panel p-6 space-y-4">
           <div>

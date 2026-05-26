@@ -20,7 +20,7 @@ export function AIConsultantSection() {
         ...prev,
         {
           role: "assistant",
-          content: "Спасибо за описание задачи! Я AI-консультант AIAutomation Studio. В текущей версии я работаю в демо-режиме. Для полноценной консультации свяжитесь с нами через форму на странице контактов или напишите в Telegram.",
+          content: "Спасибо за описание задачи! Я AI-консультант ServiceLayer. В текущей версии я работаю в демо-режиме. Для полноценной консультации свяжитесь с нами через форму на странице контактов или напишите в Telegram.",
         },
       ])
     }, 1000)
@@ -46,7 +46,7 @@ export function AIConsultantSection() {
               </div>
               <div>
                 <p className="text-text-primary text-xs font-medium">AI Consultant</p>
-                <p className="text-text-muted text-[10px]">AIAutomation Studio</p>
+                <p className="text-text-muted text-[10px]">ServiceLayer</p>
               </div>
             </div>
 

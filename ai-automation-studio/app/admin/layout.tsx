@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { AdminShell } from "@/components/admin/admin-shell"
 
 export const metadata: Metadata = {
-  title: "Админ-панель | AIAutomation Studio",
+  title: "Админ-панель | ServiceLayer",
   robots: { index: false, follow: false },
 }
 

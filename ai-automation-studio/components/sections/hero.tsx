@@ -125,7 +125,7 @@ export function Hero({ content }: { content?: HeroContent }) {
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-accent/30 shadow-[0_0_60px_rgba(99,102,241,0.2)]">
               <Image
                 src="/avatar.png"
-                alt="AIAutomation Studio — Founder"
+                alt="ServiceLayer — Founder"
                 fill
                 sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
                 className="object-cover"

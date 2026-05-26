@@ -5,7 +5,7 @@ import { ROICalculator } from "@/components/sections/roi-calculator"
 import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 
 export const metadata: Metadata = {
-  title: "ROI-калькулятор — AIAutomation Studio",
+  title: "ROI-калькулятор — ServiceLayer",
   description:
     "Рассчитайте, сколько ваш сервисный центр теряет без AI-автоматизации. Калькулятор операционных потерь.",
 }

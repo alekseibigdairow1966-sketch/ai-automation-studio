@@ -11,7 +11,7 @@ export function TrustSection() {
   const { locale, t } = useLocale()
 
   const founderName = locale === "kk" ? "Алексей" : "Алексей"
-  const founderRole = locale === "kk" ? "Негізін қалаушы, AIAutomation Studio" : "Основатель AIAutomation Studio"
+  const founderRole = locale === "kk" ? "Негізін қалаушы, ServiceLayer" : "Основатель ServiceLayer"
   const founderQuote = locale === "kk"
     ? "Біз сервис орталықтарының нақты ауыртпалығын білеміз — сондықтан біздің шешімдер жұмыс істейді"
     : "Мы знаем реальную боль сервисных центров — поэтому наши решения работают"

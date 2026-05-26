@@ -37,10 +37,10 @@ export async function Footer() {
         <div>
           <div className="flex items-center gap-2.5 mb-4">
             <div className="w-7 h-7 rounded-lg accent-gradient flex items-center justify-center text-white text-[10px] font-bold">
-              AI
+              SL
             </div>
             <span className="font-semibold text-text-primary text-sm">
-              AIAutomation Studio
+              ServiceLayer
             </span>
           </div>
           <p className="text-text-muted text-xs leading-relaxed max-w-xs mb-3">
@@ -97,7 +97,7 @@ export async function Footer() {
 
       <div className="border-t border-white/[0.06] px-4 sm:px-6 py-5">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-text-muted">
-          <span>&copy; {new Date().getFullYear()} AIAutomation Studio</span>
+          <span>&copy; {new Date().getFullYear()} ServiceLayer</span>
           <div className="flex gap-4">
             {c.phones[0] && (
               <a

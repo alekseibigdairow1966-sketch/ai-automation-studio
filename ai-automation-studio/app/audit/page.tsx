@@ -5,7 +5,7 @@ import { AuditFunnel } from "@/components/audit/audit-funnel"
 import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 
 export const metadata: Metadata = {
-  title: "AI-аудит автоматизации — AIAutomation Studio",
+  title: "AI-аудит автоматизации — ServiceLayer",
   description:
     "Пройдите экспресс-аудит вашего бизнеса и получите персональные рекомендации по AI-автоматизации за 2 минуты.",
 }

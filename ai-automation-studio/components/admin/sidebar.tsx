@@ -56,14 +56,14 @@ export function Sidebar({
         <div className="p-6 border-b border-white/[0.06]">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg accent-gradient flex items-center justify-center text-white text-xs font-bold">
-              AI
+              SL
             </div>
             <div>
               <p className="text-text-primary text-sm font-semibold">
                 Админ-панель
               </p>
               <p className="text-text-muted text-[10px]">
-                AIAutomation Studio
+                ServiceLayer
               </p>
             </div>
           </div>

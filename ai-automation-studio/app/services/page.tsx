@@ -13,7 +13,7 @@ import { TrustSection } from "@/components/sections/trust-section"
 import { getServerLocale, getTranslations } from "@/lib/i18n-server"
 
 export const metadata: Metadata = {
-  title: "AI-решения для сервисных центров — AIAutomation Studio",
+  title: "AI-решения для сервисных центров — ServiceLayer",
   description: "AI-приёмка, WhatsApp-автоматизация, CRM, маршрутизация заявок, аналитика и автоматизация бизнес-процессов для сервисного бизнеса.",
 }
 

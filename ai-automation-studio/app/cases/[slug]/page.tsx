@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cs = cases.find((c: { slug: string }) => c.slug === slug)
   if (!cs) return {}
   return {
-    title: `${cs.title} — AIAutomation Studio`,
+    title: `${cs.title} — ServiceLayer`,
     description: cs.description,
   }
 }

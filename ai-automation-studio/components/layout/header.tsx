@@ -28,10 +28,10 @@ export function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
             <div className="w-8 h-8 rounded-lg accent-gradient flex items-center justify-center text-white text-xs font-bold tracking-tight">
-              AI
+              SL
             </div>
             <span className="font-semibold text-text-primary text-sm hidden sm:block">
-              AIAutomation Studio
+              ServiceLayer
             </span>
           </Link>
 
