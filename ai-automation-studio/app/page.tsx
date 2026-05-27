@@ -10,11 +10,11 @@ import { TrustSection } from "@/components/sections/trust-section"
 import { CTASection, type CTAContent } from "@/components/sections/cta-section"
 
 const HERO_DEFAULTS: HeroContent = {
-  badge: "Операционная AI-платформа",
-  title: "CRM-автоматизация сервисного центра",
-  titleAccent: "на базе AI",
+  badge: "Операционная платформа",
+  title: "Система управления сервисными операциями",
+  titleAccent: "",
   subtitle:
-    "Автоматизируем заявки, статусы ремонта, уведомления клиентов и контроль работы мастеров — без хаоса и ручного контроля.",
+    "Приём заявок, маршрутизация мастеров, контроль статусов ремонта и автоуведомления клиентов — в единой операционной системе.",
   stats: [
     { value: "0%", label: "потерянных заявок" },
     { value: "-80%", label: "ручной работы" },

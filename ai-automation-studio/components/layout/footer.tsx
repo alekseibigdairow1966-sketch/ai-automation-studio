@@ -33,6 +33,23 @@ export async function Footer() {
 
   return (
     <footer className="border-t border-white/10 mt-24">
+      {/* Operational capabilities bar */}
+      <div className="border-b border-white/5 bg-white/[0.01]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+          {[
+            { label: "SLA Monitoring", status: "active" },
+            { label: "Queue Coordination", status: "active" },
+            { label: "Multi-channel Intake", status: "active" },
+            { label: "Repair Lifecycle Tracking", status: "active" },
+          ].map((cap) => (
+            <span key={cap.label} className="flex items-center gap-2 text-text-muted/60 text-[10px]">
+              <span className="w-1 h-1 rounded-full bg-emerald-500/60" />
+              {cap.label}
+            </span>
+          ))}
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 grid grid-cols-1 sm:grid-cols-3 gap-10 text-sm">
         <div>
           <div className="flex items-center gap-2.5 mb-4">

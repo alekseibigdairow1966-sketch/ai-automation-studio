@@ -158,9 +158,9 @@ export function ROICalculator() {
           <MotionWrapper delay={0.2}>
             <div className="space-y-4">
               {/* Losses breakdown */}
-              <div className="glass-panel p-6 border-red-500/10">
+              <div className="glass-panel p-6 border-rose-500/8">
                 <div className="flex items-center gap-2 mb-4">
-                  <TrendingDown size={18} className="text-red-400" />
+                  <TrendingDown size={18} className="text-rose-400/80" />
                   <h3 className="text-text-primary font-semibold text-sm">
                     {t.calculator.monthlyLosses}
                   </h3>
@@ -170,31 +170,31 @@ export function ROICalculator() {
                     icon={<DollarSign size={14} />}
                     label={t.calculator.lostRevenue as string}
                     value={<AnimatedValue value={results.lostRevenue} />}
-                    color="text-red-400"
+                    color="text-rose-400/80"
                   />
                   <ResultRow
                     icon={<Clock size={14} />}
                     label={t.calculator.commTime as string}
                     value={<AnimatedValue value={results.commTime} />}
-                    color="text-red-400"
+                    color="text-rose-400/80"
                   />
                   <ResultRow
                     icon={<AlertTriangle size={14} />}
                     label={t.calculator.controlCoord as string}
                     value={<AnimatedValue value={results.controlOverhead} />}
-                    color="text-red-400"
+                    color="text-rose-400/80"
                   />
                   <div className="border-t border-white/5 pt-3 flex items-center justify-between">
                     <span className="text-text-primary text-sm font-semibold">{t.calculator.totalLosses}</span>
-                    <AnimatedValue value={results.totalLosses} className="text-red-400 text-lg font-bold" />
+                    <AnimatedValue value={results.totalLosses} className="text-rose-400/90 text-lg font-semibold" />
                   </div>
                 </div>
               </div>
 
               {/* Savings */}
-              <div className="glass-panel p-6 border-accent/20">
+              <div className="glass-panel p-6 border-accent/10">
                 <div className="flex items-center gap-2 mb-4">
-                  <TrendingUp size={18} className="text-accent" />
+                  <TrendingUp size={18} className="text-accent/80" />
                   <h3 className="text-text-primary font-semibold text-sm">
                     {t.calculator.withAI}
                   </h3>
@@ -202,11 +202,11 @@ export function ROICalculator() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-text-muted text-sm">{t.calculator.savingsMonth}</span>
-                    <AnimatedValue value={results.potentialSavings} className="text-accent text-lg font-bold" />
+                    <AnimatedValue value={results.potentialSavings} className="text-accent/90 text-lg font-semibold" />
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-text-muted text-sm">{t.calculator.savingsYear}</span>
-                    <AnimatedValue value={results.annualSavings} className="accent-gradient-text text-2xl font-bold" />
+                    <AnimatedValue value={results.annualSavings} className="text-accent text-xl font-semibold" />
                   </div>
                 </div>
               </div>
@@ -229,11 +229,11 @@ export function ROICalculator() {
 
               {/* Benchmark */}
               <div className="text-center space-y-1.5 py-1">
-                <p className="text-text-muted/50 text-[10px] font-medium uppercase tracking-wider">
+                <p className="text-text-muted text-[10px] font-medium uppercase tracking-wider">
                   {t.calculator.benchmark.title}
                 </p>
                 {(t.calculator.benchmark.items as readonly string[]).map((item, i) => (
-                  <p key={i} className="text-text-muted/40 text-[11px]">
+                  <p key={i} className="text-text-muted/70 text-[11px]">
                     {item}
                   </p>
                 ))}
@@ -250,8 +250,9 @@ export function ROICalculator() {
         </div>
 
         {/* Disclaimer */}
-        <p className="text-text-muted text-xs text-center mt-8 max-w-2xl mx-auto leading-relaxed">
-          {t.calculator.disclaimer}
+        <p className="text-text-muted/70 text-xs text-center mt-8 max-w-2xl mx-auto leading-relaxed">
+          {t.calculator.disclaimer}{" "}
+          Оценка включает: пропущенные обращения, задержки ответа, ручную координацию мастеров, повторные обращения клиентов.
         </p>
 
         {/* How Losses Form */}

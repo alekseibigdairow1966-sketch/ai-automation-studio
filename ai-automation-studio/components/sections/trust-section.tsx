@@ -13,8 +13,8 @@ export function TrustSection() {
   const founderName = "Алексей"
   const founderRole = locale === "kk" ? "Негізін қалаушы, ServiceLayer" : "Основатель ServiceLayer"
   const founderQuote = locale === "kk"
-    ? "Біз сервис орталықтарының нақты ауыртпалығын білеміз — сондықтан біздің шешімдер жұмыс істейді"
-    : "Мы знаем реальную боль сервисных центров — поэтому наши решения работают"
+    ? "ServiceLayer сервис орталықтарының нақты операциялық процестері негізінде жобаланған"
+    : "ServiceLayer проектируется вокруг реальных операционных процессов сервисных центров"
 
   /* Only first 2 trust items — compact credibility */
   const items = t.trust.items.slice(0, 2)

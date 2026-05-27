@@ -23,27 +23,32 @@ const content = {
 /* ── Data ── */
 const kpiCards = [
   { label: "Active Repairs", value: 47, sub: "+3 since last hour" },
-  { label: "Waiting Parts", value: 12, sub: "2 supplier delays detected" },
-  { label: "Completed Today", value: 8, sub: "92% SLA completed" },
+  { label: "Waiting Parts", value: 12, sub: "2 supplier delays · 1 overdue" },
+  { label: "Completed Today", value: 8, sub: "92% SLA · 1 escalated" },
 ]
 
 const tickets: {
   id: string
   device: string
   status: string
+  sla?: string
+  tech?: string
   priority: "HIGH" | "MEDIUM" | "LOW"
   highlight?: boolean
+  overdue?: boolean
 }[] = [
-  { id: "#4821", device: "Galaxy S25 Ultra", status: "In Progress", priority: "HIGH", highlight: true },
-  { id: "#4820", device: "Samsung S22", status: "Diagnostics", priority: "MEDIUM" },
-  { id: "#4819", device: "Acer Nitro V15", status: "Waiting Parts", priority: "LOW" },
+  { id: "#4821", device: "Galaxy S25 Ultra", status: "In Progress", sla: "SLA 1h 42m", tech: "Ермек К.", priority: "HIGH", highlight: true },
+  { id: "#4820", device: "Samsung S22", status: "Diagnostics", sla: "SLA risk", tech: "Диагн. отдел", priority: "MEDIUM" },
+  { id: "#4819", device: "Acer Nitro V15", status: "Waiting Parts", sla: "Delayed 2d", tech: "Ожидание", priority: "LOW", overdue: true },
+  { id: "#4818", device: "iPhone 15 Pro", status: "Escalated", sla: "Overdue", tech: "Руководитель", priority: "HIGH", overdue: true },
 ]
 
 const activityFeed: { time: string; text: string; color: string }[] = [
-  { time: "14:32", text: "New repair ticket created", color: "bg-emerald-400" },
-  { time: "14:32", text: "Technician notified via Telegram", color: "bg-blue-400" },
-  { time: "14:33", text: "Client confirmation sent", color: "bg-emerald-400" },
-  { time: "14:34", text: "Dashboard updated", color: "bg-neutral-500" },
+  { time: "14:32", text: "Ticket #4821 created · Galaxy S25 Ultra", color: "bg-emerald-400" },
+  { time: "14:32", text: "Assigned to Ермек К. via Telegram", color: "bg-blue-400" },
+  { time: "14:33", text: "SLA timer started · 2h deadline", color: "bg-amber-400" },
+  { time: "14:34", text: "#4818 escalated · SLA breach", color: "bg-red-400" },
+  { time: "14:35", text: "Client notification sent · #4821", color: "bg-emerald-400" },
 ]
 
 const priorityStyles: Record<string, string> = {
@@ -133,7 +138,7 @@ export function LiveOperationsDashboard() {
                 </div>
 
                 {/* Table Header (desktop) */}
-                <div className="hidden sm:grid grid-cols-[72px_1fr_120px_80px] px-5 sm:px-6 py-2 border-b border-white/5">
+                <div className="hidden sm:grid grid-cols-[60px_1fr_100px_90px_70px] px-5 sm:px-6 py-2 border-b border-white/5">
                   <span className="text-text-muted text-[11px] uppercase tracking-wider">
                     Ticket
                   </span>
@@ -142,6 +147,9 @@ export function LiveOperationsDashboard() {
                   </span>
                   <span className="text-text-muted text-[11px] uppercase tracking-wider">
                     Status
+                  </span>
+                  <span className="text-text-muted text-[11px] uppercase tracking-wider">
+                    SLA
                   </span>
                   <span className="text-text-muted text-[11px] uppercase tracking-wider text-right">
                     Priority
@@ -152,10 +160,12 @@ export function LiveOperationsDashboard() {
                 {tickets.map((ticket, i) => (
                   <motion.div
                     key={ticket.id}
-                    className={`grid grid-cols-2 sm:grid-cols-[72px_1fr_120px_80px] px-5 sm:px-6 py-3 items-center gap-y-0.5 sm:gap-0 transition-colors duration-150 ${
+                    className={`grid grid-cols-2 sm:grid-cols-[60px_1fr_100px_90px_70px] px-5 sm:px-6 py-3 items-center gap-y-0.5 sm:gap-0 transition-colors duration-150 ${
                       ticket.highlight
                         ? "bg-white/[0.025] border-l-2 border-l-accent/40"
-                        : "hover:bg-white/[0.015]"
+                        : ticket.overdue
+                          ? "bg-red-500/[0.02]"
+                          : "hover:bg-white/[0.015]"
                     } ${
                       i < tickets.length - 1
                         ? "border-b border-white/5"
@@ -171,9 +181,15 @@ export function LiveOperationsDashboard() {
                     </span>
                     <span className="text-text-primary text-sm sm:order-none order-first col-span-2 sm:col-span-1">
                       {ticket.device}
+                      {ticket.tech && <span className="text-text-muted/50 text-[10px] ml-2 hidden lg:inline">· {ticket.tech}</span>}
                     </span>
-                    <span className="text-text-secondary text-xs">
+                    <span className={`text-xs ${ticket.overdue ? "text-red-400/80" : "text-text-secondary"}`}>
                       {ticket.status}
+                    </span>
+                    <span className={`text-[10px] hidden sm:inline ${
+                      ticket.overdue ? "text-red-400/70" : ticket.sla?.includes("risk") ? "text-amber-400/70" : "text-text-muted/50"
+                    }`}>
+                      {ticket.sla}
                     </span>
                     <span className="text-right">
                       <span

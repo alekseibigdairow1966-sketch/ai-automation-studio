@@ -10,13 +10,13 @@ const content = {
     title: "Как работает система",
     subtitle: "Полный цикл обработки обращения — от сообщения клиента до закрытия заявки",
     steps: [
-      { title: "Клиент пишет в WhatsApp", desc: "Обращение поступает через мессенджер, сайт или телефон" },
-      { title: "AI Router анализирует обращение", desc: "Классификация типа ремонта, срочности и категории" },
-      { title: "CRM создаёт заявку автоматически", desc: "Данные клиента, тип устройства, описание проблемы" },
-      { title: "AI определяет тип ремонта", desc: "Маршрутизация к нужному мастеру по специализации" },
-      { title: "Мастер получает уведомление", desc: "Push в Telegram с полной информацией о заявке" },
-      { title: "Клиент получает автообновления", desc: "Статус ремонта, готовность, стоимость — автоматически" },
-      { title: "Руководитель видит всё в dashboard", desc: "Загрузка мастеров, конверсии, скорость обработки" },
+      { title: "Клиент пишет в WhatsApp", desc: "Обращение поступает через мессенджер, сайт или телефон", event: "Ticket #4821 created" },
+      { title: "Система анализирует обращение", desc: "Классификация типа ремонта, срочности и категории", event: "Routed → Diagnostics" },
+      { title: "CRM создаёт заявку автоматически", desc: "Данные клиента, тип устройства, описание проблемы", event: "SLA timer started" },
+      { title: "Маршрутизация к мастеру", desc: "Назначение по специализации и текущей загрузке", event: "Assigned: Ермек К." },
+      { title: "Мастер получает уведомление", desc: "Push в Telegram с полной информацией о заявке", event: "Telegram alert sent" },
+      { title: "Клиент получает автообновления", desc: "Статус ремонта, готовность, стоимость — автоматически", event: "Client confirmation sent" },
+      { title: "Руководитель видит всё в dashboard", desc: "Загрузка мастеров, SLA compliance, скорость обработки", event: "Dashboard updated" },
     ],
   },
   kk: {
@@ -24,13 +24,13 @@ const content = {
     title: "Жүйе қалай жұмыс істейді",
     subtitle: "Өтінімді өңдеудің толық циклі — клиент хабарламасынан өтінімді жабуға дейін",
     steps: [
-      { title: "Клиент WhatsApp-қа жазады", desc: "Өтінім мессенджер, сайт немесе телефон арқылы түседі" },
-      { title: "AI Router өтінімді талдайды", desc: "Жөндеу түрін, шұғылдығын және санатын жіктеу" },
-      { title: "CRM өтінімді автоматты жасайды", desc: "Клиент деректері, құрылғы түрі, мәселе сипаттамасы" },
-      { title: "AI жөндеу түрін анықтайды", desc: "Мамандық бойынша қажетті шеберге маршруттау" },
-      { title: "Шебер хабарландыру алады", desc: "Өтінім туралы толық ақпаратпен Telegram-ға push" },
-      { title: "Клиент автожаңартулар алады", desc: "Жөндеу мәртебесі, дайындық, құны — автоматты түрде" },
-      { title: "Басшы бәрін dashboard-та көреді", desc: "Шеберлер жүктемесі, конверсиялар, өңдеу жылдамдығы" },
+      { title: "Клиент WhatsApp-қа жазады", desc: "Өтінім мессенджер, сайт немесе телефон арқылы түседі", event: "Ticket #4821 created" },
+      { title: "Жүйе өтінімді талдайды", desc: "Жөндеу түрін, шұғылдығын және санатын жіктеу", event: "Routed → Diagnostics" },
+      { title: "CRM өтінімді автоматты жасайды", desc: "Клиент деректері, құрылғы түрі, мәселе сипаттамасы", event: "SLA timer started" },
+      { title: "Шеберге маршруттау", desc: "Мамандық бойынша және жүктеме бойынша тағайындау", event: "Assigned: Ермек К." },
+      { title: "Шебер хабарландыру алады", desc: "Өтінім туралы толық ақпаратпен Telegram-ға push", event: "Telegram alert sent" },
+      { title: "Клиент автожаңартулар алады", desc: "Жөндеу мәртебесі, дайындық, құны — автоматты түрде", event: "Client confirmation sent" },
+      { title: "Басшы бәрін dashboard-та көреді", desc: "Шеберлер жүктемесі, SLA compliance, өңдеу жылдамдығы", event: "Dashboard updated" },
     ],
   },
 } as const
@@ -72,9 +72,15 @@ export function SystemWorkflow() {
                     </div>
 
                     {/* Content */}
-                    <div className="pt-1">
-                      <h4 className="text-text-primary text-sm font-semibold mb-1">{step.title}</h4>
-                      <p className="text-text-muted text-xs leading-relaxed">{step.desc}</p>
+                    <div className="pt-1 flex-1">
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <h4 className="text-text-primary text-sm font-semibold">{step.title}</h4>
+                        {/* Live event badge */}
+                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/5 text-text-muted/60 font-mono">
+                          {step.event}
+                        </span>
+                      </div>
+                      <p className="text-text-muted text-xs leading-relaxed mt-1">{step.desc}</p>
                     </div>
 
                     {/* Arrow between steps */}

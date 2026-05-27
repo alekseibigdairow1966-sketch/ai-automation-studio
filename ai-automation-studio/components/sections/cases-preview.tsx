@@ -17,12 +17,12 @@ function CRMPreview() {
             <span className="w-1 h-1 rounded-full bg-emerald-400" />
             <span className="text-[9px] text-text-primary font-medium">Repair Queue</span>
           </div>
-          <span className="text-[8px] text-text-muted">3 active</span>
+          <span className="text-[8px] text-text-muted">3 active · SLA 92%</span>
         </div>
         {[
-          { id: "#4821", device: "Galaxy S25 Ultra", status: "In Progress", color: "bg-accent/15 text-accent border-accent/20" },
-          { id: "#4820", device: "Samsung S22", status: "Diagnostics", color: "bg-amber-500/15 text-amber-400 border-amber-500/20" },
-          { id: "#4819", device: "Acer Nitro V15", status: "Ready", color: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20" },
+          { id: "#4821", device: "Galaxy S25 Ultra", status: "Repair", color: "bg-accent/15 text-accent border-accent/20" },
+          { id: "#4820", device: "Samsung S22", status: "Awaiting diag.", color: "bg-amber-500/15 text-amber-400 border-amber-500/20" },
+          { id: "#4819", device: "Acer Nitro V15", status: "Parts wait", color: "bg-neutral-500/15 text-neutral-400 border-neutral-500/20" },
         ].map((row, i, arr) => (
           <div
             key={row.id}
