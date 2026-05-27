@@ -64,7 +64,7 @@ function CRMDashboardPreview() {
           { label: "Готово", value: "31", color: "text-emerald-400" },
         ].map((s, i) => (
           <div key={i} className="bg-white/[0.03] rounded px-2 py-1.5 text-center">
-            <p className="text-text-muted/50">{s.label}</p>
+            <p className="text-text-muted/70">{s.label}</p>
             <p className={`text-sm font-bold tabular-nums ${s.color}`}>{s.value}</p>
           </div>
         ))}
@@ -84,7 +84,7 @@ function CRMDashboardPreview() {
       ))}
       <div className="bg-white/[0.03] rounded px-2 py-1.5">
         <div className="flex justify-between mb-1">
-          <span className="text-text-muted/50">Закрыто</span>
+          <span className="text-text-muted/70">Закрыто</span>
           <span className="text-text-primary font-semibold">74%</span>
         </div>
         <div className="w-full h-1 bg-white/[0.06] rounded-full overflow-hidden">
@@ -174,7 +174,7 @@ function SupportTicketsPreview() {
   return (
     <div className="bg-white/[0.02] rounded-lg p-3 space-y-1.5 text-[10px]">
       <div className="flex items-center justify-between pb-1.5 border-b border-white/[0.04]">
-        <span className="text-text-muted/50 uppercase tracking-wider">Тикеты</span>
+        <span className="text-text-muted/70 uppercase tracking-wider">Тикеты</span>
         <span className="text-emerald-400">70% AI</span>
       </div>
       {[
@@ -325,7 +325,7 @@ export function CasesListClient({ cases }: { cases: CaseStudy[] }) {
                       {/* Automated features */}
                       {cs.automatedFeatures && (
                         <div>
-                          <p className="text-text-muted/50 text-[10px] font-medium uppercase tracking-wider mb-2">{t.casesPage.automated}</p>
+                          <p className="text-text-muted/70 text-[10px] font-medium uppercase tracking-wider mb-2">{t.casesPage.automated}</p>
                           <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
                             {cs.automatedFeatures.slice(0, featureLimit).map((feat, i) => (
                               <div key={i} className="flex items-start gap-1.5">
@@ -339,7 +339,7 @@ export function CasesListClient({ cases }: { cases: CaseStudy[] }) {
 
                       {/* Results */}
                       <div>
-                        <p className="text-text-muted/50 text-[10px] font-medium uppercase tracking-wider mb-2">{t.casesPage.results}</p>
+                        <p className="text-text-muted/70 text-[10px] font-medium uppercase tracking-wider mb-2">{t.casesPage.results}</p>
                         <div className="space-y-1.5">
                           {cs.results.slice(0, resultLimit).map((r, i) => (
                             <div key={i} className="flex items-center justify-between text-xs">
@@ -361,7 +361,7 @@ export function CasesListClient({ cases }: { cases: CaseStudy[] }) {
                             <div key={i} className="flex items-center gap-1.5">
                               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
                               <span className="text-text-primary text-[11px] font-semibold tabular-nums">{pm.value}</span>
-                              <span className="text-text-muted/50 text-[10px]">{pm.label}</span>
+                              <span className="text-text-muted/70 text-[10px]">{pm.label}</span>
                             </div>
                           ))}
                         </div>
@@ -390,7 +390,7 @@ export function CasesListClient({ cases }: { cases: CaseStudy[] }) {
                         <div>
                           <div className="flex items-center gap-1.5 mb-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            <p className="text-text-muted/50 text-[10px] font-medium uppercase tracking-wider">
+                            <p className="text-text-muted/70 text-[10px] font-medium uppercase tracking-wider">
                               {t.casesPage.liveEvents}
                             </p>
                           </div>
@@ -470,7 +470,7 @@ export function CasesListClient({ cases }: { cases: CaseStudy[] }) {
                             <div key={i} className="flex items-center gap-1">
                               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
                               <span className="text-text-primary text-[11px] font-semibold tabular-nums">{pm.value}</span>
-                              <span className="text-text-muted/50 text-[10px]">{pm.label}</span>
+                              <span className="text-text-muted/70 text-[10px]">{pm.label}</span>
                             </div>
                           ))}
                         </div>
@@ -482,7 +482,7 @@ export function CasesListClient({ cases }: { cases: CaseStudy[] }) {
                           {events.slice(0, 2).map((ev, i) => (
                             <div key={i} className="flex items-start gap-1.5">
                               <span className="text-emerald-400/50 text-[10px] mt-0.5 shrink-0">●</span>
-                              <span className="text-text-muted/60 text-[10px] leading-relaxed">{ev}</span>
+                              <span className="text-text-muted/80 text-[10px] leading-relaxed">{ev}</span>
                             </div>
                           ))}
                         </div>
@@ -497,7 +497,7 @@ export function CasesListClient({ cases }: { cases: CaseStudy[] }) {
                             </span>
                           ))}
                           {cs.technologies.length > 3 && (
-                            <span className="text-[10px] px-1.5 py-0.5 text-text-muted/40">
+                            <span className="text-[10px] px-1.5 py-0.5 text-text-muted/80">
                               +{cs.technologies.length - 3}
                             </span>
                           )}

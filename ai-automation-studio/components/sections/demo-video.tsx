@@ -82,7 +82,7 @@ export function DemoVideo() {
                   <div className="w-2.5 h-2.5 rounded-full bg-amber-400/40" />
                   <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/40" />
                 </div>
-                <div className="absolute top-4 right-4 text-text-muted/20 text-[10px] font-mono">
+                <div className="absolute top-4 right-4 text-text-muted/40 text-[10px] font-mono">
                   REC ●
                 </div>
               </div>

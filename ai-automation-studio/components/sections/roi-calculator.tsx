@@ -233,7 +233,7 @@ export function ROICalculator() {
                   {t.calculator.benchmark.title}
                 </p>
                 {(t.calculator.benchmark.items as readonly string[]).map((item, i) => (
-                  <p key={i} className="text-text-muted/70 text-[11px]">
+                  <p key={i} className="text-text-muted/85 text-[11px]">
                     {item}
                   </p>
                 ))}
@@ -250,7 +250,7 @@ export function ROICalculator() {
         </div>
 
         {/* Disclaimer */}
-        <p className="text-text-muted/70 text-xs text-center mt-8 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-text-muted/85 text-xs text-center mt-8 max-w-2xl mx-auto leading-relaxed">
           {t.calculator.disclaimer}{" "}
           Оценка включает: пропущенные обращения, задержки ответа, ручную координацию мастеров, повторные обращения клиентов.
         </p>

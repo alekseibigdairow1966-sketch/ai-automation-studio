@@ -120,7 +120,7 @@ export function LiveOperationsDashboard() {
                   <p className="text-text-primary text-2xl sm:text-3xl font-semibold tabular-nums mb-1">
                     {card.value}
                   </p>
-                  <p className="text-text-muted/60 text-[10px] sm:text-[11px] leading-tight">
+                  <p className="text-text-muted/80 text-[10px] sm:text-[11px] leading-tight">
                     {card.sub}
                   </p>
                 </motion.div>
@@ -181,13 +181,13 @@ export function LiveOperationsDashboard() {
                     </span>
                     <span className="text-text-primary text-sm sm:order-none order-first col-span-2 sm:col-span-1">
                       {ticket.device}
-                      {ticket.tech && <span className="text-text-muted/50 text-[10px] ml-2 hidden lg:inline">· {ticket.tech}</span>}
+                      {ticket.tech && <span className="text-text-muted/70 text-[10px] ml-2 hidden lg:inline">· {ticket.tech}</span>}
                     </span>
                     <span className={`text-xs ${ticket.overdue ? "text-red-400/80" : "text-text-secondary"}`}>
                       {ticket.status}
                     </span>
                     <span className={`text-[10px] hidden sm:inline ${
-                      ticket.overdue ? "text-red-400/70" : ticket.sla?.includes("risk") ? "text-amber-400/70" : "text-text-muted/50"
+                      ticket.overdue ? "text-red-400/70" : ticket.sla?.includes("risk") ? "text-amber-400/70" : "text-text-muted/70"
                     }`}>
                       {ticket.sla}
                     </span>

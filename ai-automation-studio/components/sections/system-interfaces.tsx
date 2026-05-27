@@ -265,7 +265,7 @@ function AutomationLogs() {
     <div className="font-mono text-[11px] leading-relaxed space-y-1">
       {logs.map((log, i) => (
         <div key={i} className="flex items-start gap-2">
-          <span className="text-text-muted/40 tabular-nums shrink-0">{log.time}</span>
+          <span className="text-text-muted/60 tabular-nums shrink-0">{log.time}</span>
           <span className={`${levelColors[log.level] ?? "text-text-muted"} shrink-0 w-12`}>[{log.level}]</span>
           <span className="text-text-muted">{log.msg}</span>
         </div>

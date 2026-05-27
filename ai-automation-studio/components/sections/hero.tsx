@@ -159,7 +159,7 @@ export function Hero({ content }: { content?: HeroContent }) {
                   <div key={kpi.label} className={`px-3.5 py-3 ${i < 2 ? "border-r border-white/5" : ""}`}>
                     <p className="text-text-muted text-[9px] uppercase tracking-wider mb-0.5">{kpi.label}</p>
                     <p className={`text-xl font-semibold tabular-nums ${kpi.color}`}>{kpi.value}</p>
-                    <p className="text-text-muted/50 text-[8px] mt-0.5">{kpi.sub}</p>
+                    <p className="text-text-muted/70 text-[8px] mt-0.5">{kpi.sub}</p>
                   </div>
                 ))}
               </div>
@@ -183,11 +183,11 @@ export function Hero({ content }: { content?: HeroContent }) {
                       <span className="text-text-primary text-[11px]">{ticket.device}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-text-muted/50 text-[8px] hidden sm:inline">{ticket.tech}</span>
+                      <span className="text-text-muted/70 text-[8px] hidden sm:inline">{ticket.tech}</span>
                       <span className={`text-[8px] px-1.5 py-0.5 rounded ${
                         ticket.sla === "SLA risk" || ticket.sla === "Delayed"
                           ? "text-amber-400/70 bg-amber-500/5"
-                          : "text-text-muted/40 bg-white/[0.02]"
+                          : "text-text-muted/60 bg-white/[0.03]"
                       }`}>
                         {ticket.sla}
                       </span>
@@ -209,8 +209,8 @@ export function Hero({ content }: { content?: HeroContent }) {
 
               {/* Bottom status bar */}
               <div className="px-4 py-1.5 border-t border-white/5 bg-white/[0.01] flex items-center justify-between">
-                <span className="text-text-muted/40 text-[8px]">Queue load: 78%</span>
-                <span className="text-text-muted/40 text-[8px]">SLA compliance: 92%</span>
+                <span className="text-text-muted/60 text-[8px]">Queue load: 78%</span>
+                <span className="text-text-muted/60 text-[8px]">SLA compliance: 92%</span>
               </div>
             </div>
 

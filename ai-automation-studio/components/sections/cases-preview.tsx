@@ -53,7 +53,7 @@ function ReceptionPreview() {
           <p className="text-[9px] text-text-secondary leading-snug">
             Здравствуйте, хочу записаться на чистку зубов
           </p>
-          <p className="text-[8px] text-text-muted/60 text-right mt-1">10:24</p>
+          <p className="text-[8px] text-text-muted/80 text-right mt-1">10:24</p>
         </div>
         {/* Bot reply */}
         <div className="bg-accent/[0.08] border border-accent/10 rounded-lg rounded-br-sm px-3 py-2 max-w-[220px] ml-auto">

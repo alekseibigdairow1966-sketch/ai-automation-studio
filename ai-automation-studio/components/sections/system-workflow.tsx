@@ -76,7 +76,7 @@ export function SystemWorkflow() {
                       <div className="flex items-center gap-3 flex-wrap">
                         <h4 className="text-text-primary text-sm font-semibold">{step.title}</h4>
                         {/* Live event badge */}
-                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/5 text-text-muted/60 font-mono">
+                        <span className="text-[9px] px-2 py-0.5 rounded-full bg-white/[0.06] border border-white/8 text-text-muted/80 font-mono">
                           {step.event}
                         </span>
                       </div>

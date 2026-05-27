@@ -42,7 +42,7 @@ export async function Footer() {
             { label: "Multi-channel Intake", status: "active" },
             { label: "Repair Lifecycle Tracking", status: "active" },
           ].map((cap) => (
-            <span key={cap.label} className="flex items-center gap-2 text-text-muted/60 text-[10px]">
+            <span key={cap.label} className="flex items-center gap-2 text-text-muted/80 text-[10px]">
               <span className="w-1 h-1 rounded-full bg-emerald-500/60" />
               {cap.label}
             </span>
