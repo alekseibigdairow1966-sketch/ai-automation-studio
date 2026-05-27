@@ -15,11 +15,11 @@ const technologies = [
 
 export function TechStack() {
   return (
-    <section className="py-24 px-4 sm:px-6 bg-surface/50">
+    <section className="py-14 md:py-16 px-6 lg:px-8 bg-surface/50">
       <div className="max-w-7xl mx-auto">
-        <MotionWrapper className="text-center mb-16">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">Стек</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary">
+        <MotionWrapper className="text-center mb-10">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">Стек</p>
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary">
             Технологии, которые мы используем
           </h2>
         </MotionWrapper>

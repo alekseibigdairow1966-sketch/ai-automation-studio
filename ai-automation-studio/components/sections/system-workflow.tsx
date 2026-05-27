@@ -44,13 +44,13 @@ export function SystemWorkflow() {
   const c = content[locale as Lang] ?? content.ru
 
   return (
-    <section className="py-14 px-4 sm:px-6">
+    <section className="py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <MotionWrapper className="text-center mb-10">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">
             {c.badge}
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary mb-3">
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             {c.title}
           </h2>
           <p className="text-text-muted text-sm max-w-xl mx-auto">{c.subtitle}</p>
@@ -67,7 +67,7 @@ export function SystemWorkflow() {
                 <MotionWrapper key={i} delay={0.05 * i}>
                   <div className="relative flex items-start gap-5 py-5 pl-1">
                     {/* Node */}
-                    <div className="relative z-10 shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-surface border border-white/[0.06] flex items-center justify-center">
+                    <div className="relative z-10 shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-surface border border-white/5 flex items-center justify-center">
                       <Icon size={18} className="text-accent" />
                     </div>
 

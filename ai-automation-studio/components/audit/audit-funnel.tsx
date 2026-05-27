@@ -165,7 +165,7 @@ export function AuditFunnel() {
                     <button
                       key={opt.value}
                       onClick={() => goNext(opt.value)}
-                      className="w-full text-left px-5 py-4 rounded-xl border border-white/[0.08] bg-white/[0.03] text-text-secondary hover:border-accent/40 hover:bg-accent/5 hover:text-text-primary transition-all duration-200 text-sm group flex items-center justify-between"
+                      className="w-full text-left px-5 py-4 rounded-xl border border-white/10 bg-white/[0.03] text-text-secondary hover:border-accent/40 hover:bg-accent/5 hover:text-text-primary transition-all duration-200 text-sm group flex items-center justify-between"
                     >
                       <span>{opt.label}</span>
                       <ArrowRight size={14} className="text-text-muted group-hover:text-accent transition-colors" />
@@ -189,7 +189,7 @@ export function AuditFunnel() {
                           className={`w-full text-left px-5 py-4 rounded-xl border text-sm transition-all duration-200 flex items-center justify-between ${
                             sel
                               ? "border-accent/50 bg-accent/10 text-accent"
-                              : "border-white/[0.08] bg-white/[0.03] text-text-secondary hover:border-accent/30"
+                              : "border-white/10 bg-white/[0.03] text-text-secondary hover:border-accent/30"
                           }`}
                         >
                           <span>{opt.label}</span>
@@ -333,7 +333,7 @@ export function AuditFunnel() {
               <Input
                 value={leadForm.name}
                 onChange={(e) => { setLeadForm((p) => ({ ...p, name: e.target.value })); setFormErrors((p) => ({ ...p, name: "" })) }}
-                className="bg-background border-white/[0.06] text-text-primary"
+                className="bg-background border-white/5 text-text-primary"
               />
               {formErrors.name && <p className="text-red-400 text-xs mt-1">{formErrors.name}</p>}
             </div>
@@ -344,7 +344,7 @@ export function AuditFunnel() {
                 placeholder="+7 (___) ___-__-__"
                 value={leadForm.phone}
                 onChange={(e) => { setLeadForm((p) => ({ ...p, phone: e.target.value })); setFormErrors((p) => ({ ...p, phone: "" })) }}
-                className="bg-background border-white/[0.06] text-text-primary placeholder:text-text-muted"
+                className="bg-background border-white/5 text-text-primary placeholder:text-text-muted"
               />
               {formErrors.phone && <p className="text-red-400 text-xs mt-1">{formErrors.phone}</p>}
             </div>
@@ -354,7 +354,7 @@ export function AuditFunnel() {
                 type="email"
                 value={leadForm.email}
                 onChange={(e) => setLeadForm((p) => ({ ...p, email: e.target.value }))}
-                className="bg-background border-white/[0.06] text-text-primary"
+                className="bg-background border-white/5 text-text-primary"
               />
             </div>
             <div>
@@ -362,7 +362,7 @@ export function AuditFunnel() {
               <Input
                 value={leadForm.business}
                 onChange={(e) => setLeadForm((p) => ({ ...p, business: e.target.value }))}
-                className="bg-background border-white/[0.06] text-text-primary"
+                className="bg-background border-white/5 text-text-primary"
               />
             </div>
 

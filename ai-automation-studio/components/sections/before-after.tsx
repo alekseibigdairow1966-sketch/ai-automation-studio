@@ -58,18 +58,18 @@ export function BeforeAfter() {
   const c = content[locale as Lang] ?? content.ru
 
   return (
-    <section className="py-14 px-4 sm:px-6">
+    <section className="py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
-        <MotionWrapper className="text-center mb-12">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
+        <MotionWrapper className="text-center mb-10">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">
             {c.badge}
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary">
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary">
             {c.title}
           </h2>
         </MotionWrapper>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {/* Before */}
           <MotionWrapper delay={0.1}>
             <div className="glass-panel p-6 border-red-500/10 h-full">

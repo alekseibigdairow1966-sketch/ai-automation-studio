@@ -20,7 +20,7 @@ export function MobileNav({ open, onClose, links, discussLabel = "Обсудит
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.2 }}
-          className="fixed top-16 left-0 right-0 z-40 md:hidden bg-surface border-b border-white/[0.06] shadow-xl"
+          className="fixed top-16 left-0 right-0 z-40 lg:hidden bg-surface border-b border-white/10 shadow-xl"
         >
           <div className="px-4 py-6 space-y-1">
             {links.map((link) => (

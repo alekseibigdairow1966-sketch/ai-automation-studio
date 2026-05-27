@@ -24,8 +24,8 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/[0.06]">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-white/10">
+        <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
             <div className="w-8 h-8 rounded-lg accent-gradient flex items-center justify-center text-white text-xs font-bold tracking-tight">
               SL
@@ -35,7 +35,7 @@ export function Header() {
             </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8 text-sm">
+          <div className="hidden lg:flex items-center gap-6 text-sm">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -62,7 +62,7 @@ export function Header() {
               </Button>
             </Link>
             <button
-              className="md:hidden text-text-secondary hover:text-text-primary transition-colors"
+              className="lg:hidden text-text-secondary hover:text-text-primary transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}

@@ -6,7 +6,7 @@ export function LanguageSwitcher() {
   const { locale, setLocale } = useLocale()
 
   return (
-    <div className="flex items-center rounded-lg border border-white/[0.08] overflow-hidden text-xs">
+    <div className="flex items-center rounded-lg border border-white/10 overflow-hidden text-xs">
       <button
         onClick={() => setLocale("ru")}
         className={`px-2.5 py-1.5 font-medium transition-colors ${

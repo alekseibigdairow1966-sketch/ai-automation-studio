@@ -39,13 +39,13 @@ const pipeline = [
 
 export function IntegrationEcosystem() {
   return (
-    <section className="py-24 px-4 sm:px-6">
+    <section className="py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <MotionWrapper className="text-center mb-16">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
+        <MotionWrapper className="text-center mb-10">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">
             Экосистема
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             Интеграции и технологический стек
           </h2>
           <p className="text-text-muted text-sm max-w-2xl mx-auto">
@@ -54,7 +54,7 @@ export function IntegrationEcosystem() {
         </MotionWrapper>
 
         {/* Integration grid */}
-        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-16">
+        <StaggerContainer className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-6 mb-12">
           {integrations.map((item) => {
             const Icon = item.icon
             return (
@@ -85,7 +85,7 @@ export function IntegrationEcosystem() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 }}
-                    className="flex-1 bg-white/[0.04] border border-white/[0.06] rounded-xl p-3 text-center"
+                    className="flex-1 bg-white/[0.04] border border-white/5 rounded-xl p-3 text-center"
                   >
                     <div className="w-6 h-6 rounded-lg accent-gradient flex items-center justify-center mx-auto mb-2 text-white text-[10px] font-bold">
                       {i + 1}

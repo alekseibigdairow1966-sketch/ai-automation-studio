@@ -52,7 +52,7 @@ function CRMDashboard() {
       </div>
       {/* Recent orders */}
       <div className="bg-white/[0.02] rounded-lg overflow-hidden">
-        <div className="px-3 py-2 border-b border-white/[0.04] flex items-center">
+        <div className="px-3 py-2 border-b border-white/5 flex items-center">
           <span className="text-text-muted text-[10px] uppercase tracking-wider">Последние заявки</span>
         </div>
         {[
@@ -61,7 +61,7 @@ function CRMDashboard() {
           { id: "#4819", type: "Замена батареи", status: "Ожидает", master: "—", statusColor: "text-text-muted" },
           { id: "#4818", type: "Ремонт разъёма", status: "В работе", master: "Дамир С.", statusColor: "text-amber-400" },
         ].map((r, i) => (
-          <div key={i} className="px-3 py-2 border-b border-white/[0.03] flex items-center justify-between text-xs">
+          <div key={i} className="px-3 py-2 border-b border-white/5 flex items-center justify-between text-xs">
             <div className="flex items-center gap-3">
               <span className="text-accent tabular-nums">{r.id}</span>
               <span className="text-text-secondary">{r.type}</span>
@@ -109,7 +109,7 @@ function RepairCard() {
           </div>
         ))}
       </div>
-      <div className="border-t border-white/[0.06] pt-3">
+      <div className="border-t border-white/5 pt-3">
         <p className="text-text-muted text-[10px] uppercase tracking-wider mb-2">История</p>
         {[
           ["14:32", "Заявка создана (AI-классификация)"],
@@ -137,7 +137,7 @@ function WhatsAppBot() {
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-2 pb-2 border-b border-white/[0.06]">
+      <div className="flex items-center gap-2 pb-2 border-b border-white/5">
         <div className="w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center">
           <MessageSquare size={12} className="text-emerald-400" />
         </div>
@@ -173,7 +173,7 @@ function TelegramNotifications() {
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-2 pb-2 border-b border-white/[0.06]">
+      <div className="flex items-center gap-2 pb-2 border-b border-white/5">
         <div className="w-7 h-7 rounded-full bg-blue-500/20 flex items-center justify-center">
           <Send size={12} className="text-blue-400" />
         </div>
@@ -287,13 +287,13 @@ export function SystemInterfaces() {
   const ActiveScreen = SCREENS[activeTab]
 
   return (
-    <section className="py-20 px-4 sm:px-6">
+    <section className="py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
-        <MotionWrapper className="text-center mb-12">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
+        <MotionWrapper className="text-center mb-10">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">
             {c.badge}
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary mb-3">
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             {c.title}
           </h2>
           <p className="text-text-muted text-sm">{c.subtitle}</p>
@@ -302,7 +302,7 @@ export function SystemInterfaces() {
         <MotionWrapper delay={0.1}>
           <div className="glass-panel overflow-hidden">
             {/* Tab bar */}
-            <div className="flex overflow-x-auto border-b border-white/[0.06] px-2 gap-0.5 scrollbar-hide">
+            <div className="flex overflow-x-auto border-b border-white/5 px-2 gap-0.5 scrollbar-hide">
               {c.tabs.map((tab, i) => {
                 const Icon = TAB_ICONS[i]
                 return (

@@ -83,13 +83,13 @@ export function ROICalculator() {
   }
 
   return (
-    <section className="py-16 px-4 sm:px-6">
+    <section className="py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <MotionWrapper className="text-center mb-10">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">
             {t.calculator.badge}
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             {t.calculator.title}
           </h2>
           <p className="text-text-muted text-sm max-w-2xl mx-auto">
@@ -97,7 +97,7 @@ export function ROICalculator() {
           </p>
         </MotionWrapper>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
           {/* Inputs */}
           <MotionWrapper delay={0.1}>
             <div className="glass-panel p-6 sm:p-8 space-y-6">
@@ -184,7 +184,7 @@ export function ROICalculator() {
                     value={<AnimatedValue value={results.controlOverhead} />}
                     color="text-red-400"
                   />
-                  <div className="border-t border-white/[0.06] pt-3 flex items-center justify-between">
+                  <div className="border-t border-white/5 pt-3 flex items-center justify-between">
                     <span className="text-text-primary text-sm font-semibold">{t.calculator.totalLosses}</span>
                     <AnimatedValue value={results.totalLosses} className="text-red-400 text-lg font-bold" />
                   </div>
@@ -212,7 +212,7 @@ export function ROICalculator() {
               </div>
 
               {/* Dynamic Insight */}
-              <div className="pt-4 mt-1 border-t border-white/[0.06] min-h-[56px] flex items-start justify-center">
+              <div className="pt-4 mt-1 border-t border-white/5 min-h-[56px] flex items-start justify-center">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={insightText}

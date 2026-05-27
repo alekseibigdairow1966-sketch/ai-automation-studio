@@ -10,13 +10,13 @@ export function PainPointsSection() {
   const { t } = useLocale()
 
   return (
-    <section className="py-16 px-4 sm:px-6">
+    <section className="py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <MotionWrapper className="text-center mb-10">
-          <p className="text-red-400/80 text-xs font-medium uppercase tracking-widest mb-3">
+          <p className="text-red-400/80 text-xs font-medium uppercase tracking-[0.2em] mb-3">
             {t.pains.badge}
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             {t.pains.title}
           </h2>
           <p className="text-text-muted text-sm max-w-xl mx-auto">
@@ -24,7 +24,7 @@ export function PainPointsSection() {
           </p>
         </MotionWrapper>
 
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {t.pains.items.map((pain, i) => {
             const Icon = ICONS[i] ?? PhoneOff
             return (

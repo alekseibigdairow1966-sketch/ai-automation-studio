@@ -93,13 +93,13 @@ export function ProofOperations() {
   })
 
   return (
-    <section className="py-20 px-4 sm:px-6">
+    <section className="py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <MotionWrapper className="text-center mb-14">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
+        <MotionWrapper className="text-center mb-10">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">
             {c.badge}
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-text-primary mb-3">
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             {c.title}
           </h2>
           <p className="text-text-muted text-sm">{c.subtitle}</p>
@@ -149,7 +149,7 @@ export function ProofOperations() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -16 }}
                       transition={{ duration: 0.35, ease: "easeOut" }}
-                      className="py-2 border-b border-white/[0.04] last:border-0"
+                      className="py-2 border-b border-white/5 last:border-0"
                     >
                       <div className="flex items-start gap-2">
                         <span className="text-accent/40 text-[10px] mt-0.5 shrink-0 tabular-nums">

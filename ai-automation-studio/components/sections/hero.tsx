@@ -35,7 +35,7 @@ export function Hero({ content }: { content?: HeroContent }) {
         <div className="absolute inset-0 hero-grid opacity-[0.04]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
           {/* Left: Text content */}
           <motion.div
@@ -45,7 +45,7 @@ export function Hero({ content }: { content?: HeroContent }) {
             transition={{ duration: 0.8 }}
           >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/30 bg-accent/5 mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/20 bg-accent/5 mb-8">
               <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
               <span className="text-xs text-accent font-medium tracking-wide">
                 {c.badge}
@@ -53,13 +53,13 @@ export function Hero({ content }: { content?: HeroContent }) {
             </div>
 
             {/* H1 */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-6">
               {c.title}{" "}
               <span className="accent-gradient-text">{c.titleAccent}</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-text-secondary text-lg sm:text-xl max-w-2xl mb-10 leading-relaxed lg:mx-0 mx-auto">
+            <p className="text-text-secondary text-base sm:text-lg max-w-2xl mb-10 leading-relaxed lg:mx-0 mx-auto">
               {c.subtitle}
             </p>
 
@@ -119,9 +119,9 @@ export function Hero({ content }: { content?: HeroContent }) {
             <div className="absolute -inset-8 bg-accent/[0.06] blur-[80px] rounded-3xl" />
 
             {/* Main dashboard card */}
-            <div className="relative bg-[#08080d] border border-white/[0.07] rounded-xl overflow-hidden shadow-2xl">
+            <div className="relative bg-[#08080d] border border-white/10 rounded-xl overflow-hidden shadow-2xl">
               {/* Top bar */}
-              <div className="px-4 py-2.5 border-b border-white/[0.06] flex items-center justify-between">
+              <div className="px-4 py-2.5 border-b border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-40" />
@@ -134,13 +134,13 @@ export function Hero({ content }: { content?: HeroContent }) {
               </div>
 
               {/* KPI row */}
-              <div className="grid grid-cols-3 border-b border-white/[0.06]">
+              <div className="grid grid-cols-3 border-b border-white/5">
                 {[
                   { label: "Active", value: "47", color: "text-text-primary" },
                   { label: "Queue", value: "12", color: "text-amber-400" },
                   { label: "Done", value: "8", color: "text-emerald-400" },
                 ].map((kpi, i) => (
-                  <div key={kpi.label} className={`px-3.5 py-3 ${i < 2 ? "border-r border-white/[0.06]" : ""}`}>
+                  <div key={kpi.label} className={`px-3.5 py-3 ${i < 2 ? "border-r border-white/5" : ""}`}>
                     <p className="text-text-muted text-[9px] uppercase tracking-wider mb-0.5">{kpi.label}</p>
                     <p className={`text-xl font-semibold tabular-nums ${kpi.color}`}>{kpi.value}</p>
                   </div>
@@ -158,7 +158,7 @@ export function Hero({ content }: { content?: HeroContent }) {
                     key={ticket.id}
                     className={`px-4 py-2.5 flex items-center justify-between ${
                       ticket.highlight ? "bg-white/[0.025] border-l-2 border-l-accent/40" : ""
-                    } ${i < arr.length - 1 ? "border-b border-white/[0.04]" : ""}`}
+                    } ${i < arr.length - 1 ? "border-b border-white/5" : ""}`}
                   >
                     <div className="flex items-center gap-3">
                       <span className="text-text-muted text-[10px] font-mono">{ticket.id}</span>
@@ -185,7 +185,7 @@ export function Hero({ content }: { content?: HeroContent }) {
 
             {/* Floating: New ticket notification */}
             <motion.div
-              className="absolute -bottom-4 -left-3 sm:-left-6 bg-[#0a0a12] border border-white/[0.08] rounded-lg px-3.5 py-2.5 shadow-2xl z-10"
+              className="absolute -bottom-4 -left-3 sm:-left-6 bg-[#0a0a12] border border-white/10 rounded-lg px-3.5 py-2.5 shadow-2xl z-10"
               initial={{ opacity: 0, y: 10, x: -10 }}
               animate={{ opacity: 1, y: 0, x: 0 }}
               transition={{ delay: 1.0, duration: 0.5 }}

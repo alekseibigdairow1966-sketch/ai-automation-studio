@@ -57,13 +57,13 @@ const demos = [
 
 export function InteractiveDemos() {
   return (
-    <section className="py-24 px-4 sm:px-6 bg-surface/50">
+    <section className="py-14 md:py-16 px-6 lg:px-8 bg-surface/50">
       <div className="max-w-7xl mx-auto">
-        <MotionWrapper className="text-center mb-16">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
+        <MotionWrapper className="text-center mb-10">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">
             Как это работает
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             Операционные AI-системы в действии
           </h2>
           <p className="text-text-muted text-sm max-w-2xl mx-auto">
@@ -71,7 +71,7 @@ export function InteractiveDemos() {
           </p>
         </MotionWrapper>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {demos.map((demo) => {
             const Icon = demo.icon
             return (
@@ -104,7 +104,7 @@ export function InteractiveDemos() {
                             className={`max-w-[80%] rounded-xl px-3 py-2 text-xs leading-relaxed ${
                               msg.align === "right"
                                 ? "bg-accent/15 text-accent border border-accent/20 rounded-br-sm"
-                                : "bg-white/[0.06] text-text-secondary border border-white/[0.06] rounded-bl-sm"
+                                : "bg-white/[0.06] text-text-secondary border border-white/5 rounded-bl-sm"
                             }`}
                           >
                             <span className="text-text-muted text-[10px] block mb-0.5">{msg.from}</span>
@@ -125,7 +125,7 @@ export function InteractiveDemos() {
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ delay: i * 0.08 }}
-                          className="bg-white/[0.04] rounded-lg p-3 border border-white/[0.04]"
+                          className="bg-white/[0.04] rounded-lg p-3 border border-white/5"
                         >
                           <p className="text-text-muted text-[10px] mb-1">{m.label}</p>
                           <p className="text-text-primary text-sm font-bold">{m.value}</p>

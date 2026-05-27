@@ -48,12 +48,12 @@ export function Sidebar({
       )}
 
       <aside
-        className={`fixed left-0 top-0 bottom-0 w-64 bg-surface border-r border-white/[0.06] flex flex-col z-50 transition-transform duration-200 ${
+        className={`fixed left-0 top-0 bottom-0 w-64 bg-surface border-r border-white/10 flex flex-col z-50 transition-transform duration-200 ${
           open ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0`}
       >
         {/* Logo */}
-        <div className="p-6 border-b border-white/[0.06]">
+        <div className="p-6 border-b border-white/10">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg accent-gradient flex items-center justify-center text-white text-xs font-bold">
               SL
@@ -91,7 +91,7 @@ export function Sidebar({
         </nav>
 
         {/* Bottom */}
-        <div className="p-4 border-t border-white/[0.06] space-y-1">
+        <div className="p-4 border-t border-white/10 space-y-1">
           <Link
             href="/"
             target="_blank"

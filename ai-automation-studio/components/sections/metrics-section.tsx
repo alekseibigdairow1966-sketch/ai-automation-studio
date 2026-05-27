@@ -8,7 +8,7 @@ export function MetricsSection() {
   const { t } = useLocale()
 
   return (
-    <section className="py-24 px-4 sm:px-6">
+    <section className="py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {t.metrics.map((m, i) => (

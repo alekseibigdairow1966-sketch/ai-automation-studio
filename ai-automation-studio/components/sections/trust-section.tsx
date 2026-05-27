@@ -20,14 +20,14 @@ export function TrustSection() {
   const items = t.trust.items.slice(0, 2)
 
   return (
-    <section className="py-14 px-4 sm:px-6">
+    <section className="py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           {items.map((point, i) => {
             const Icon = ICONS[i] ?? Wrench
             return (
               <StaggerItem key={i}>
-                <div className="border border-white/[0.06] rounded-xl p-5 sm:p-6 bg-surface/30">
+                <div className="border border-white/10 rounded-xl p-5 sm:p-6 bg-surface/30">
                   <div className="flex items-start gap-3.5">
                     <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
                       <Icon size={18} className="text-accent" />

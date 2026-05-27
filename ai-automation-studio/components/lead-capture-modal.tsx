@@ -71,7 +71,7 @@ export function LeadCaptureModal({ open, onClose }: LeadCaptureModalProps) {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="relative w-full max-w-md bg-[#0a0a12] border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden"
+              className="relative w-full max-w-md bg-[#0a0a12] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
@@ -84,7 +84,7 @@ export function LeadCaptureModal({ open, onClose }: LeadCaptureModalProps) {
               {/* Close button */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-text-muted hover:text-text-primary transition-colors z-10"
+                className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-white/[0.04] border border-white/5 flex items-center justify-center text-text-muted hover:text-text-primary transition-colors z-10"
               >
                 <X size={14} />
               </button>
@@ -126,7 +126,7 @@ export function LeadCaptureModal({ open, onClose }: LeadCaptureModalProps) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Как к вам обращаться"
-                        className="bg-white/[0.03] border-white/[0.06] text-text-primary text-sm placeholder:text-text-muted/40"
+                        className="bg-white/[0.03] border-white/5 text-text-primary text-sm placeholder:text-text-muted/40"
                         required
                       />
                     </div>
@@ -138,7 +138,7 @@ export function LeadCaptureModal({ open, onClose }: LeadCaptureModalProps) {
                         value={contact}
                         onChange={(e) => setContact(e.target.value)}
                         placeholder="+7 (___) ___-__-__"
-                        className="bg-white/[0.03] border-white/[0.06] text-text-primary text-sm placeholder:text-text-muted/40"
+                        className="bg-white/[0.03] border-white/5 text-text-primary text-sm placeholder:text-text-muted/40"
                         required
                       />
                     </div>
@@ -151,7 +151,7 @@ export function LeadCaptureModal({ open, onClose }: LeadCaptureModalProps) {
                         onChange={(e) => setAbout(e.target.value)}
                         placeholder="Например: ремонт телефонов, 30 заявок в день"
                         rows={2}
-                        className="w-full rounded-md bg-white/[0.03] border border-white/[0.06] text-text-primary text-sm px-3 py-2 placeholder:text-text-muted/40 focus:outline-none focus:ring-1 focus:ring-accent/50 resize-none"
+                        className="w-full rounded-md bg-white/[0.03] border border-white/5 text-text-primary text-sm px-3 py-2 placeholder:text-text-muted/40 focus:outline-none focus:ring-1 focus:ring-accent/50 resize-none"
                       />
                     </div>
                   </div>

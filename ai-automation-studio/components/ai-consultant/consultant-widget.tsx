@@ -245,11 +245,11 @@ export function ConsultantWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed bottom-4 right-4 z-50 w-[min(400px,calc(100vw-2rem))] h-[min(600px,calc(100vh-6rem))] flex flex-col rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl shadow-black/40"
+            className="fixed bottom-4 right-4 z-50 w-[min(400px,calc(100vw-2rem))] h-[min(600px,calc(100vh-6rem))] flex flex-col rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40"
             style={{ background: "rgba(15,15,18,0.97)", backdropFilter: "blur(16px)" }}
           >
             {/* ---- Header ---- */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] shrink-0">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 shrink-0">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg accent-gradient flex items-center justify-center">
                   <Bot size={16} className="text-white" />
@@ -339,7 +339,7 @@ export function ConsultantWidget() {
                         <button
                           key={opt.value}
                           onClick={() => handleSelect(opt.value, opt.label)}
-                          className="w-full text-left px-3.5 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] text-text-secondary text-sm hover:border-accent/40 hover:bg-accent/5 hover:text-text-primary transition-all duration-200"
+                          className="w-full text-left px-3.5 py-2.5 rounded-xl border border-white/10 bg-white/[0.03] text-text-secondary text-sm hover:border-accent/40 hover:bg-accent/5 hover:text-text-primary transition-all duration-200"
                         >
                           {opt.label}
                         </button>
@@ -356,7 +356,7 @@ export function ConsultantWidget() {
                               className={`w-full text-left px-3.5 py-2.5 rounded-xl border text-sm transition-all duration-200 flex items-center justify-between ${
                                 selected
                                   ? "border-accent/50 bg-accent/10 text-accent"
-                                  : "border-white/[0.08] bg-white/[0.03] text-text-secondary hover:border-accent/30"
+                                  : "border-white/10 bg-white/[0.03] text-text-secondary hover:border-accent/30"
                               }`}
                             >
                               <span>{opt.label}</span>
@@ -443,7 +443,7 @@ export function ConsultantWidget() {
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.1 }}
-                        className="bg-white/[0.04] rounded-xl p-3 border border-white/[0.06]"
+                        className="bg-white/[0.04] rounded-xl p-3 border border-white/5"
                       >
                         <div className="flex items-start gap-2 mb-1.5">
                           <span
@@ -505,7 +505,7 @@ export function ConsultantWidget() {
                           setLeadForm((p) => ({ ...p, name: e.target.value }))
                           setFormErrors((p) => ({ ...p, name: "" }))
                         }}
-                        className="bg-white/[0.04] border-white/[0.08] text-text-primary placeholder:text-text-muted text-sm"
+                        className="bg-white/[0.04] border-white/10 text-text-primary placeholder:text-text-muted text-sm"
                       />
                       {formErrors.name && (
                         <p className="text-red-400 text-xs mt-1">{formErrors.name}</p>
@@ -520,7 +520,7 @@ export function ConsultantWidget() {
                           setLeadForm((p) => ({ ...p, phone: e.target.value }))
                           setFormErrors((p) => ({ ...p, phone: "" }))
                         }}
-                        className="bg-white/[0.04] border-white/[0.08] text-text-primary placeholder:text-text-muted text-sm"
+                        className="bg-white/[0.04] border-white/10 text-text-primary placeholder:text-text-muted text-sm"
                       />
                       {formErrors.phone && (
                         <p className="text-red-400 text-xs mt-1">{formErrors.phone}</p>
@@ -533,7 +533,7 @@ export function ConsultantWidget() {
                       onChange={(e) =>
                         setLeadForm((p) => ({ ...p, email: e.target.value }))
                       }
-                      className="bg-white/[0.04] border-white/[0.08] text-text-primary placeholder:text-text-muted text-sm"
+                      className="bg-white/[0.04] border-white/10 text-text-primary placeholder:text-text-muted text-sm"
                     />
 
                     <Button

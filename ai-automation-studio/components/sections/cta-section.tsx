@@ -25,14 +25,14 @@ export function CTASection({ content }: { content?: CTAContent }) {
 
   return (
     <>
-      <section className="py-16 px-4 sm:px-6">
+      <section className="py-14 md:py-16 px-6 lg:px-8">
         <MotionWrapper>
           <div className="max-w-4xl mx-auto relative">
             {/* Outer glow */}
-            <div className="absolute -inset-1 bg-gradient-to-br from-accent/15 via-accent-end/8 to-transparent rounded-[28px] blur-xl opacity-50" />
+            <div className="absolute -inset-1 bg-gradient-to-br from-accent/10 via-accent-end/5 to-transparent rounded-2xl blur-xl opacity-40" />
 
             {/* Card */}
-            <div className="relative bg-[#08080d] border border-white/[0.08] rounded-3xl p-10 sm:p-16 text-center overflow-hidden">
+            <div className="relative bg-[#08080d] border border-white/10 rounded-2xl p-8 sm:p-12 text-center overflow-hidden">
               {/* Subtle gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.04] via-transparent to-accent-end/[0.03]" />
               {/* Top accent line */}
@@ -41,10 +41,10 @@ export function CTASection({ content }: { content?: CTAContent }) {
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] h-[1px] bg-gradient-to-r from-transparent via-accent-end/20 to-transparent" />
 
               <div className="relative">
-                <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+                <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
                   {c.title}
                 </h2>
-                <p className="text-text-muted text-lg mb-8 max-w-lg mx-auto leading-relaxed">
+                <p className="text-text-muted text-base mb-8 max-w-lg mx-auto leading-relaxed">
                   {c.subtitle}
                 </p>
                 <Button

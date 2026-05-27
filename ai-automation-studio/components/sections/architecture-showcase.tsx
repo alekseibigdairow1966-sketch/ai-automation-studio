@@ -57,11 +57,11 @@ const steps = [
 
 export function ArchitectureShowcase() {
   return (
-    <section className="py-24 px-4 sm:px-6">
+    <section className="py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <MotionWrapper className="text-center mb-16">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">Архитектура</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+        <MotionWrapper className="text-center mb-10">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">Архитектура</p>
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             Как работает AI-система сервисного центра
           </h2>
           <p className="text-text-muted text-sm max-w-xl mx-auto">

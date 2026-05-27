@@ -27,11 +27,11 @@ export function AIConsultantSection() {
   }
 
   return (
-    <section className="py-24 px-4 sm:px-6 bg-surface/50">
+    <section className="py-14 md:py-16 px-6 lg:px-8 bg-surface/50">
       <div className="max-w-2xl mx-auto">
         <MotionWrapper className="text-center mb-10">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">AI-консультант</p>
-          <h2 className="text-3xl font-bold text-text-primary mb-3">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">AI-консультант</p>
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             Опишите вашу задачу
           </h2>
           <p className="text-text-muted text-sm">AI подберёт подходящее решение автоматизации</p>
@@ -40,7 +40,7 @@ export function AIConsultantSection() {
         <MotionWrapper delay={0.2}>
           <div className="glass-panel overflow-hidden">
             {/* Header */}
-            <div className="flex items-center gap-2.5 px-5 py-3 border-b border-white/[0.06]">
+            <div className="flex items-center gap-2.5 px-5 py-3 border-b border-white/5">
               <div className="w-8 h-8 rounded-lg accent-gradient flex items-center justify-center">
                 <Bot size={14} className="text-white" />
               </div>
@@ -78,7 +78,7 @@ export function AIConsultantSection() {
             </div>
 
             {/* Input */}
-            <div className="border-t border-white/[0.06] p-3 flex gap-2">
+            <div className="border-t border-white/5 p-3 flex gap-2">
               <Textarea
                 value={input}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInput(e.target.value)}
@@ -87,7 +87,7 @@ export function AIConsultantSection() {
                 }}
                 placeholder="Например: хочу автоматизировать приём заявок..."
                 rows={2}
-                className="resize-none bg-background border-white/[0.06] text-text-primary text-sm placeholder:text-text-muted"
+                className="resize-none bg-background border-white/5 text-text-primary text-sm placeholder:text-text-muted"
               />
               <Button onClick={handleSend} disabled={!input.trim()} className="accent-gradient text-white self-end shrink-0">
                 <Send size={14} />

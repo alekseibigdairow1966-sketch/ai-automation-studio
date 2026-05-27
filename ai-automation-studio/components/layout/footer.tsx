@@ -32,8 +32,8 @@ export async function Footer() {
   const t = getTranslations(locale)
 
   return (
-    <footer className="border-t border-white/[0.06] mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 sm:grid-cols-3 gap-10 text-sm">
+    <footer className="border-t border-white/10 mt-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 grid grid-cols-1 sm:grid-cols-3 gap-10 text-sm">
         <div>
           <div className="flex items-center gap-2.5 mb-4">
             <div className="w-7 h-7 rounded-lg accent-gradient flex items-center justify-center text-white text-[10px] font-bold">
@@ -95,7 +95,7 @@ export async function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/[0.06] px-4 sm:px-6 py-5">
+      <div className="border-t border-white/10 px-6 lg:px-8 py-5">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-text-muted">
           <span>&copy; {new Date().getFullYear()} ServiceLayer</span>
           <div className="flex gap-4">

@@ -11,8 +11,8 @@ import { StaggerContainer, StaggerItem, MotionWrapper } from "@/components/motio
 function CRMPreview() {
   return (
     <div className="w-full h-full flex items-center justify-center px-5 py-3">
-      <div className="w-full max-w-[240px] bg-[#08080d] border border-white/[0.07] rounded-lg overflow-hidden text-left shadow-lg">
-        <div className="px-3 py-1.5 border-b border-white/[0.06] flex items-center justify-between">
+      <div className="w-full max-w-[240px] bg-[#08080d] border border-white/10 rounded-lg overflow-hidden text-left shadow-lg">
+        <div className="px-3 py-1.5 border-b border-white/5 flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="w-1 h-1 rounded-full bg-emerald-400" />
             <span className="text-[9px] text-text-primary font-medium">Repair Queue</span>
@@ -27,7 +27,7 @@ function CRMPreview() {
           <div
             key={row.id}
             className={`px-3 py-2 flex items-center justify-between ${
-              i < arr.length - 1 ? "border-b border-white/[0.03]" : ""
+              i < arr.length - 1 ? "border-b border-white/5" : ""
             }`}
           >
             <div className="flex items-center gap-2">
@@ -49,7 +49,7 @@ function ReceptionPreview() {
     <div className="w-full h-full flex items-center justify-center px-5 py-3">
       <div className="w-full max-w-[240px] space-y-2">
         {/* Incoming message */}
-        <div className="bg-white/[0.05] border border-white/[0.04] rounded-lg rounded-bl-sm px-3 py-2 max-w-[200px]">
+        <div className="bg-white/[0.05] border border-white/5 rounded-lg rounded-bl-sm px-3 py-2 max-w-[200px]">
           <p className="text-[9px] text-text-secondary leading-snug">
             Здравствуйте, хочу записаться на чистку зубов
           </p>
@@ -70,8 +70,8 @@ function ReceptionPreview() {
 function RestaurantPreview() {
   return (
     <div className="w-full h-full flex items-center justify-center px-5 py-3">
-      <div className="w-full max-w-[220px] bg-[#08080d] border border-white/[0.07] rounded-lg overflow-hidden text-left shadow-lg">
-        <div className="px-3 py-1.5 border-b border-white/[0.06] flex items-center justify-between">
+      <div className="w-full max-w-[220px] bg-[#08080d] border border-white/10 rounded-lg overflow-hidden text-left shadow-lg">
+        <div className="px-3 py-1.5 border-b border-white/5 flex items-center justify-between">
           <span className="text-[9px] text-text-primary font-medium">Order #847</span>
           <span className="text-[8px] font-medium px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
             Confirmed
@@ -86,12 +86,12 @@ function RestaurantPreview() {
             <span className="text-[9px] text-text-muted">Лагман x1</span>
             <span className="text-[9px] text-text-secondary tabular-nums">2 100 ₸</span>
           </div>
-          <div className="border-t border-white/[0.04] pt-1.5 flex justify-between">
+          <div className="border-t border-white/5 pt-1.5 flex justify-between">
             <span className="text-[9px] text-text-primary font-medium">Итого</span>
             <span className="text-[9px] text-text-primary font-semibold tabular-nums">8 900 ₸</span>
           </div>
         </div>
-        <div className="px-3 py-1.5 border-t border-white/[0.06] bg-white/[0.015]">
+        <div className="px-3 py-1.5 border-t border-white/5 bg-white/[0.015]">
           <span className="text-[8px] text-text-muted flex items-center gap-1">
             <span className="w-1 h-1 rounded-full bg-emerald-400" />
             POS synced
@@ -118,12 +118,12 @@ export function CasesPreview() {
     .filter(Boolean) as typeof cases
 
   return (
-    <section className="py-16 px-4 sm:px-6 bg-surface/50">
+    <section className="py-14 md:py-16 px-6 lg:px-8 bg-surface/50">
       <div className="max-w-7xl mx-auto">
-        <MotionWrapper className="flex items-end justify-between mb-12">
+        <MotionWrapper className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">Кейсы</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary">
+            <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">Кейсы</p>
+            <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary">
               Реализованные проекты
             </h2>
           </div>
@@ -132,7 +132,7 @@ export function CasesPreview() {
           </Link>
         </MotionWrapper>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {featured.map((cs) => (
             <StaggerItem key={cs.id}>
               <Link href={`/cases/${cs.slug}`} className="group block glass-panel hover-glow overflow-hidden h-full">

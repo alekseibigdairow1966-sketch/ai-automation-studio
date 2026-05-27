@@ -75,7 +75,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
         {/* Mobile header */}
-        <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-surface border-b border-white/[0.06] flex items-center px-4 z-30">
+        <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-surface border-b border-white/10 flex items-center px-4 z-30">
           <button
             onClick={() => setSidebarOpen(true)}
             className="text-text-secondary hover:text-text-primary transition-colors"

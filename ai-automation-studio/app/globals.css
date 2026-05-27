@@ -129,7 +129,7 @@
   --surface-elevated: #27272A;
   --accent-end: #8B5CF6;
   --text-primary: #FAFAFA;
-  --text-secondary: #A1A1AA;
+  --text-secondary: #D4D4D8;
   --text-muted: #71717A;
   --success: #22C55E;
 }
@@ -157,9 +157,9 @@
     background-clip: text;
   }
   .glass-panel {
-    background: rgba(24, 24, 27, 0.8);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
     border-radius: 1rem;
   }
   .hover-glow {
@@ -168,10 +168,10 @@
                 border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .hover-glow:hover {
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.12),
-                0 8px 32px rgba(0, 0, 0, 0.25);
-    border-color: rgba(99, 102, 241, 0.25);
-    transform: translateY(-2px);
+    box-shadow: 0 0 24px rgba(99, 102, 241, 0.08),
+                0 4px 20px rgba(0, 0, 0, 0.20);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
   }
 
   /* --- Phase 3: Ambient motion --- */

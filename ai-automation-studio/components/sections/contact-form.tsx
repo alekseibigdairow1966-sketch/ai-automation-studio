@@ -68,7 +68,7 @@ export function ContactFormSection() {
 
   if (status === "success") {
     return (
-      <section className="py-24 px-4 sm:px-6" id="contact-form">
+      <section className="py-14 md:py-16 px-6 lg:px-8" id="contact-form">
         <MotionWrapper className="max-w-lg mx-auto text-center py-16">
           <CheckCircle2 size={48} className="text-accent mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-text-primary mb-2">
@@ -83,13 +83,13 @@ export function ContactFormSection() {
   }
 
   return (
-    <section className="py-24 px-4 sm:px-6" id="contact-form">
+    <section className="py-14 md:py-16 px-6 lg:px-8" id="contact-form">
       <div className="max-w-lg mx-auto">
         <MotionWrapper className="text-center mb-10">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">
             {t.contactForm.badge}
           </p>
-          <h2 className="text-3xl font-bold text-text-primary mb-3">
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             {t.contactForm.title}
           </h2>
           <p className="text-text-muted text-sm">
@@ -117,7 +117,7 @@ export function ContactFormSection() {
                 </label>
                 <Input
                   name="name"
-                  className="bg-background border-white/[0.06] text-text-primary"
+                  className="bg-background border-white/5 text-text-primary"
                 />
                 {errors.name && (
                   <p className="text-red-400 text-xs mt-1">{errors.name}</p>
@@ -131,7 +131,7 @@ export function ContactFormSection() {
                   name="phone"
                   type="tel"
                   placeholder="+7 (___) ___-__-__"
-                  className="bg-background border-white/[0.06] text-text-primary placeholder:text-text-muted"
+                  className="bg-background border-white/5 text-text-primary placeholder:text-text-muted"
                 />
                 {errors.phone && (
                   <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
@@ -147,7 +147,7 @@ export function ContactFormSection() {
                 <Input
                   name="email"
                   type="email"
-                  className="bg-background border-white/[0.06] text-text-primary"
+                  className="bg-background border-white/5 text-text-primary"
                 />
               </div>
               <div>
@@ -158,7 +158,7 @@ export function ContactFormSection() {
                   name="whatsapp"
                   type="tel"
                   placeholder="+7..."
-                  className="bg-background border-white/[0.06] text-text-primary placeholder:text-text-muted"
+                  className="bg-background border-white/5 text-text-primary placeholder:text-text-muted"
                 />
               </div>
             </div>
@@ -170,7 +170,7 @@ export function ContactFormSection() {
               <Input
                 name="business"
                 placeholder={t.contactForm.businessPlaceholder}
-                className="bg-background border-white/[0.06] text-text-primary placeholder:text-text-muted"
+                className="bg-background border-white/5 text-text-primary placeholder:text-text-muted"
               />
             </div>
 
@@ -190,7 +190,7 @@ export function ContactFormSection() {
                       className={`text-xs px-3 py-1.5 rounded-lg transition-all ${
                         active
                           ? "accent-gradient text-white"
-                          : "bg-white/[0.04] text-text-muted border border-white/[0.06] hover:border-accent/30"
+                          : "bg-white/[0.04] text-text-muted border border-white/5 hover:border-accent/30"
                       }`}
                     >
                       {p}
@@ -208,7 +208,7 @@ export function ContactFormSection() {
                 name="message"
                 rows={3}
                 placeholder={t.contactForm.messagePlaceholder}
-                className="resize-none bg-background border-white/[0.06] text-text-primary placeholder:text-text-muted"
+                className="resize-none bg-background border-white/5 text-text-primary placeholder:text-text-muted"
               />
             </div>
 

@@ -36,11 +36,11 @@ export function OperationalDashboard() {
   ]
 
   return (
-    <section className="py-24 px-4 sm:px-6 bg-surface/50">
+    <section className="py-14 md:py-16 px-6 lg:px-8 bg-surface/50">
       <div className="max-w-7xl mx-auto">
-        <MotionWrapper className="text-center mb-16">
-          <p className="text-accent text-xs font-medium uppercase tracking-widest mb-3">{t.dashboard.badge}</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+        <MotionWrapper className="text-center mb-10">
+          <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">{t.dashboard.badge}</p>
+          <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
             {t.dashboard.title}
           </h2>
           <p className="text-text-muted text-sm max-w-xl mx-auto">
@@ -73,7 +73,7 @@ export function OperationalDashboard() {
                 return (
                   <motion.div
                     key={i}
-                    className="bg-background/50 border border-white/[0.06] rounded-xl p-4"
+                    className="bg-background/50 border border-white/5 rounded-xl p-4"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -111,8 +111,8 @@ export function OperationalDashboard() {
             </div>
 
             {/* Queue table */}
-            <div className="bg-background/50 border border-white/[0.06] rounded-xl overflow-x-auto">
-              <div className="px-4 py-3 border-b border-white/[0.06] flex items-center gap-2">
+            <div className="bg-background/50 border border-white/5 rounded-xl overflow-x-auto">
+              <div className="px-4 py-3 border-b border-white/5 flex items-center gap-2">
                 <Wrench size={14} className="text-text-muted" />
                 <span className="text-text-primary text-sm font-medium">{t.dashboard.repairQueue}</span>
                 <span className="text-text-muted text-xs ml-auto">{t.dashboard.activeCount}</span>
@@ -143,7 +143,7 @@ export function OperationalDashboard() {
             </div>
 
             {/* Bottom hint */}
-            <div className="flex items-center gap-2 mt-4 pt-4 border-t border-white/[0.04]">
+            <div className="flex items-center gap-2 mt-4 pt-4 border-t border-white/5">
               <AlertTriangle size={12} className="text-amber-400" />
               <span className="text-text-muted text-xs">{t.dashboard.alertHint}</span>
             </div>
