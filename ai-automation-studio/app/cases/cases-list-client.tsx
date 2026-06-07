@@ -11,7 +11,7 @@ import { useLocale } from "@/lib/i18n"
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
 
-const industries = ["Сервисные центры", "Клиники", "Рестораны", "E-commerce", "SaaS"]
+const industries = ["Сервисные центры"]
 const technologies = ["WhatsApp API", "OpenAI", "n8n", "Supabase", "Telegram Bot"]
 
 const LEVEL_META: Record<string, { label: string; color: string; order: number }> = {
@@ -22,31 +22,11 @@ const LEVEL_META: Record<string, { label: string; color: string; order: number }
 
 /* Live events mapped by case id */
 const LIVE_EVENTS: Record<string, string[]> = {
-  "1": [
-    "AI определил: «Консультация терапевта»",
-    "Запись создана → слот 15:30 забронирован",
-    "Пациент получил подтверждение в WhatsApp",
-  ],
-  "2": [
-    "Заказ #1247 получен через WhatsApp",
-    "POS обновлена → заказ в очереди на кухне",
-    "Клиент получил подтверждение: 25 мин",
-  ],
-  "3": [
-    "AI ответил: статус заказа #78412 — доставка",
-    "Запрос о возврате → эскалация оператору",
-    "Проверка наличия: iPhone 15 Pro — в наличии",
-  ],
   "4": [
     "Заявка #4821 автоматически создана из WhatsApp",
     "AI классифицировал: «Замена дисплея iPhone 14»",
     "Telegram уведомление отправлено мастеру Алексей К.",
     "Статус обновлён → клиент уведомлён автоматически",
-  ],
-  "5": [
-    "AI ответил на тикет #3892 за 18 сек (RAG)",
-    "Эскалация тикета #3895 → оператору с контекстом",
-    "База знаний обновлена: +3 новых FAQ",
   ],
 }
 
@@ -95,111 +75,8 @@ function CRMDashboardPreview() {
   )
 }
 
-function WhatsAppPreview() {
-  return (
-    <div className="bg-white/[0.02] rounded-lg p-3 space-y-2 text-[11px]">
-      <div className="flex items-center gap-2 pb-1.5 border-b border-white/[0.04]">
-        <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center text-[8px] text-emerald-400">AI</div>
-        <span className="text-text-primary text-[10px] font-medium">AI Assistant</span>
-        <span className="text-emerald-400 text-[8px]">online</span>
-      </div>
-      <div className="flex justify-end">
-        <div className="bg-accent/15 rounded-lg rounded-br-sm px-2.5 py-1.5 max-w-[85%] text-text-secondary">
-          Запись к терапевту на завтра
-        </div>
-      </div>
-      <div className="flex justify-start">
-        <div className="bg-white/[0.04] rounded-lg rounded-bl-sm px-2.5 py-1.5 max-w-[85%] text-text-muted">
-          Свободно: 10:00, 14:30, 16:00. Какое время удобно?
-        </div>
-      </div>
-      <div className="flex justify-end">
-        <div className="bg-accent/15 rounded-lg rounded-br-sm px-2.5 py-1.5 text-text-secondary">14:30</div>
-      </div>
-      <div className="flex justify-start">
-        <div className="bg-white/[0.04] rounded-lg rounded-bl-sm px-2.5 py-1.5 max-w-[85%] text-text-muted">
-          ✅ Запись создана на 14:30. Напоминание придёт за 2 часа.
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function OrderPreview() {
-  return (
-    <div className="bg-white/[0.02] rounded-lg p-3 space-y-2 text-[10px]">
-      <div className="flex items-center justify-between pb-1.5 border-b border-white/[0.04]">
-        <span className="text-text-primary text-[11px] font-medium">Заказ #1247</span>
-        <span className="text-emerald-400">Подтверждён</span>
-      </div>
-      {["Бургер классический ×2", "Картофель фри ×1", "Кола 0.5л ×2"].map((item, i) => (
-        <div key={i} className="flex items-center justify-between px-1 text-text-muted">
-          <span>{item}</span>
-        </div>
-      ))}
-      <div className="flex items-center justify-between pt-1.5 border-t border-white/[0.04] text-[11px]">
-        <span className="text-text-muted">Итого</span>
-        <span className="text-text-primary font-semibold">4 200 ₸</span>
-      </div>
-      <div className="bg-white/[0.03] rounded px-2 py-1.5 text-text-muted text-center">
-        Готовность: ~25 мин → POS обновлена
-      </div>
-    </div>
-  )
-}
-
-function ChatWidgetPreview() {
-  return (
-    <div className="bg-white/[0.02] rounded-lg p-3 space-y-2 text-[11px]">
-      <div className="flex items-center gap-2 pb-1.5 border-b border-white/[0.04]">
-        <div className="w-5 h-5 rounded-full bg-violet-500/20 flex items-center justify-center text-[8px] text-violet-400">AI</div>
-        <span className="text-text-primary text-[10px] font-medium">Поддержка</span>
-      </div>
-      <div className="flex justify-end">
-        <div className="bg-accent/15 rounded-lg rounded-br-sm px-2.5 py-1.5 max-w-[85%] text-text-secondary">
-          Где мой заказ #78412?
-        </div>
-      </div>
-      <div className="flex justify-start">
-        <div className="bg-white/[0.04] rounded-lg rounded-bl-sm px-2.5 py-1.5 max-w-[85%] text-text-muted">
-          Заказ #78412 отправлен. Трек: KZ2847291. Доставка завтра до 18:00.
-        </div>
-      </div>
-      <div className="text-[9px] text-emerald-400/60 text-center">AI ответил за 3 сек</div>
-    </div>
-  )
-}
-
-function SupportTicketsPreview() {
-  return (
-    <div className="bg-white/[0.02] rounded-lg p-3 space-y-1.5 text-[10px]">
-      <div className="flex items-center justify-between pb-1.5 border-b border-white/[0.04]">
-        <span className="text-text-muted/70 uppercase tracking-wider">Тикеты</span>
-        <span className="text-emerald-400">70% AI</span>
-      </div>
-      {[
-        { id: "#3892", q: "Как настроить API?", st: "AI решён", stColor: "text-emerald-400" },
-        { id: "#3895", q: "Баг в отчётах", st: "Эскалация", stColor: "text-amber-400" },
-        { id: "#3891", q: "Лимиты тарифа", st: "AI решён", stColor: "text-emerald-400" },
-      ].map((t, i) => (
-        <div key={i} className="flex items-center justify-between px-0.5 py-1">
-          <div className="flex items-center gap-2">
-            <span className="text-accent tabular-nums">{t.id}</span>
-            <span className="text-text-muted truncate max-w-[120px]">{t.q}</span>
-          </div>
-          <span className={`${t.stColor} shrink-0`}>{t.st}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
-
 const PREVIEW_BY_ID: Record<string, () => React.JSX.Element> = {
-  "1": WhatsAppPreview,
-  "2": OrderPreview,
-  "3": ChatWidgetPreview,
   "4": CRMDashboardPreview,
-  "5": SupportTicketsPreview,
 }
 
 /* ------------------------------------------------------------------ */
@@ -227,8 +104,8 @@ export function CasesListClient({ cases }: { cases: CaseStudy[] }) {
 
   return (
     <>
-      {/* Filters */}
-      <div className="mb-8 space-y-3">
+      {/* Filters — hidden when only a single scenario exists */}
+      <div className={`mb-8 space-y-3 ${cases.length <= 1 ? "hidden" : ""}`}>
         <div>
           <p className="text-text-muted text-xs mb-2">{t.casesPage.industry}</p>
           <div className="flex flex-wrap gap-2">

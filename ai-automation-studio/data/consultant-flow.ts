@@ -27,9 +27,7 @@ export const CONSULTANT_STEPS: ConsultantStep[] = [
     field: "Тип бизнеса",
     options: [
       { label: "Сервисный центр", value: "service_center" },
-      { label: "Клиника / Медцентр", value: "clinic" },
-      { label: "Ресторан / Кафе", value: "restaurant" },
-      { label: "E-commerce", value: "ecommerce" },
+      { label: "Ремонтная мастерская", value: "service_center" },
       { label: "Другое", value: "other" },
     ],
   },
@@ -212,9 +210,6 @@ export function generateRecommendations(
 
 const BUSINESS_NAMES: Record<string, string> = {
   service_center: "сервисного центра",
-  clinic: "клиники",
-  restaurant: "ресторана",
-  ecommerce: "e-commerce бизнеса",
   other: "вашего бизнеса",
 }
 
