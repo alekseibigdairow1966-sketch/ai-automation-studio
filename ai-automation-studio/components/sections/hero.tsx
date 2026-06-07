@@ -80,8 +80,8 @@ export function Hero({ content }: { content?: HeroContent }) {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-4 mb-16">
-              <Link href="/cases">
+            <div className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-4 mb-4">
+              <Link href="/audit">
                 <Button
                   size="lg"
                   className="accent-gradient text-white font-medium px-8 hover:opacity-90 transition-opacity"
@@ -90,7 +90,7 @@ export function Hero({ content }: { content?: HeroContent }) {
                   <ArrowRight size={16} className="ml-2" />
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href="#how-it-works">
                 <Button
                   size="lg"
                   variant="outline"
@@ -101,12 +101,17 @@ export function Hero({ content }: { content?: HeroContent }) {
               </Link>
             </div>
 
+            {/* Micro-trust line */}
+            <p className="text-text-muted text-xs sm:text-sm mb-12 lg:text-left text-center">
+              {t.hero.microtrust}
+            </p>
+
             {/* Stats — staggered blur reveal */}
-            <div className="flex justify-center lg:justify-start gap-8 sm:gap-12">
+            <div className="flex justify-center lg:justify-start gap-6 sm:gap-10">
               {c.stats.map((stat, i) => (
                 <motion.div
                   key={i}
-                  className="text-center"
+                  className="text-center lg:text-left"
                   initial={{ opacity: 0, y: 15, filter: "blur(8px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   transition={{
@@ -115,10 +120,12 @@ export function Hero({ content }: { content?: HeroContent }) {
                     ease: "easeOut",
                   }}
                 >
-                  <p className="text-3xl sm:text-4xl font-bold accent-gradient-text">
+                  <p className="text-2xl sm:text-3xl font-bold accent-gradient-text">
                     {stat.value}
                   </p>
-                  <p className="text-text-muted text-sm mt-1">{stat.label}</p>
+                  <p className="text-text-muted text-xs mt-1 max-w-[140px] leading-snug mx-auto lg:mx-0">
+                    {stat.label}
+                  </p>
                 </motion.div>
               ))}
             </div>

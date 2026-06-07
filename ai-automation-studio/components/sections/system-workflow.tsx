@@ -9,6 +9,7 @@ const content = {
     badge: "Архитектура процесса",
     title: "Как работает система",
     subtitle: "Полный цикл обработки обращения — от сообщения клиента до закрытия заявки",
+    note: "Полный цикл настраивается за 14 дней. Дальше система работает сама.",
     steps: [
       { title: "Клиент пишет в WhatsApp", desc: "Обращение поступает через мессенджер, сайт или телефон", event: "Ticket #4821 created" },
       { title: "Система анализирует обращение", desc: "Классификация типа ремонта, срочности и категории", event: "Routed → Diagnostics" },
@@ -23,6 +24,7 @@ const content = {
     badge: "Процесс архитектурасы",
     title: "Жүйе қалай жұмыс істейді",
     subtitle: "Өтінімді өңдеудің толық циклі — клиент хабарламасынан өтінімді жабуға дейін",
+    note: "Толық цикл 14 күнде бапталады. Әрі қарай жүйе өзі жұмыс істейді.",
     steps: [
       { title: "Клиент WhatsApp-қа жазады", desc: "Өтінім мессенджер, сайт немесе телефон арқылы түседі", event: "Ticket #4821 created" },
       { title: "Жүйе өтінімді талдайды", desc: "Жөндеу түрін, шұғылдығын және санатын жіктеу", event: "Routed → Diagnostics" },
@@ -44,7 +46,7 @@ export function SystemWorkflow() {
   const c = content[locale as Lang] ?? content.ru
 
   return (
-    <section className="py-14 md:py-16 px-6 lg:px-8">
+    <section id="how-it-works" className="scroll-mt-24 py-14 md:py-16 px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <MotionWrapper className="text-center mb-10">
           <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">
@@ -95,6 +97,16 @@ export function SystemWorkflow() {
             })}
           </div>
         </div>
+
+        {/* Setup-time note */}
+        <MotionWrapper delay={0.1}>
+          <div className="mt-10 flex justify-center">
+            <div className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl border border-accent/20 bg-accent/5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shrink-0" />
+              <span className="text-text-secondary text-sm">{c.note}</span>
+            </div>
+          </div>
+        </MotionWrapper>
       </div>
     </section>
   )

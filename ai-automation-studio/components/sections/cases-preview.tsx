@@ -122,13 +122,16 @@ export function CasesPreview() {
       <div className="max-w-7xl mx-auto">
         <MotionWrapper className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">Кейсы</p>
-            <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary">
-              Реализованные проекты
+            <p className="text-accent text-xs font-medium uppercase tracking-[0.2em] mb-3">Сценарии внедрения</p>
+            <h2 className="text-2xl lg:text-3xl font-semibold text-text-primary mb-3">
+              Как это работает в разных нишах
             </h2>
+            <p className="text-text-muted text-sm max-w-xl">
+              Типовые сценарии автоматизации. Готовы развернуть под ваш процесс.
+            </p>
           </div>
-          <Link href="/cases" className="hidden sm:flex items-center gap-1.5 text-accent text-sm font-medium hover:underline">
-            Все кейсы <ArrowRight size={14} />
+          <Link href="/cases" className="hidden sm:flex items-center gap-1.5 text-accent text-sm font-medium hover:underline shrink-0">
+            Все сценарии <ArrowRight size={14} />
           </Link>
         </MotionWrapper>
 
@@ -155,7 +158,7 @@ export function CasesPreview() {
                   <h3 className="font-semibold text-text-primary mb-2 group-hover:text-accent transition-colors">
                     {cs.title}
                   </h3>
-                  <p className="text-text-muted text-sm line-clamp-2 mb-4">{cs.description}</p>
+                  <p className="text-text-muted text-sm line-clamp-2 mb-4">Сценарий: {cs.description}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {cs.technologies.slice(0, 3).map((tech) => (
                       <span key={tech} className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-text-muted">
@@ -171,7 +174,7 @@ export function CasesPreview() {
 
         <div className="sm:hidden mt-8 text-center">
           <Link href="/cases" className="text-accent text-sm font-medium hover:underline inline-flex items-center gap-1.5">
-            Все кейсы <ArrowRight size={14} />
+            Все сценарии <ArrowRight size={14} />
           </Link>
         </div>
       </div>
